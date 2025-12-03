@@ -1249,6 +1249,9 @@
             
             // レコードが見つからない場合の処理（選択されたアルゴリズムに応じて）
             if (!record) {
+                // デバッグ: 未学習ペアの処理
+                console.log(`[getKerningPhase1] 未学習ペア: ${pairKey}, アルゴリズム: ${unlearnedPairAlgorithm}`);
+                
                 if (unlearnedPairAlgorithm === "average") {
                     // アルゴリズム1: 未学習ペアに学習済みペアの平均値を使用
                     if (phase1ModelAverage !== null && phase1ModelAverage !== undefined) {
@@ -1256,12 +1259,15 @@
                         const rightFeatures = getCharFeatures(rightChar, fontName, baseWidthPx);
                         const avgWidth = (leftFeatures.width + rightFeatures.width) / 2;
                         const gapPx = phase1ModelAverage * avgWidth * trackingCoefficient;
+                        console.log(`[getKerningPhase1] 平均値アルゴリズム: gapPx = ${gapPx.toFixed(3)}px`);
                         return gapPx;
                     }
                     // 平均値も計算できない場合はnullを返す（Phase0にフォールバック）
+                    console.log(`[getKerningPhase1] 平均値が計算できないためnullを返す`);
                     return null;
                 } else if (unlearnedPairAlgorithm === "phase0") {
                     // アルゴリズム2: Phase0のルールベースにフォールバック
+                    console.log(`[getKerningPhase1] Phase0フォールバック: nullを返す`);
                     return null;  // nullを返すとgetKerning関数でPhase0にフォールバックされる
                 } else if (unlearnedPairAlgorithm === "phase0_scaled") {
                     // アルゴリズム3: Phase0のルールベース × 係数（文字列全体の幅に応じた調整）
@@ -1300,10 +1306,13 @@
                     // Phase0のgapに係数をかける
                     // 係数が極端な値にならないように制限（0.1 ～ 10.0）
                     scaleFactor = Math.max(0.1, Math.min(10.0, scaleFactor));
-                    return phase0Gap * scaleFactor * trackingCoefficient;
+                    const gapPx = phase0Gap * scaleFactor * trackingCoefficient;
+                    console.log(`[getKerningPhase1] Phase0スケールアルゴリズム: phase0Gap = ${phase0Gap.toFixed(3)}px, scaleFactor = ${scaleFactor.toFixed(3)}, gapPx = ${gapPx.toFixed(3)}px`);
+                    return gapPx;
                 }
                 
                 // デフォルト: nullを返してPhase0にフォールバック
+                console.log(`[getKerningPhase1] デフォルト: nullを返す`);
                 return null;
             }
             
@@ -1475,11 +1484,13 @@
             if (phaseMode === "phase1" && phase1Model) {
                 const phase1Gap = getKerningPhase1(leftChar, rightChar, fontName, baseWidthPx, globalTracking);
                 
-                // Phase1の値が見つかった場合
+                // Phase1の値が見つかった場合（学習済みペア、または未学習ペアの処理方法で計算された値）
                 if (phase1Gap !== null) {
-                    // ブレンド比率が0の場合はPhase0のみ、1.0の場合はPhase1のみ
+                    // Phase1モードでは、blendRatioが0でもPhase1の値（未学習ペアの処理方法を含む）を使用
+                    // blendRatioはPhase0とPhase1のブレンド比率だが、Phase1モードではPhase1の値を優先
                     if (blendRatio <= 0.0) {
-                        return phase0Gap;
+                        // blendRatio = 0の場合でも、Phase1モードではPhase1の値を使用
+                        return phase1Gap;
                     } else if (blendRatio >= 1.0) {
                         return phase1Gap;
                     } else {
@@ -1488,7 +1499,8 @@
                     }
                 }
                 
-                // Phase1で値が見つからない場合（未学習ペア）
+                // Phase1で値が見つからない場合（未学習ペアで、unlearnedPairAlgorithm === "phase0"の場合のみ）
+                // この場合、getKerningPhase1はnullを返すので、Phase0にフォールバック
                 // ブレンド比率が0の場合はPhase0のみ
                 if (blendRatio <= 0.0) {
                     return phase0Gap;
@@ -1511,6 +1523,30 @@
             const fontFamily = fontFamilyMap[fontId] || "Gothic";
             const base = baseTracking[fontFamily]?.[styleId] || 
                         baseTracking[fontFamily]?.default || 0;
+
+            // Phase1モードでphase0_scaledアルゴリズムが選択されている場合、
+            // 事前にPhase0の幅を計算してcurrentTextInfoを設定
+            // （getKerningPhase1が呼ばれる時点でcurrentTextInfoが必要なため）
+            if (phaseMode === "phase1" && unlearnedPairAlgorithm === "phase0_scaled" && !isComputingPhase0Width) {
+                const originalPhaseMode = phaseMode;
+                isComputingPhase0Width = true;
+                phaseMode = "phase0";
+                const phase0Result = computeKerningPositions(text, fontId, fontSize, styleId, globalTracking);
+                const phase0TotalWidth = phase0Result.totalWidth || 0;
+                phaseMode = originalPhaseMode;
+                isComputingPhase0Width = false;
+                
+                // estimatedPhase1TotalWidthは、実際のPhase1計算後に更新されるため、
+                // ここでは一時的にphase0TotalWidthと同じ値に設定
+                // （後でcomputeKerningPositionsの最後で更新される）
+                currentTextInfo = {
+                    phase0TotalWidth: phase0TotalWidth,
+                    estimatedPhase1TotalWidth: phase0TotalWidth,  // 一時的な値、後で更新
+                    text: text,
+                    fontId: fontId,
+                    fontSize: fontSize
+                };
+            }
 
             // 各文字の特徴量を取得
             const chars = Array.from(text);
@@ -1760,9 +1796,13 @@
             }
             
             // グローバル変数に文字列全体の情報を保存（アルゴリズム3用）
+            // phase0_scaledアルゴリズムでは、幅アンカー適用前のPhase1の幅を使用
+            const estimatedPhase1Width = (phaseMode === "phase1" && unlearnedPairAlgorithm === "phase0_scaled") 
+                ? totalWidth  // 幅アンカー適用前の幅
+                : phase1TotalWidth;  // 幅アンカー適用後の幅（またはPhase0モード時）
             currentTextInfo = {
                 phase0TotalWidth: phase0TotalWidth,
-                estimatedPhase1TotalWidth: phase1TotalWidth,
+                estimatedPhase1TotalWidth: estimatedPhase1Width,
                 text: text,
                 fontId: fontId,
                 fontSize: fontSize

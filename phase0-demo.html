@@ -284,6 +284,44 @@
                 <!-- 文字ごとの情報がここに動的に追加されます -->
             </div>
         </div>
+
+        <div class="info-panel" id="evaluationPanel" style="display: none;">
+            <h3>📊 機能評価パネル（Phase1モード時のみ表示）</h3>
+            <p style="font-size: 12px; color: #7f8c8d; margin-bottom: 15px;">
+                このパネルでは「幅アンカー」と「Phase0とのブレンド」の効果を数値で確認できます。
+            </p>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>幅アンカーの効果</strong>
+                    <div style="margin-top: 5px; font-size: 12px; line-height: 1.6;">
+                        <div>Phase0幅: <span id="evalPhase0Width">-</span>px</div>
+                        <div>Phase1幅(調整前): <span id="evalPhase1WidthBefore">-</span>px</div>
+                        <div>Phase1幅(調整後): <span id="evalPhase1WidthAfter">-</span>px</div>
+                        <div>幅の差分: <span id="evalWidthDelta">-</span>px</div>
+                        <div>1ギャップあたりの調整: <span id="evalAdjustPerGap">-</span>px</div>
+                        <div>幅アンカー適用: <span id="evalWidthAnchorApplied">-</span></div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <strong>Phase0とのブレンド効果</strong>
+                    <div style="margin-top: 5px; font-size: 12px; line-height: 1.6;">
+                        <div>ブレンド比率: <span id="evalBlendRatio">-</span>%</div>
+                        <div>平均Phase0ギャップ: <span id="evalAvgPhase0Gap">-</span>px</div>
+                        <div>平均Phase1ギャップ: <span id="evalAvgPhase1Gap">-</span>px</div>
+                        <div>平均ブレンド後ギャップ: <span id="evalAvgBlendedGap">-</span>px</div>
+                        <div>ギャップ変化率: <span id="evalGapChangeRate">-</span>%</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <strong>総合評価</strong>
+                    <div style="margin-top: 5px; font-size: 12px; line-height: 1.6;">
+                        <div>学習済みペア数: <span id="evalLearnedPairs">-</span> / <span id="evalTotalPairs">-</span></div>
+                        <div>未学習ペア数: <span id="evalUnlearnedPairs">-</span></div>
+                        <div>ギャップの標準偏差: <span id="evalGapStdDev">-</span>px</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1506,6 +1544,8 @@
             const densityAdjusts = [];
             const pairCategories = [];
             const isLearned = [];  // 各ペアが学習済みかどうか（Phase1モード時のみ有効）
+            const phase0Gaps = [];  // 各ペアのPhase0ギャップ値（評価用）
+            const phase1Gaps = [];  // 各ペアのPhase1ギャップ値（評価用、ブレンド前）
 
             for (let i = 0; i < chars.length - 1; i++) {
                 const A = features[i];
@@ -1539,7 +1579,21 @@
                 }
                 isLearned.push(pairIsLearned);
 
-                // getKerning関数を使用（Phase0/Phase1自動切り替え）
+                // Phase0とPhase1のギャップを個別に計算（評価用）
+                const phase0Gap = getKerningPhase0(leftChar, rightChar, fontId, fontSize, styleId, globalTracking);
+                phase0Gaps.push(phase0Gap);
+                
+                let phase1GapValue = phase0Gap;  // デフォルトはPhase0
+                if (phaseMode === "phase1" && phase1Model) {
+                    const phase1Gap = getKerningPhase1(leftChar, rightChar, fontId, fontSize, globalTracking);
+                    if (phase1Gap !== null) {
+                        // ブレンドを適用する前のPhase1の値を保存
+                        phase1GapValue = phase1Gap;
+                    }
+                }
+                phase1Gaps.push(phase1GapValue);
+
+                // getKerning関数を使用（Phase0/Phase1自動切り替え、ブレンド適用済み）
                 let gap = getKerning(leftChar, rightChar, fontId, fontSize, styleId, globalTracking);
                 
                 // 最小・最大のガード
@@ -1714,6 +1768,13 @@
                 fontSize: fontSize
             };
             
+            // 評価データを準備
+            const shouldApplyWidthAnchor = phaseMode === "phase1" && unlearnedPairAlgorithm !== "phase0";
+            const deltaW = phaseMode === "phase1" ? (phase1TotalWidth - phase0TotalWidth) : 0;
+            const adjustPerGap = shouldApplyWidthAnchor && gaps.length > 0 && Math.abs(deltaW) > 0.001 ? 
+                (-deltaW / gaps.length) : 0;
+            const widthAnchorApplied = shouldApplyWidthAnchor && Math.abs(deltaW) > 0.001;
+            
             return {
                 positions,
                 gaps,
@@ -1723,8 +1784,21 @@
                 features,
                 base,
                 fontFamily,
-                totalWidth: totalWidth,
+                totalWidth: phase1TotalWidth,
                 isLearned: isLearned,  // 各ペアが学習済みかどうか
+                evaluationData: {
+                    phase0TotalWidth: phase0TotalWidth,
+                    phase1TotalWidthBefore: phaseMode === "phase1" ? totalWidth : phase1TotalWidth,
+                    phase1TotalWidthAfter: phase1TotalWidth,
+                    deltaW: deltaW,
+                    adjustPerGap: adjustPerGap,
+                    widthAnchorApplied: widthAnchorApplied,
+                    blendRatio: blendRatio,
+                    phase0Gaps: phase0Gaps,
+                    phase1Gaps: phase1Gaps,
+                    blendedGaps: gaps,
+                    isLearned: isLearned
+                }
             };
         }
 
@@ -2021,6 +2095,105 @@
         // ============================================
         // UI更新関数
         // ============================================
+        
+        // ============================================
+        // 評価パネルの更新
+        // ============================================
+        
+        function updateEvaluationPanel(result) {
+            const panel = document.getElementById('evaluationPanel');
+            if (!panel) return;
+            
+            // Phase1モードの時のみ表示
+            if (phaseMode === "phase1" && phase1Model) {
+                panel.style.display = 'block';
+                
+                const evalData = result.evaluationData || {};
+                
+                // 幅アンカーの評価
+                if (evalData.phase0TotalWidth !== undefined) {
+                    document.getElementById('evalPhase0Width').textContent = evalData.phase0TotalWidth.toFixed(2);
+                }
+                if (evalData.phase1TotalWidthBefore !== undefined) {
+                    document.getElementById('evalPhase1WidthBefore').textContent = evalData.phase1TotalWidthBefore.toFixed(2);
+                }
+                if (evalData.phase1TotalWidthAfter !== undefined) {
+                    document.getElementById('evalPhase1WidthAfter').textContent = evalData.phase1TotalWidthAfter.toFixed(2);
+                }
+                if (evalData.deltaW !== undefined) {
+                    const deltaW = evalData.deltaW;
+                    const deltaElement = document.getElementById('evalWidthDelta');
+                    deltaElement.textContent = `${deltaW > 0 ? '+' : ''}${deltaW.toFixed(2)}`;
+                    deltaElement.style.color = Math.abs(deltaW) > 0.1 ? (deltaW > 0 ? '#e74c3c' : '#27ae60') : '#7f8c8d';
+                }
+                if (evalData.adjustPerGap !== undefined) {
+                    const adjust = evalData.adjustPerGap;
+                    const adjustElement = document.getElementById('evalAdjustPerGap');
+                    adjustElement.textContent = `${adjust > 0 ? '+' : ''}${adjust.toFixed(3)}`;
+                    adjustElement.style.color = Math.abs(adjust) > 0.01 ? (adjust > 0 ? '#e74c3c' : '#27ae60') : '#7f8c8d';
+                }
+                document.getElementById('evalWidthAnchorApplied').textContent = 
+                    evalData.widthAnchorApplied ? '適用済み' : '未適用';
+                
+                // ブレンド効果の評価
+                const blendPercent = (blendRatio * 100).toFixed(0);
+                document.getElementById('evalBlendRatio').textContent = `${blendPercent}%`;
+                
+                // Phase0とPhase1のギャップを計算
+                if (evalData.phase0Gaps && evalData.phase0Gaps.length > 0 && 
+                    evalData.phase1Gaps && evalData.phase1Gaps.length > 0) {
+                    const avgPhase0Gap = evalData.phase0Gaps.reduce((a, b) => a + b, 0) / evalData.phase0Gaps.length;
+                    const avgPhase1Gap = evalData.phase1Gaps.reduce((a, b) => a + b, 0) / evalData.phase1Gaps.length;
+                    const avgBlendedGap = evalData.blendedGaps ? 
+                        (evalData.blendedGaps.reduce((a, b) => a + b, 0) / evalData.blendedGaps.length) : avgPhase1Gap;
+                    
+                    document.getElementById('evalAvgPhase0Gap').textContent = avgPhase0Gap.toFixed(2);
+                    document.getElementById('evalAvgPhase1Gap').textContent = avgPhase1Gap.toFixed(2);
+                    document.getElementById('evalAvgBlendedGap').textContent = avgBlendedGap.toFixed(2);
+                    
+                    // ギャップ変化率（Phase0からブレンド後への変化）
+                    if (avgPhase0Gap !== 0) {
+                        const changeRate = ((avgBlendedGap - avgPhase0Gap) / avgPhase0Gap * 100);
+                        const changeElement = document.getElementById('evalGapChangeRate');
+                        changeElement.textContent = `${changeRate > 0 ? '+' : ''}${changeRate.toFixed(1)}%`;
+                        changeElement.style.color = Math.abs(changeRate) > 5 ? (changeRate > 0 ? '#e74c3c' : '#27ae60') : '#7f8c8d';
+                    } else {
+                        document.getElementById('evalGapChangeRate').textContent = '-';
+                    }
+                    
+                    // 標準偏差
+                    if (evalData.blendedGaps && evalData.blendedGaps.length > 0) {
+                        const mean = avgBlendedGap;
+                        const variance = evalData.blendedGaps.reduce((sum, gap) => sum + Math.pow(gap - mean, 2), 0) / evalData.blendedGaps.length;
+                        const stdDev = Math.sqrt(variance);
+                        document.getElementById('evalGapStdDev').textContent = stdDev.toFixed(2);
+                    } else {
+                        document.getElementById('evalGapStdDev').textContent = '-';
+                    }
+                } else {
+                    document.getElementById('evalAvgPhase0Gap').textContent = '-';
+                    document.getElementById('evalAvgPhase1Gap').textContent = '-';
+                    document.getElementById('evalAvgBlendedGap').textContent = '-';
+                    document.getElementById('evalGapChangeRate').textContent = '-';
+                    document.getElementById('evalGapStdDev').textContent = '-';
+                }
+                
+                // 総合評価
+                if (evalData.isLearned && evalData.isLearned.length > 0) {
+                    const learnedCount = evalData.isLearned.filter(x => x).length;
+                    const totalCount = evalData.isLearned.length;
+                    document.getElementById('evalLearnedPairs').textContent = learnedCount;
+                    document.getElementById('evalTotalPairs').textContent = totalCount;
+                    document.getElementById('evalUnlearnedPairs').textContent = (totalCount - learnedCount);
+                } else {
+                    document.getElementById('evalLearnedPairs').textContent = '-';
+                    document.getElementById('evalTotalPairs').textContent = '-';
+                    document.getElementById('evalUnlearnedPairs').textContent = '-';
+                }
+            } else {
+                panel.style.display = 'none';
+            }
+        }
 
         function updateDisplay() {
             const text = document.getElementById('textInput').value || 'Wave';
@@ -2068,6 +2241,9 @@
                 // 情報パネルはPhase1の結果を表示
                 updateInfoPanel(resultPhase1, text);
                 
+                // 評価パネル更新（Phase1の結果を使用）
+                updateEvaluationPanel(resultPhase1);
+                
                 // モードを元に戻す
                 phaseMode = currentPhaseMode;
             } else {
@@ -2087,6 +2263,9 @@
 
                 // 情報パネル更新
                 updateInfoPanel(result, text);
+                
+                // 評価パネル更新
+                updateEvaluationPanel(result);
             }
         }
 

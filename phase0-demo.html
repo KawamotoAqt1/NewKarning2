@@ -188,6 +188,18 @@
                     <span>未学習ペアを可視化（Phase1モード時）</span>
                 </label>
             </div>
+            <div class="control-group" id="blendRatioGroup" style="grid-column: 1 / -1; display: none;">
+                <label for="blendRatioSlider">Phase0とのブレンド比率（Phase1モード時）</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="min-width: 80px; font-size: 12px; color: #666;">Phase0のみ</span>
+                    <input type="range" id="blendRatioSlider" min="0" max="100" value="0" step="1" style="flex: 1;">
+                    <span style="min-width: 80px; font-size: 12px; color: #666; text-align: right;">Phase1のみ</span>
+                    <span id="blendRatioValue" style="min-width: 60px; text-align: right; font-weight: 600;">0%</span>
+                </div>
+                <div style="margin-top: 5px; font-size: 11px; color: #888;">
+                    <span id="blendRatioDescription">Phase0のルールベースカーニングを100%使用</span>
+                </div>
+            </div>
             <div class="control-group">
                 <label for="textInput">文字列</label>
                 <input type="text" id="textInput" value="WAVE" placeholder="文字列を入力">
@@ -288,6 +300,7 @@
         let showUnlearnedPairs = true;  // 未学習ペアの可視化を表示するかどうか
         let currentTextInfo = null;  // 現在の文字列全体の情報（文字列全体の幅計算用）
         let isComputingPhase0Width = false;  // Phase0の幅計算中フラグ（無限ループ防止用）
+        let blendRatio = 0.0;  // Phase0とPhase1のブレンド比率（0.0 = Phase0のみ、1.0 = Phase1のみ、0.5 = 50%ずつ）
 
         // 一般的なフォントリスト（日本語・英語）
         const commonFonts = [
@@ -1417,18 +1430,39 @@
         // ============================================
         
         function getKerning(leftChar, rightChar, fontName, baseWidthPx, styleId = "default", globalTracking = 0) {
+            // Phase0の値を常に計算（ブレンドに必要）
+            const phase0Gap = getKerningPhase0(leftChar, rightChar, fontName, baseWidthPx, styleId, globalTracking);
+            
             // Phase1モードでモデルがロード済みの場合
             if (phaseMode === "phase1" && phase1Model) {
                 const phase1Gap = getKerningPhase1(leftChar, rightChar, fontName, baseWidthPx, globalTracking);
+                
+                // Phase1の値が見つかった場合
                 if (phase1Gap !== null) {
-                    return phase1Gap;
+                    // ブレンド比率が0の場合はPhase0のみ、1.0の場合はPhase1のみ
+                    if (blendRatio <= 0.0) {
+                        return phase0Gap;
+                    } else if (blendRatio >= 1.0) {
+                        return phase1Gap;
+                    } else {
+                        // ブレンド: (1 - blendRatio) * phase0Gap + blendRatio * phase1Gap
+                        return (1.0 - blendRatio) * phase0Gap + blendRatio * phase1Gap;
+                    }
                 }
-                // Phase1で値が見つからない場合はPhase0にフォールバック
-                return getKerningPhase0(leftChar, rightChar, fontName, baseWidthPx, styleId, globalTracking);
+                
+                // Phase1で値が見つからない場合（未学習ペア）
+                // ブレンド比率が0の場合はPhase0のみ
+                if (blendRatio <= 0.0) {
+                    return phase0Gap;
+                } else {
+                    // 未学習ペアでもブレンド比率が0より大きい場合は、Phase0のみを返す
+                    // （未学習ペアの場合はPhase1の値がnullなので、Phase0のみが適切）
+                    return phase0Gap;
+                }
             }
             
             // Phase0モードまたはモデル未ロードの場合はPhase0を使用
-            return getKerningPhase0(leftChar, rightChar, fontName, baseWidthPx, styleId, globalTracking);
+            return phase0Gap;
         }
         
         // ============================================
@@ -2140,7 +2174,7 @@
         // Phaseモード切り替え
         document.getElementById('phaseModeSelect').addEventListener('change', function() {
             phaseMode = this.value;
-            // Phase1モードの時のみ未学習ペアアルゴリズムのセレクトボックスと可視化チェックボックスを表示
+            // Phase1モードの時のみ未学習ペアアルゴリズムのセレクトボックスと可視化チェックボックス、ブレンド比率スライダーを表示
             const unlearnedPairAlgorithmGroup = document.getElementById('unlearnedPairAlgorithmGroup');
             if (unlearnedPairAlgorithmGroup) {
                 unlearnedPairAlgorithmGroup.style.display = (phaseMode === "phase1") ? "flex" : "none";
@@ -2148,6 +2182,10 @@
             const showUnlearnedPairsGroup = document.getElementById('showUnlearnedPairsGroup');
             if (showUnlearnedPairsGroup) {
                 showUnlearnedPairsGroup.style.display = (phaseMode === "phase1") ? "flex" : "none";
+            }
+            const blendRatioGroup = document.getElementById('blendRatioGroup');
+            if (blendRatioGroup) {
+                blendRatioGroup.style.display = (phaseMode === "phase1") ? "flex" : "none";
             }
             updateDisplay();
         });
@@ -2180,12 +2218,43 @@
             updateDisplay();
         });
         
+        // Phase0とのブレンド比率スライダー
+        const blendRatioSlider = document.getElementById('blendRatioSlider');
+        const blendRatioValue = document.getElementById('blendRatioValue');
+        const blendRatioDescription = document.getElementById('blendRatioDescription');
+        
+        if (blendRatioSlider && blendRatioValue && blendRatioDescription) {
+            // ブレンド比率の説明文を更新する関数
+            function updateBlendRatioDescription(ratio) {
+                if (ratio <= 0) {
+                    blendRatioDescription.textContent = 'Phase0のルールベースカーニングを100%使用';
+                } else if (ratio >= 100) {
+                    blendRatioDescription.textContent = 'Phase1の学習値カーニングを100%使用';
+                } else {
+                    const phase0Percent = (100 - ratio).toFixed(0);
+                    const phase1Percent = ratio.toFixed(0);
+                    blendRatioDescription.textContent = `Phase0: ${phase0Percent}% + Phase1: ${phase1Percent}% でブレンド`;
+                }
+            }
+            
+            blendRatioSlider.addEventListener('input', function() {
+                const value = parseFloat(this.value);
+                blendRatio = value / 100.0;  // 0.0～1.0の範囲に変換
+                blendRatioValue.textContent = `${value}%`;
+                updateBlendRatioDescription(value);
+                updateDisplay();
+            });
+            
+            // 初期表示を更新
+            updateBlendRatioDescription(0);
+        }
+        
         // 初期表示
         trackingValue.textContent = '0px';
 
         // ページ読み込み時にPhase1モデルを読み込み、フォント検出を実行
         document.addEventListener('DOMContentLoaded', function() {
-            // 初期表示時に未学習ペアアルゴリズムのセレクトボックスと可視化チェックボックスの表示/非表示を設定
+            // 初期表示時に未学習ペアアルゴリズムのセレクトボックスと可視化チェックボックス、ブレンド比率スライダーの表示/非表示を設定
             const unlearnedPairAlgorithmGroup = document.getElementById('unlearnedPairAlgorithmGroup');
             if (unlearnedPairAlgorithmGroup) {
                 unlearnedPairAlgorithmGroup.style.display = (phaseMode === "phase1") ? "flex" : "none";
@@ -2193,6 +2262,10 @@
             const showUnlearnedPairsGroup = document.getElementById('showUnlearnedPairsGroup');
             if (showUnlearnedPairsGroup) {
                 showUnlearnedPairsGroup.style.display = (phaseMode === "phase1") ? "flex" : "none";
+            }
+            const blendRatioGroup = document.getElementById('blendRatioGroup');
+            if (blendRatioGroup) {
+                blendRatioGroup.style.display = (phaseMode === "phase1") ? "flex" : "none";
             }
             
             loadPhase1Model().then(() => {

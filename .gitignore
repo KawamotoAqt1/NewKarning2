@@ -72,6 +72,8 @@ json_all/
 json_train/
 output/
 buildmodel/
+Study/
+debug/
 
 # CSV aggregated files (uncomment if generated)
 # pairs_aggregated.csv

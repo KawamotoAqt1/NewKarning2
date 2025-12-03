@@ -184,7 +184,7 @@
             </div>
             <div class="control-group" id="showUnlearnedPairsGroup" style="grid-column: 1 / -1; display: none;">
                 <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                    <input type="checkbox" id="showUnlearnedPairsCheckbox" checked>
+                    <input type="checkbox" id="showUnlearnedPairsCheckbox">
                     <span>未学習ペアを可視化（Phase1モード時）</span>
                 </label>
             </div>
@@ -335,7 +335,7 @@
         let phase1ModelAverage = null;  // 学習済みペアのgap_norm_avgの平均値（未学習ペア用）
         let phase0Average = null;  // Phase0のルールベースで計算した平均値（係数計算用）
         let unlearnedPairAlgorithm = "average";  // 未学習ペアの処理方法: "average", "phase0", "phase0_scaled"
-        let showUnlearnedPairs = true;  // 未学習ペアの可視化を表示するかどうか
+        let showUnlearnedPairs = false;  // 未学習ペアの可視化を表示するかどうか
         let currentTextInfo = null;  // 現在の文字列全体の情報（文字列全体の幅計算用）
         let isComputingPhase0Width = false;  // Phase0の幅計算中フラグ（無限ループ防止用）
         let blendRatio = 0.0;  // Phase0とPhase1のブレンド比率（0.0 = Phase0のみ、1.0 = Phase1のみ、0.5 = 50%ずつ）

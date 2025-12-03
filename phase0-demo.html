@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase0/Phase1 カーニングデモ - 前後比較</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+        }
+
+        .canvas-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .canvas-box {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 20px;
+        }
+
+        .canvas-box h3 {
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .canvas-box.before h3::before {
+            content: "❌";
+            font-size: 20px;
+        }
+
+        .canvas-box.after h3::before {
+            content: "✅";
+            font-size: 20px;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background: #fff;
+        }
+
+        .info-panel {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .info-panel h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 12px;
+            border-radius: 4px;
+            border-left: 3px solid #3498db;
+        }
+
+        .info-item strong {
+            display: block;
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .info-item span {
+            font-size: 14px;
+            color: #2c3e50;
+            word-break: break-all;
+        }
+
+        @media (max-width: 768px) {
+            .canvas-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Phase0/Phase1 カーニングエンジン デモ</h1>
+        <p class="subtitle">ルールベース（Phase0）と学習値（Phase1）のカーニング調整 - 前後比較</p>
+
+        <div class="controls">
+            <div class="control-group" style="grid-column: 1 / -1;">
+                <label for="phaseModeSelect">カーニングモード</label>
+                <select id="phaseModeSelect">
+                    <option value="phase0">Phase0（ルールベース）</option>
+                    <option value="phase1">Phase1（学習値）</option>
+                    <option value="compare">比較モード（Phase0 vs Phase1）</option>
+                </select>
+            </div>
+            <div class="control-group" id="unlearnedPairAlgorithmGroup" style="grid-column: 1 / -1; display: none;">
+                <label for="unlearnedPairAlgorithmSelect">未学習ペアの処理方法（Phase1モード時）</label>
+                <select id="unlearnedPairAlgorithmSelect">
+                    <option value="average">未学習ペアに平均値を使用</option>
+                    <option value="phase0">Phase0のルールベースにフォールバック</option>
+                    <option value="phase0_scaled">Phase0のルールベース × 係数（幅に応じた調整）</option>
+                </select>
+            </div>
+            <div class="control-group" id="showUnlearnedPairsGroup" style="grid-column: 1 / -1; display: none;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="checkbox" id="showUnlearnedPairsCheckbox" checked>
+                    <span>未学習ペアを可視化（Phase1モード時）</span>
+                </label>
+            </div>
+            <div class="control-group">
+                <label for="textInput">文字列</label>
+                <input type="text" id="textInput" value="WAVE" placeholder="文字列を入力">
+            </div>
+            <div class="control-group">
+                <label for="fontSelect">フォント</label>
+                <select id="fontSelect">
+                    <option value="">読み込み中...</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="fontCustomInput">カスタムフォント名（直接入力可）</label>
+                <input type="text" id="fontCustomInput" placeholder="例: フォント名を入力">
+            </div>
+            <div class="control-group">
+                <label for="styleSelect">スタイル</label>
+                <select id="styleSelect">
+                    <option value="default">デフォルト</option>
+                    <option value="和モダン">和モダン</option>
+                    <option value="北欧">北欧</option>
+                    <option value="モダン">モダン</option>
+                    <option value="カジュアル">カジュアル</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="fontSizeInput">フォントサイズ (px)</label>
+                <input type="number" id="fontSizeInput" value="64" min="20" max="200">
+            </div>
+            <div class="control-group" style="grid-column: 1 / -1;">
+                <label for="trackingSlider">全体トラッキング調整</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <input type="range" id="trackingSlider" min="-50" max="50" value="0" step="1" style="flex: 1;">
+                    <span id="trackingValue" style="min-width: 60px; text-align: right; font-weight: 600;">0px</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-container" id="canvasContainer">
+            <div class="canvas-box before">
+                <h3 id="canvasBeforeLabel">カーニング前（固定トラッキング）</h3>
+                <canvas id="canvasBefore" width="600" height="200"></canvas>
+            </div>
+            <div class="canvas-box after">
+                <h3 id="canvasAfterLabel">カーニング後（Phase0ロジック適用）</h3>
+                <canvas id="canvasAfter" width="600" height="200"></canvas>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <h3>計算詳細</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>フォントファミリー</strong>
+                    <span id="infoFontFamily">-</span>
+                </div>
+                <div class="info-item">
+                    <strong>基本トラッキング</strong>
+                    <span id="infoBaseTracking">-</span>
+                </div>
+                <div class="info-item">
+                    <strong>文字カテゴリ</strong>
+                    <span id="infoCharTypes">-</span>
+                </div>
+                <div class="info-item">
+                    <strong>ペア補正</strong>
+                    <span id="infoPairAdjusts">-</span>
+                </div>
+                <div class="info-item">
+                    <strong>黒密度補正</strong>
+                    <span id="infoDensityAdjusts">-</span>
+                </div>
+                <div class="info-item">
+                    <strong>最終ギャップ</strong>
+                <span id="infoFinalGaps">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <h3>文字ごとの詳細情報（デバッグ用）</h3>
+            <div id="charDetails" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+                <!-- 文字ごとの情報がここに動的に追加されます -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // Phase0/Phase1 カーニングエンジン実装
+        // ============================================
+        
+        // グローバル状態
+        let phaseMode = "phase0";  // "phase0" or "phase1" or "compare"
+        let phase1Model = null;   // Phase1モデルデータ
+        let phase1ModelAverage = null;  // 学習済みペアのgap_norm_avgの平均値（未学習ペア用）
+        let phase0Average = null;  // Phase0のルールベースで計算した平均値（係数計算用）
+        let unlearnedPairAlgorithm = "average";  // 未学習ペアの処理方法: "average", "phase0", "phase0_scaled"
+        let showUnlearnedPairs = true;  // 未学習ペアの可視化を表示するかどうか
+        let currentTextInfo = null;  // 現在の文字列全体の情報（文字列全体の幅計算用）
+        let isComputingPhase0Width = false;  // Phase0の幅計算中フラグ（無限ループ防止用）
+
+        // 一般的なフォントリスト（日本語・英語）
+        const commonFonts = [
+            // 日本語フォント（明朝系）
+            "游明朝", "Yu Mincho", "游明朝体",
+            "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "ヒラギノ明朝 Pro", "Hiragino Mincho Pro",
+            "ヒラギノ明朝 Pro W3", "ヒラギノ明朝 Pro W6",
+            "明朝体", "MS Mincho", "MS 明朝",
+            "小塚明朝 Pro", "Kozuka Mincho Pro",
+            "リュウミン", "Ryumin",
+            "筑紫明朝", "Tsukushi Mincho",
+            "源ノ明朝", "Source Han Serif", "Noto Serif CJK JP",
+            "08丸三-明朝体",
+            
+            // 日本語フォント（ゴシック系）
+            "游ゴシック", "Yu Gothic", "游ゴシック体",
+            "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro",
+            "ヒラギノ角ゴ Pro W3", "ヒラギノ角ゴ Pro W6",
+            "メイリオ", "Meiryo",
+            "MS ゴシック", "MS Gothic",
+            "小塚ゴシック Pro", "Kozuka Gothic Pro",
+            "新ゴ", "Shin Go",
+            "源ノ角ゴシック", "Source Han Sans", "Noto Sans CJK JP",
+            "UD デジタル 教科書体", "UD Digi Kyokasho",
+            "BIZ UDゴシック", "BIZ UD Gothic",
+            "BIZ UDPゴシック", "BIZ UDP Gothic",
+            
+            // 日本語フォント（丸ゴシック系）
+            "丸ゴシック", "Maru Gothic",
+            "ヒラギノ丸ゴ ProN", "Hiragino Maru Gothic ProN",
+            "小塚丸ゴシック Pro", "Kozuka Maru Gothic Pro",
+            "UD デジタル 教科書体 NK-R", "UD Digi Kyokasho NK-R",
+            
+            // 英語フォント（セリフ）
+            "Times New Roman", "Times",
+            "Georgia", "Palatino", "Book Antiqua",
+            "Garamond", "Baskerville", "Caslon",
+            
+            // 英語フォント（サンセリフ）
+            "Arial", "Helvetica", "Helvetica Neue",
+            "Verdana", "Tahoma", "Trebuchet MS",
+            "Calibri", "Segoe UI", "Roboto",
+            "Open Sans", "Lato", "Montserrat",
+            
+            // 英語フォント（等幅）
+            "Courier New", "Courier", "Monaco",
+            "Consolas", "Menlo", "Lucida Console",
+            
+            // 英語フォント（装飾・その他）
+            "Century Gothic", "Futura", "Gill Sans",
+            
+            // 装飾系・ロゴ風フォント（Design）
+            "Comic Sans MS", "Impact", "Arial Black",
+            "Cooper Black", "Bauhaus 93", "Stencil",
+            "Algerian", "Broadway", "Chiller",
+            "Copperplate Gothic", "Engravers MT", "Felix Titling",
+            "Harrington", "Hobo Std", "Informal Roman",
+            "Lithos Pro", "Niagara Engraved", "Niagara Solid",
+            "OCR A Extended", "Old English Text MT", "Onyx",
+            "Papyrus", "Playbill", "Ravie",
+            "Showcard Gothic", "Snap ITC", "Stencil Std",
+            "Wide Latin", "Wingdings", "Webdings",
+            
+            // 筆記体・スクリプト系フォント（日本語）
+            "HG行書体", "HG Gyoshotai",
+            "HG正楷書体-PRO", "HG Seikaishotai PRO",
+            "HG教科書体", "HG Kyokashotai",
+            "DF行書体", "DF Gyoshotai",
+            "DF中行書体", "DF Chu Gyoshotai",
+            "DF太行書体", "DF Futo Gyoshotai",
+            "DF中太楷書体", "DF Chuto Kaishotai",
+            "DF太楷書体", "DF Futo Kaishotai",
+            "DF中楷書体", "DF Chu Kaishotai",
+            "DFPOP行書体", "DFPOP Gyoshotai",
+            "DFPOP楷書体", "DFPOP Kaishotai",
+            "DFPOP毛筆体", "DFPOP Mofutai",
+            "DFPOP勘亭流", "DFPOP Kanteiryu",
+            "DFPOP勘流", "DFPOP Kanryu",
+            "DFPOP江戸勘亭流", "DFPOP Edo Kanteiryu",
+            "DFPOP江戸文字", "DFPOP Edomoji",
+            "DFPOP相撲文字", "DFPOP Sumomoji",
+            "DFPOP寄席文字", "DFPOP Yose Moji",
+            "DFPOP籠文字", "DFPOP Kagomoji",
+            "DFPOP篆書体", "DFPOP Tenshotai",
+            "DFPOP隷書体", "DFPOP Reishotai",
+            "DFPOP古印体", "DFPOP Kointai",
+            "HGP創英角ﾎﾟｯﾌﾟ体", "HGP Soei Kakupopu",
+            "HGS創英角ﾎﾟｯﾌﾟ体", "HGS Soei Kakupopu",
+            "HG創英角ﾎﾟｯﾌﾟ体", "HG Soei Kakupopu",
+            
+            // 筆記体・スクリプト系フォント（英語）
+            "Brush Script MT", "Brush Script",
+            "Lucida Handwriting", "Lucida Calligraphy",
+            "Monotype Corsiva", "Corsiva",
+            "Script MT Bold", "Script",
+            "Vivaldi", "Edwardian Script ITC",
+            "French Script MT", "French Script",
+            "Kunstler Script", "Kunstler",
+            "Mistral", "Lucida Blackletter",
+            "Old English Text MT", "Old English",
+            "Blackadder ITC", "Blackadder",
+            "Bradley Hand ITC", "Bradley Hand",
+            "Freestyle Script", "Freestyle",
+            "Gigi", "Harlow Solid Italic",
+            "Jokerman", "Juice ITC",
+            "Kristen ITC", "Kristen",
+            "Magneto", "Matura MT Script Capitals",
+            "Rage Italic", "Rage",
+            "Segoe Script", "Segoe Print",
+            "Tempus Sans ITC", "Tempus Sans",
+            "Viner Hand ITC", "Viner Hand",
+            "Zapfino", "Zapf Chancery",
+        ];
+
+        // 2.1 フォントファミリー分類テーブル（拡張版） 
+        const fontFamilyMap = {
+            // 明朝系
+            "游明朝": "Mincho", "Yu Mincho": "Mincho", "游明朝体": "Mincho",
+            "ヒラギノ明朝 ProN": "Mincho", "Hiragino Mincho ProN": "Mincho",
+            "ヒラギノ明朝 Pro": "Mincho", "Hiragino Mincho Pro": "Mincho",
+            "ヒラギノ明朝 Pro W3": "Mincho", "ヒラギノ明朝 Pro W6": "Mincho",
+            "明朝体": "Mincho", "MS Mincho": "Mincho", "MS 明朝": "Mincho",
+            "小塚明朝 Pro": "Mincho", "Kozuka Mincho Pro": "Mincho",
+            "リュウミン": "Mincho", "Ryumin": "Mincho",
+            "筑紫明朝": "Mincho", "Tsukushi Mincho": "Mincho",
+            "源ノ明朝": "Mincho", "Source Han Serif": "Mincho", "Noto Serif CJK JP": "Mincho",
+            "08丸三-明朝体": "Mincho",
+            "08丸三ー明朝体": "Mincho",  // 長音符版も追加
+            "08丸三－明朝体": "Mincho",  // 全角ハイフン版も追加
+            
+            // ゴシック系
+            "游ゴシック": "Gothic", "Yu Gothic": "Gothic", "游ゴシック体": "Gothic",
+            "ヒラギノ角ゴ ProN": "Gothic", "Hiragino Kaku Gothic ProN": "Gothic",
+            "ヒラギノ角ゴ Pro": "Gothic", "Hiragino Kaku Gothic Pro": "Gothic",
+            "ヒラギノ角ゴ Pro W3": "Gothic", "ヒラギノ角ゴ Pro W6": "Gothic",
+            "メイリオ": "Gothic", "Meiryo": "Gothic",
+            "MS ゴシック": "Gothic", "MS Gothic": "Gothic",
+            "小塚ゴシック Pro": "Gothic", "Kozuka Gothic Pro": "Gothic",
+            "新ゴ": "Gothic", "Shin Go": "Gothic",
+            "源ノ角ゴシック": "Gothic", "Source Han Sans": "Gothic", "Noto Sans CJK JP": "Gothic",
+            "UD デジタル 教科書体": "Gothic", "UD Digi Kyokasho": "Gothic",
+            "BIZ UDゴシック": "Gothic", "BIZ UD Gothic": "Gothic",
+            "BIZ UDPゴシック": "Gothic", "BIZ UDP Gothic": "Gothic",
+            "Arial": "Gothic", "Helvetica": "Gothic", "Helvetica Neue": "Gothic",
+            "Verdana": "Gothic", "Tahoma": "Gothic", "Trebuchet MS": "Gothic",
+            "Calibri": "Gothic", "Segoe UI": "Gothic", "Roboto": "Gothic",
+            "Open Sans": "Gothic", "Lato": "Gothic", "Montserrat": "Gothic",
+            
+            // 丸ゴシック系
+            "丸ゴシック": "MaruGothic", "Maru Gothic": "MaruGothic",
+            "ヒラギノ丸ゴ ProN": "MaruGothic", "Hiragino Maru Gothic ProN": "MaruGothic",
+            "小塚丸ゴシック Pro": "MaruGothic", "Kozuka Maru Gothic Pro": "MaruGothic",
+            "UD デジタル 教科書体 NK-R": "MaruGothic", "UD Digi Kyokasho NK-R": "MaruGothic",
+            
+            // 筆記体・スクリプト系（Brush）
+            "HG行書体": "Brush", "HG Gyoshotai": "Brush",
+            "HG正楷書体-PRO": "Brush", "HG Seikaishotai PRO": "Brush",
+            "DF行書体": "Brush", "DF Gyoshotai": "Brush",
+            "DF中行書体": "Brush", "DF Chu Gyoshotai": "Brush",
+            "DF太行書体": "Brush", "DF Futo Gyoshotai": "Brush",
+            "DF中太楷書体": "Brush", "DF Chuto Kaishotai": "Brush",
+            "DF太楷書体": "Brush", "DF Futo Kaishotai": "Brush",
+            "DF中楷書体": "Brush", "DF Chu Kaishotai": "Brush",
+            "DFPOP行書体": "Brush", "DFPOP Gyoshotai": "Brush",
+            "DFPOP楷書体": "Brush", "DFPOP Kaishotai": "Brush",
+            "DFPOP毛筆体": "Brush", "DFPOP Mofutai": "Brush",
+            "DFPOP勘亭流": "Brush", "DFPOP Kanteiryu": "Brush",
+            "DFPOP勘流": "Brush", "DFPOP Kanryu": "Brush",
+            "DFPOP江戸勘亭流": "Brush", "DFPOP Edo Kanteiryu": "Brush",
+            "DFPOP江戸文字": "Brush", "DFPOP Edomoji": "Brush",
+            "DFPOP相撲文字": "Brush", "DFPOP Sumomoji": "Brush",
+            "DFPOP寄席文字": "Brush", "DFPOP Yose Moji": "Brush",
+            "DFPOP籠文字": "Brush", "DFPOP Kagomoji": "Brush",
+            "DFPOP篆書体": "Brush", "DFPOP Tenshotai": "Brush",
+            "DFPOP隷書体": "Brush", "DFPOP Reishotai": "Brush",
+            "DFPOP古印体": "Brush", "DFPOP Kointai": "Brush",
+            
+            // アルファベット筆記体・スクリプト系（Script）
+            "Brush Script MT": "Script", "Brush Script": "Script",
+            "Lucida Handwriting": "Script", "Lucida Calligraphy": "Script",
+            "Monotype Corsiva": "Script", "Corsiva": "Script",
+            "Script MT Bold": "Script", "Script": "Script",
+            "Vivaldi": "Script", "Edwardian Script ITC": "Script",
+            "French Script MT": "Script", "French Script": "Script",
+            "Kunstler Script": "Script", "Kunstler": "Script",
+            "Mistral": "Script", "Lucida Blackletter": "Script",
+            "Old English Text MT": "Script", "Old English": "Script",
+            "Blackadder ITC": "Script", "Blackadder": "Script",
+            "Bradley Hand ITC": "Script", "Bradley Hand": "Script",
+            "Freestyle Script": "Script", "Freestyle": "Script",
+            "Gigi": "Script", "Harlow Solid Italic": "Script",
+            "Jokerman": "Script", "Juice ITC": "Script",
+            "Kristen ITC": "Script", "Kristen": "Script",
+            "Magneto": "Script", "Matura MT Script Capitals": "Script",
+            "Rage Italic": "Script", "Rage": "Script",
+            "Segoe Script": "Script", "Segoe Print": "Script",
+            "Tempus Sans ITC": "Script", "Tempus Sans": "Script",
+            "Viner Hand ITC": "Script", "Viner Hand": "Script",
+            "Zapfino": "Script", "Zapf Chancery": "Script",
+            
+            // 装飾系・ロゴ風（Design）
+            "Comic Sans MS": "Design", "Impact": "Design", "Arial Black": "Design",
+            "Cooper Black": "Design", "Bauhaus 93": "Design", "Stencil": "Design",
+            "Algerian": "Design", "Broadway": "Design", "Chiller": "Design",
+            "Copperplate Gothic": "Design", "Engravers MT": "Design", "Felix Titling": "Design",
+            "Harrington": "Design", "Hobo Std": "Design", "Informal Roman": "Design",
+            "Lithos Pro": "Design", "Niagara Engraved": "Design", "Niagara Solid": "Design",
+            "OCR A Extended": "Design", "Onyx": "Design",
+            "Papyrus": "Design", "Playbill": "Design", "Ravie": "Design",
+            "Showcard Gothic": "Design", "Snap ITC": "Design", "Stencil Std": "Design",
+            "Wide Latin": "Design", "Wingdings": "Design", "Webdings": "Design",
+        };
+
+        // 2.2 ファミリー別・スタイル別の基本トラッキング
+        const baseTracking = {
+            Mincho: {
+                default: 0,
+                和モダン: -0.5,
+                北欧: +0.5,
+                モダン: 0,
+                カジュアル: 0,
+            },
+            Gothic: {
+                default: 0,
+                モダン: -0.3,
+                カジュアル: +0.3,
+                和モダン: 0,
+                北欧: 0,
+            },
+            MaruGothic: {
+                default: 0,
+            },
+            Brush: {
+                default: -0.8,
+            },
+            Script: {
+                default: -0.5,
+            },
+            Design: {
+                default: 0,
+            },
+        };
+
+        // ============================================
+        // 文字特徴分類モジュール（CharFeatureResolver）
+        // ============================================
+
+        // 特徴量キャッシュ
+        const featureCache = {};
+
+        // 文字種を判定（Unicode/文字種ベース）
+        function getCharCategory(char) {
+            const code = char.charCodeAt(0);
+            
+            // 漢字（CJK統合漢字）
+            if ((code >= 0x4E00 && code <= 0x9FFF) || 
+                (code >= 0x3400 && code <= 0x4DBF) ||
+                (code >= 0xF900 && code <= 0xFAFF)) {
+                return "KANJI";
+            }
+            
+            // ひらがな
+            if (code >= 0x3040 && code <= 0x309F) {
+                return "HIRAGANA";
+            }
+            
+            // カタカナ
+            if (code >= 0x30A0 && code <= 0x30FF) {
+                return "KATAKANA";
+            }
+            
+            // 英大文字
+            if (code >= 0x41 && code <= 0x5A) {
+                return "LATIN_UPPER";
+            }
+            
+            // 英小文字
+            if (code >= 0x61 && code <= 0x7A) {
+                return "LATIN_LOWER";
+            }
+            
+            // 記号・その他
+            return "SYMBOL";
+        }
+
+        // Canvasから文字の形状を分析
+        function analyzeCharWithCanvas(char, fontId, fontSize) {
+            try {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                // フォントを設定（フォント名にハイフンやスペースがある場合は引用符で囲む）
+                ctx.font = `${fontSize}px "${fontId}"`;
+                
+                // テキストメトリクスを取得
+                const metrics = ctx.measureText(char);
+                const width = metrics.width;
+                
+                // バウンディングボックスを取得（利用可能な場合）
+                const actualBoundingBoxAscent = metrics.actualBoundingBoxAscent || fontSize * 0.8;
+                const actualBoundingBoxDescent = metrics.actualBoundingBoxDescent || fontSize * 0.2;
+                const actualBoundingBoxLeft = metrics.actualBoundingBoxLeft || 0;
+                const actualBoundingBoxRight = metrics.actualBoundingBoxRight || width;
+                
+                const height = actualBoundingBoxAscent + actualBoundingBoxDescent;
+                const fullWidth = actualBoundingBoxRight - actualBoundingBoxLeft;
+                
+                // Canvasサイズを設定（余白を含む）
+                const padding = Math.max(fontSize * 0.2, 5);
+                const baselineX = padding - actualBoundingBoxLeft;
+                canvas.width = Math.ceil(fullWidth + padding * 2);
+                canvas.height = Math.ceil(height + padding * 2);
+                
+                // 背景を白で塗りつぶし
+                ctx.fillStyle = '#FFFFFF';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // 文字を描画
+                ctx.font = `${fontSize}px "${fontId}"`;
+                ctx.fillStyle = '#000000';
+                ctx.textBaseline = 'alphabetic';
+                ctx.textAlign = 'left';
+                
+                // 描画位置を計算（左の余白とベースライン位置を考慮）
+                const x = padding - actualBoundingBoxLeft;
+                const y = padding + actualBoundingBoxAscent;
+                ctx.fillText(char, x, y);
+                
+                // ピクセルデータを取得
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                
+                // 文字のバウンディングボックス領域を計算（余白を除く）
+                const textLeft = Math.max(0, Math.floor(padding - actualBoundingBoxLeft));
+                const textTop = Math.max(0, Math.floor(padding));
+                const textRight = Math.min(canvas.width, Math.floor(padding - actualBoundingBoxLeft + fullWidth));
+                const textBottom = Math.min(canvas.height, Math.floor(padding + height));
+                
+                let inkLeft = -actualBoundingBoxLeft;
+                let inkRight = actualBoundingBoxRight;
+                
+                // 有効な領域かチェック
+                if (textRight <= textLeft || textBottom <= textTop) {
+                    // 無効な領域の場合はデフォルト値を返す
+                    return {
+                        width,
+                        height,
+                        fillRatio: 0.4,
+                        aspectRatio: width / height,
+                        inkLeft,
+                        inkRight
+                    };
+                }
+                
+                // まず、実際に描画されたピクセルの範囲を検出
+                let minY = textBottom;
+                let maxY = textTop;
+                let minX = textRight;
+                let maxX = textLeft;
+                
+                // 最初のパス：実際に描画された黒ピクセルの範囲を検出
+                for (let y = textTop; y < textBottom; y++) {
+                    for (let x = textLeft; x < textRight; x++) {
+                        const index = (y * canvas.width + x) * 4;
+                        if (index + 3 < data.length) {
+                            const r = data[index];
+                            const g = data[index + 1];
+                            const b = data[index + 2];
+                            const a = data[index + 3];
+                            
+                            // 黒っぽいピクセルを判定（閾値: RGB平均 < 200、より緩い判定）
+                            const gray = (r + g + b) / 3;
+                            if (gray < 200 && a > 100) {
+                                // 実際に描画されたピクセルの範囲を更新
+                                if (y < minY) minY = y;
+                                if (y > maxY) maxY = y;
+                                if (x < minX) minX = x;
+                                if (x > maxX) maxX = x;
+                            }
+                        }
+                    }
+                }
+                
+                // 実際に描画されたピクセルの範囲が有効かチェック
+                if (maxY < minY || maxX < minX) {
+                    // 黒ピクセルが見つからない場合はデフォルト値
+                    return {
+                        width,
+                        height,
+                        fillRatio: 0.4,
+                        aspectRatio: width / height,
+                        inkLeft,
+                        inkRight
+                    };
+                }
+                
+                // 黒密度を計算（実際に描画されたピクセルの範囲内のみを対象）
+                let filledPixels = 0;
+                let totalPixels = 0;
+                
+                for (let y = minY; y <= maxY; y++) {
+                    for (let x = minX; x <= maxX; x++) {
+                        const index = (y * canvas.width + x) * 4;
+                        if (index + 3 < data.length) {
+                            const r = data[index];
+                            const g = data[index + 1];
+                            const b = data[index + 2];
+                            const a = data[index + 3];
+                            
+                            // 黒っぽいピクセルをカウント（閾値: RGB平均 < 200、より緩い判定）
+                            const gray = (r + g + b) / 3;
+                            if (gray < 200 && a > 100) {
+                                filledPixels++;
+                            }
+                            totalPixels++;
+                        }
+                    }
+                }
+                
+                // 実際に描画されたピクセルの範囲内でのfillRatioを計算
+                const fillRatio = totalPixels > 0 ? filledPixels / totalPixels : 0.4;
+                
+                // 実際に描画されたピクセルの範囲から高さと幅を計算
+                inkLeft = minX - baselineX;
+                inkRight = maxX - baselineX;
+                
+                const actualHeight = (maxY >= minY) ? (maxY - minY + 1) : height;
+                const actualWidth = Math.max(1, inkRight - inkLeft);
+                
+                // 縦横比を計算（実際の描画領域を使用）
+                const aspectRatio = actualWidth / actualHeight;
+                
+                return {
+                    width: actualWidth, // 実際の描画領域の幅を使用
+                    height: actualHeight, // 実際の描画領域の高さを使用
+                    fillRatio,
+                    aspectRatio,
+                    inkLeft,
+                    inkRight
+                };
+            } catch (e) {
+                console.error('文字形状分析エラー:', e, char, fontId);
+                // エラーが発生した場合はデフォルト値を返す
+                try {
+                    const tempCanvas = document.createElement('canvas');
+                    const tempCtx = tempCanvas.getContext('2d');
+                    tempCtx.font = `${fontSize}px "${fontId}"`;
+                    const metrics = tempCtx.measureText(char);
+                    return {
+                        width: metrics.width,
+                        height: fontSize,
+                        fillRatio: 0.4,
+                        aspectRatio: metrics.width / fontSize,
+                        inkLeft: 0,
+                        inkRight: metrics.width
+                    };
+                } catch (e2) {
+                    // さらにエラーが発生した場合は最小限の値を返す
+                    return {
+                        width: fontSize * 0.6,
+                        height: fontSize,
+                        fillRatio: 0.4,
+                        aspectRatio: 0.6,
+                        inkLeft: 0,
+                        inkRight: fontSize * 0.6
+                    };
+                }
+            }
+        }
+
+        // 文字の特徴量を自動判定
+        function resolveCharFeatures(char, fontId, fontSize) {
+            try {
+                // キャッシュキー
+                const cacheKey = `${fontId}:${char}:${fontSize}`;
+                
+                // キャッシュをチェック
+                if (featureCache[cacheKey]) {
+                    return featureCache[cacheKey];
+                }
+                
+                // 文字種を判定
+                const charCategory = getCharCategory(char);
+                
+                // Canvasから形状を分析
+                const shape = analyzeCharWithCanvas(char, fontId, fontSize);
+                
+                // shapeが正しく取得できているか確認
+                if (!shape || typeof shape.width === 'undefined') {
+                    throw new Error('形状分析に失敗しました');
+                }
+                
+                // Canvas APIのactualBoundingBoxを取得（SVGのbboxとの比較用）
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                ctx.font = `${fontSize}px "${fontId}"`;
+                const metrics = ctx.measureText(char);
+                // actualBoundingBoxLeftは通常0または負の値（文字がベースラインの左側に広がっている場合）
+                const actualBoundingBoxLeft = metrics.actualBoundingBoxLeft || 0;
+                // actualBoundingBoxRightは通常width以上（文字がベースラインの右側に広がっている場合）
+                // フォールバックはmetrics.widthを使用（shape.widthは実際の描画領域の幅で、フォントサイズに近い値になる可能性がある）
+                const actualBoundingBoxRight = metrics.actualBoundingBoxRight !== undefined 
+                    ? metrics.actualBoundingBoxRight 
+                    : metrics.width;
+            
+            // 黒密度を判定
+            let density;
+            if (shape.fillRatio > 0.45) {
+                density = "HEAVY";
+            } else if (shape.fillRatio < 0.20) {
+                density = "LIGHT";
+            } else {
+                density = "MEDIUM";
+            }
+            
+            // 文字タイプを判定
+            let charType;
+            
+            if (charCategory === "KANJI") {
+                // 漢字の場合
+                if (shape.aspectRatio < 0.7) {
+                    // 縦長
+                    charType = density === "HEAVY" ? "VERTICAL_HEAVY" : "VERTICAL_LIGHT";
+                } else if (shape.fillRatio > 0.5) {
+                    // 黒密度が高い
+                    charType = "COMPLEX";
+                } else {
+                    charType = "COMPLEX";
+                }
+            } else if (charCategory === "HIRAGANA" || charCategory === "KATAKANA") {
+                // かなの場合
+                if (shape.fillRatio < 0.3 && shape.aspectRatio > 0.8 && shape.aspectRatio < 1.25) {
+                    charType = "CURVE";
+                } else if (shape.aspectRatio > 1.3 || shape.aspectRatio < 0.6) {
+                    // 斜め線が多い可能性
+                    charType = "DIAGONAL";
+                } else {
+                    charType = "KANA";
+                }
+            } else if (charCategory === "LATIN_UPPER") {
+                charType = "LATIN_UPPER";
+            } else if (charCategory === "LATIN_LOWER") {
+                charType = "LATIN_LOWER";
+            } else {
+                // その他（記号など）
+                if (shape.fillRatio > 0.6) {
+                    charType = "CURVE";
+                } else {
+                    charType = "MIXED";
+                }
+            }
+            
+                // 結果を構築
+                const features = {
+                    width: shape.width,
+                    height: shape.height,
+                    fillRatio: shape.fillRatio,
+                    aspectRatio: shape.aspectRatio,
+                    charType,
+                    density,
+                    charCategory,
+                    // SVGのbboxとの比較用にactualBoundingBoxを追加
+                    actualBoundingBoxLeft: actualBoundingBoxLeft,
+                    actualBoundingBoxRight: actualBoundingBoxRight,
+                    // 実際の描画幅（左端から右端まで）
+                    actualWidth: actualBoundingBoxRight - actualBoundingBoxLeft,
+                    inkLeft: shape.inkLeft,
+                    inkRight: shape.inkRight
+                };
+                
+                // キャッシュに保存
+                featureCache[cacheKey] = features;
+                
+                return features;
+            } catch (e) {
+                console.error('文字特徴量判定エラー:', e, char, fontId);
+                // エラーが発生した場合はデフォルト値を返す
+                const charCategory = getCharCategory(char);
+                const defaultFeatures = {
+                    width: fontSize * 0.6,
+                    height: fontSize,
+                    fillRatio: 0.4,
+                    aspectRatio: 0.6,
+                    charType: charCategory === "KANJI" ? "COMPLEX" : "MIXED",
+                    density: "MEDIUM",
+                    charCategory,
+                    actualBoundingBoxLeft: 0,
+                    actualBoundingBoxRight: fontSize * 0.6,
+                    actualWidth: fontSize * 0.6,
+                    inkLeft: 0,
+                    inkRight: fontSize * 0.6
+                };
+                return defaultFeatures;
+            }
+        }
+
+        // 5.1 ペアカテゴリごとの補正値
+        const pairCategoryAdjust = {
+            VERTICAL_VERTICAL: +0.4,
+            VERTICAL_CURVE: +0.1,
+            CURVE_CURVE: -0.2,
+            DIAGONAL_ANY: -0.5,
+            COMPLEX_COMPLEX: +0.6,
+            LATIN_PAIR: -0.3,
+            MIXED: 0.0,
+        };
+
+        // 5.2 黒密度の組み合わせによる補正
+        const densityAdjust = {
+            "HEAVY-HEAVY": +0.5,
+            "HEAVY-MEDIUM": +0.3,
+            "HEAVY-LIGHT": +0.2,
+            "MEDIUM-MEDIUM": 0.0,
+            "MEDIUM-LIGHT": -0.1,
+            "LIGHT-LIGHT": -0.2,
+            "MEDIUM-HEAVY": +0.3,
+            "LIGHT-HEAVY": +0.2,
+            "LIGHT-MEDIUM": -0.1,
+        };
+
+        // 文字の特徴量を取得（自動判定版）
+        function getCharFeatures(char, fontId, fontSize) {
+            return resolveCharFeatures(char, fontId, fontSize);
+        }
+
+        // ペアカテゴリを取得
+        function getPairCategory(typeA, typeB) {
+            const isLatin = (type) => type === "LATIN_UPPER" || type === "LATIN_LOWER";
+            const isDiagonal = (type) => type === "DIAGONAL";
+            const isVertical = (type) => type === "VERTICAL_HEAVY" || type === "VERTICAL_LIGHT";
+            const isCurve = (type) => type === "CURVE";
+            const isComplex = (type) => type === "COMPLEX";
+
+            if (isLatin(typeA) && isLatin(typeB)) return "LATIN_PAIR";
+            if (isDiagonal(typeA) || isDiagonal(typeB)) return "DIAGONAL_ANY";
+            if (isVertical(typeA) && isVertical(typeB)) return "VERTICAL_VERTICAL";
+            if (isCurve(typeA) && isCurve(typeB)) return "CURVE_CURVE";
+            if (isComplex(typeA) && isComplex(typeB)) return "COMPLEX_COMPLEX";
+            if ((isVertical(typeA) && isCurve(typeB)) || (isCurve(typeA) && isVertical(typeB))) {
+                return "VERTICAL_CURVE";
+            }
+            return "MIXED";
+        }
+
+        // ============================================
+        // Phase1モデル読み込み
+        // ============================================
+        // 
+        // Phase1モデルの構造:
+        // {
+        //   "フォント名": {  // フォント固有の学習データ（最優先）
+        //     "文字1|文字2": {
+        //       "gap_norm_avg": ...,
+        //       "gap_actual_avg": ...,
+        //       "font_size_avg": ...,
+        //       "count": ...
+        //     }
+        //   },
+        //   "Mincho": {  // カテゴリごとの学習データ（フォールバック）
+        //     "文字1|文字2": { ... }
+        //   },
+        //   "Gothic": { ... },
+        //   "MaruGothic": { ... }
+        // }
+        // 
+        // 検索優先順位:
+        // 1. フォント名で直接検索（フォント固有のデータ）
+        // 2. 長音符をハイフンに変換して検索（表記揺れ対応）
+        // 3. 正規化されたカテゴリで検索（カテゴリごとのデータ）
+        // 
+        // 学習データ生成時の推奨事項:
+        // - フォント固有のデータがある場合は、フォント名をキーとして保存
+        // - 複数のフォントで共通のデータを使用する場合は、カテゴリ名をキーとして保存
+        // - 両方保存することで、フォント固有のデータがない場合でもカテゴリごとのデータを使用可能
+        
+        async function loadPhase1Model() {
+            try {
+                const response = await fetch("/assets/phase1_model.json");
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                phase1Model = data;
+                console.log("Phase1モデルを読み込みました", phase1Model);
+                
+                // デバッグ: モデルに含まれるキーを表示
+                const keys = Object.keys(phase1Model);
+                const fontSpecificKeys = keys.filter(k => !["Mincho", "Gothic", "MaruGothic", "Brush", "Script", "Design"].includes(k));
+                if (fontSpecificKeys.length > 0) {
+                    console.log("フォント固有の学習データ:", fontSpecificKeys);
+                }
+                
+                // 学習済みペアのgap_norm_avgの平均値を計算（未学習ペア用）
+                let sumGapNorm = 0;
+                let countGapNorm = 0;
+                
+                for (const fontKey in phase1Model) {
+                    const fontData = phase1Model[fontKey];
+                    if (typeof fontData !== 'object' || fontData === null) continue;
+                    
+                    for (const pairKey in fontData) {
+                        const pairData = fontData[pairKey];
+                        if (typeof pairData !== 'object' || pairData === null) continue;
+                        
+                        const gapNormAvg = pairData.gap_norm_avg;
+                        if (gapNormAvg !== undefined && gapNormAvg !== null && typeof gapNormAvg === 'number') {
+                            sumGapNorm += gapNormAvg;
+                            countGapNorm++;
+                        }
+                    }
+                }
+                
+                if (countGapNorm > 0) {
+                    phase1ModelAverage = sumGapNorm / countGapNorm;
+                    console.log(`学習済みペアの平均gap_norm_avg: ${phase1ModelAverage.toFixed(4)} (${countGapNorm}ペア)`);
+                } else {
+                    phase1ModelAverage = null;
+                    console.warn("学習済みペアの平均値を計算できませんでした");
+                }
+                
+                // Phase0のルールベースで計算した平均値を推定（係数計算用）
+                // 学習済みペアと同じペアに対してPhase0で計算した場合の平均値を計算
+                // 実際のペアデータを使ってPhase0で計算するのは複雑なので、
+                // 一般的なPhase0のgap_norm値を推定（baseTracking + 平均的な補正値）
+                // これは概算値として使用される
+                phase0Average = null;  // 必要に応じて後で計算
+            } catch (error) {
+                console.warn("Phase1モデルの読み込みに失敗しました:", error);
+                console.warn("Phase0モードのみで動作します");
+                phase1Model = null;
+                phase1ModelAverage = null;
+            }
+        }
+        
+        // ============================================
+        // フォント名正規化関数
+        // ============================================
+        
+        function normalizeFontName(fontName) {
+            if (!fontName) return "Gothic";
+            
+            // fontFamilyMapを使用してカテゴリを取得
+            const normalized = fontFamilyMap[fontName];
+            if (normalized) {
+                return normalized;
+            }
+            
+            // 長音符（ー）とハイフン（-）の違いを考慮
+            // 「08丸三ー明朝体」と「08丸三-明朝体」の両方に対応
+            const normalizedName = fontName.replace(/ー/g, '-').replace(/－/g, '-');
+            if (normalizedName !== fontName) {
+                const normalizedFromMap = fontFamilyMap[normalizedName];
+                if (normalizedFromMap) {
+                    return normalizedFromMap;
+                }
+            }
+            
+            // 部分一致で判定
+            const fontLower = fontName.toLowerCase();
+            
+            // 明朝系
+            if (fontLower.includes("mincho") || fontLower.includes("明朝") || 
+                fontLower.includes("serif") || fontLower.includes("times")) {
+                return "Mincho";
+            }
+            
+            // 丸ゴシック系
+            if (fontLower.includes("maru") || fontLower.includes("丸") ||
+                fontLower.includes("round")) {
+                return "MaruGothic";
+            }
+            
+            // 筆記体・スクリプト系
+            if (fontLower.includes("brush") || fontLower.includes("script") ||
+                fontLower.includes("行書") || fontLower.includes("楷書") ||
+                fontLower.includes("毛筆") || fontLower.includes("勘亭流")) {
+                return "Brush";
+            }
+            
+            // 装飾系・ロゴ風
+            if (fontLower.includes("design") || fontLower.includes("impact") ||
+                fontLower.includes("comic") || fontLower.includes("stencil")) {
+                return "Design";
+            }
+            
+            // デフォルトはGothic
+            return "Gothic";
+        }
+        
+        // ============================================
+        // Phase0カーニング関数
+        // ============================================
+        
+        function getKerningPhase0(leftChar, rightChar, fontName, baseWidthPx, styleId = "default", globalTracking = 0) {
+            // 既存のcomputeKerningPositionsロジックを使用
+            // 2文字のペアに対してカーニング値を計算
+            const fontFamily = fontFamilyMap[fontName] || "Gothic";
+            let base = baseTracking[fontFamily]?.[styleId] || 
+                       baseTracking[fontFamily]?.default || 0;
+            
+            // 文字の特徴量を取得
+            const leftFeatures = getCharFeatures(leftChar, fontName, baseWidthPx);
+            const rightFeatures = getCharFeatures(rightChar, fontName, baseWidthPx);
+            
+            // 平均文字幅を計算
+            const avgWidth = (leftFeatures.width + rightFeatures.width) / 2;
+            
+            // baseが0の場合は、Phase1の学習データに基づいてデフォルト値を設定
+            // Phase1のgap_norm_avgの平均は約0.35（文字幅の35%）
+            // これをベースラインとして使用
+            if (base === 0) {
+                // 文字幅に対する比率として0.35をデフォルト値とする
+                // ただし、fontSizeに対する比率として扱うため、avgWidth/baseWidthPxでスケール
+                base = 0.35 * (avgWidth / baseWidthPx);
+            }
+            
+            // ペアカテゴリ補正
+            const pairCat = getPairCategory(leftFeatures.charType, rightFeatures.charType);
+            const pairAdj = pairCategoryAdjust[pairCat] || 0;
+            
+            // 黒密度補正
+            const densityKey = leftFeatures.density + "-" + rightFeatures.density;
+            const densAdj = densityAdjust[densityKey] || 0;
+            
+            // デバッグログ（WAVE文字列の場合）
+            if (leftChar === 'W' && rightChar === 'A' || 
+                leftChar === 'A' && rightChar === 'V' || 
+                leftChar === 'V' && rightChar === 'E') {
+                console.log(`[Phase0] ${leftChar}|${rightChar}:`);
+                console.log(`  fontFamily: ${fontFamily}, styleId: ${styleId}`);
+                console.log(`  base: ${base.toFixed(4)}, pairAdj: ${pairAdj}, densAdj: ${densAdj}`);
+                console.log(`  avgWidth: ${avgWidth.toFixed(2)}px, baseWidthPx: ${baseWidthPx}, globalTracking: ${globalTracking}`);
+                console.log(`  gap計算前: ${base.toFixed(4)} * ${baseWidthPx} + ${pairAdj} * ${avgWidth.toFixed(2)} + ${densAdj} * ${avgWidth.toFixed(2)} + ${globalTracking}`);
+            }
+            
+            // 最終ギャップ
+            // baseはfontSizeに対する比率、pairAdjとdensAdjは文字幅に対する比率として扱う
+            // globalTrackingはpx単位
+            let gap = base * baseWidthPx + (pairAdj + densAdj) * avgWidth + globalTracking;
+            
+            // 最小・最大のガード
+            const minGap = -0.2 * baseWidthPx;
+            const maxGap = 0.8 * baseWidthPx;
+            const gapBeforeClamp = gap;
+            if (gap < minGap) gap = minGap;
+            if (gap > maxGap) gap = maxGap;
+            
+            // デバッグログ（WAVE文字列の場合）
+            if (leftChar === 'W' && rightChar === 'A' || 
+                leftChar === 'A' && rightChar === 'V' || 
+                leftChar === 'V' && rightChar === 'E') {
+                console.log(`  gap計算後: ${gapBeforeClamp.toFixed(3)}px`);
+                console.log(`  minGap: ${minGap.toFixed(3)}px, maxGap: ${maxGap.toFixed(3)}px`);
+                console.log(`  gap（クランプ後）: ${gap.toFixed(3)}px`);
+            }
+            
+            return gap;
+        }
+        
+        // ============================================
+        // Phase1カーニング関数
+        // ============================================
+        
+        function getKerningPhase1(leftChar, rightChar, fontName, baseWidthPx, globalTracking = 0) {
+            if (!phase1Model) {
+                return null;
+            }
+            
+            // ペアキーを生成
+            const pairKey = leftChar + "|" + rightChar;
+            
+            // フォント固有のデータを優先的に検索
+            // 優先順位:
+            // 1. フォント名で直接検索（フォント固有の学習データ - 最優先）
+            // 2. 長音符をハイフンに変換して検索（表記揺れ対応）
+            // 3. 正規化されたカテゴリで検索（フォールバック - カテゴリごとの学習データ）
+            let record = null;
+            let usedKey = null;
+            let dataSource = null; // "font-specific", "font-normalized", "category"
+            
+            if (phase1Model[fontName] && phase1Model[fontName][pairKey]) {
+                record = phase1Model[fontName][pairKey];
+                usedKey = fontName;
+                dataSource = "font-specific";
+            } else {
+                // 長音符をハイフンに変換して検索
+                const normalizedName = fontName.replace(/ー/g, '-').replace(/－/g, '-');
+                if (normalizedName !== fontName && phase1Model[normalizedName] && phase1Model[normalizedName][pairKey]) {
+                    record = phase1Model[normalizedName][pairKey];
+                    usedKey = normalizedName;
+                    dataSource = "font-normalized";
+                } else {
+                    // フォント名が見つからない場合は、正規化されたカテゴリで検索（フォールバック）
+                    const fontKey = normalizeFontName(fontName);
+                    if (phase1Model[fontKey] && phase1Model[fontKey][pairKey]) {
+                        record = phase1Model[fontKey][pairKey];
+                        usedKey = fontKey;
+                        dataSource = "category";
+                    }
+                }
+            }
+            
+            // トラッキング調整を係数に変換（-50～+50 → 0.5～1.5）
+            // トラッキング調整=0の場合は係数=1.0（元の値）
+            // トラッキング調整=+50の場合は係数=1.5（50%広げる）
+            // トラッキング調整=-50の場合は係数=0.5（50%詰める）
+            const trackingCoefficient = 1.0 + (globalTracking / 100);
+            
+            // レコードが見つからない場合の処理（選択されたアルゴリズムに応じて）
+            if (!record) {
+                if (unlearnedPairAlgorithm === "average") {
+                    // アルゴリズム1: 未学習ペアに学習済みペアの平均値を使用
+                    if (phase1ModelAverage !== null && phase1ModelAverage !== undefined) {
+                        const leftFeatures = getCharFeatures(leftChar, fontName, baseWidthPx);
+                        const rightFeatures = getCharFeatures(rightChar, fontName, baseWidthPx);
+                        const avgWidth = (leftFeatures.width + rightFeatures.width) / 2;
+                        const gapPx = phase1ModelAverage * avgWidth * trackingCoefficient;
+                        return gapPx;
+                    }
+                    // 平均値も計算できない場合はnullを返す（Phase0にフォールバック）
+                    return null;
+                } else if (unlearnedPairAlgorithm === "phase0") {
+                    // アルゴリズム2: Phase0のルールベースにフォールバック
+                    return null;  // nullを返すとgetKerning関数でPhase0にフォールバックされる
+                } else if (unlearnedPairAlgorithm === "phase0_scaled") {
+                    // アルゴリズム3: Phase0のルールベース × 係数（文字列全体の幅に応じた調整）
+                    // Phase0で計算したgapを取得
+                    const phase0Gap = getKerningPhase0(leftChar, rightChar, fontName, baseWidthPx, "default", 0);
+                    
+                    // 係数を計算（文字列全体の幅に応じたバランス調整）
+                    // 文字列全体の幅を考慮して、学習済みデータとPhase0のバランスを取る
+                    let scaleFactor = 1.0;
+                    
+                    if (phase1ModelAverage !== null && phase1ModelAverage !== undefined && currentTextInfo !== null) {
+                        // 文字列全体の幅を考慮した係数を計算
+                        // Phase0で計算した文字列全体の幅と、学習済みデータから推定される文字列全体の幅を比較
+                        const phase0TotalWidth = currentTextInfo.phase0TotalWidth;
+                        const estimatedPhase1TotalWidth = currentTextInfo.estimatedPhase1TotalWidth;
+                        
+                        if (phase0TotalWidth > 0 && estimatedPhase1TotalWidth > 0) {
+                            // 文字列全体の幅の比率を係数として使用
+                            // これにより、文字列全体のバランスを保ちながら調整される
+                            scaleFactor = estimatedPhase1TotalWidth / phase0TotalWidth;
+                        } else {
+                            // 文字列全体の幅が計算できない場合は、gap_norm値で比較（フォールバック）
+                            const leftFeatures = getCharFeatures(leftChar, fontName, baseWidthPx);
+                            const rightFeatures = getCharFeatures(rightChar, fontName, baseWidthPx);
+                            const avgWidth = (leftFeatures.width + rightFeatures.width) / 2;
+                            
+                            if (avgWidth > 0) {
+                                const phase0GapNorm = phase0Gap / avgWidth;
+                                if (phase0GapNorm !== 0 && Math.abs(phase0GapNorm) > 0.001) {
+                                    scaleFactor = phase1ModelAverage / phase0GapNorm;
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Phase0のgapに係数をかける
+                    // 係数が極端な値にならないように制限（0.1 ～ 10.0）
+                    scaleFactor = Math.max(0.1, Math.min(10.0, scaleFactor));
+                    return phase0Gap * scaleFactor * trackingCoefficient;
+                }
+                
+                // デフォルト: nullを返してPhase0にフォールバック
+                return null;
+            }
+            
+            // デバッグ: N|Iペアの場合のみ詳細ログを出力
+            if (leftChar === 'N' && rightChar === 'I') {
+                console.log(`[getKerningPhase1] ${pairKey} ペア:`);
+                console.log(`  フォント名: ${fontName}`);
+                console.log(`  使用されたキー: ${usedKey} (${dataSource})`);
+            }
+            
+            // gap_normからpx単位に変換
+            // 平均文字幅で正規化したgap_norm_avgを優先使用（学習時とカーニング計算時の基準を一致）
+            let gapNorm = record.gap_norm_avg;
+            
+            // 後方互換性: gap_norm_avgがない場合は左右の平均を使用
+            if (gapNorm === undefined || gapNorm === null) {
+                const gapNormLeft = record.gap_norm_left_avg;
+                const gapNormRight = record.gap_norm_right_avg;
+                
+                if (gapNormLeft === undefined || gapNormLeft === null ||
+                    gapNormRight === undefined || gapNormRight === null) {
+                    return null;
+                }
+                
+                // 左右の平均を取る（旧方式）
+                gapNorm = (gapNormLeft + gapNormRight) / 2;
+            }
+            
+            // 案1: 学習時のgap_actual_avgを文字幅の比率で調整
+            // Canvas APIのmeasureTextとSVGのbboxの差を考慮して、文字幅の比率で補正
+            const learnedFontSize = record.font_size_avg;
+            const gapActualAvg = record.gap_actual_avg;
+            
+            if (learnedFontSize !== undefined && learnedFontSize !== null && 
+                gapActualAvg !== undefined && gapActualAvg !== null) {
+                // 現在のフォントサイズで文字幅を測定
+                const leftFeatures = getCharFeatures(leftChar, fontName, baseWidthPx);
+                const rightFeatures = getCharFeatures(rightChar, fontName, baseWidthPx);
+                
+                // 学習時のフォントサイズで文字幅を測定
+                const leftFeaturesLearned = getCharFeatures(leftChar, fontName, learnedFontSize);
+                const rightFeaturesLearned = getCharFeatures(rightChar, fontName, learnedFontSize);
+                
+                // SVGのbboxとCanvas APIのmeasureText().widthの差を補正
+                // 学習データでは、SVGのbboxを使用してgap_actualを計算
+                // gap_actual = next.min_x - current.max_x
+                // Canvas APIでは、measureText().widthを使用して文字幅を測定
+                // 
+                // 重要な点: gap_actualはSVGのbboxで計算されているため、
+                // Canvas APIで再現するには、SVGのbboxとCanvas APIのmeasureText().widthの比率を考慮する必要がある
+                // 
+                // 学習データから:
+                // - SVG bbox: N=36.72px, I=17.08px, 平均=26.90px
+                // - Canvas API measureText: N=約31px, I=約15px, 平均=約23px
+                // - 比率: Canvas API / SVG bbox = 23 / 26.90 ≈ 0.855
+                // 
+                // gap_actualは文字間の実際の距離なので、文字幅に比例する
+                // したがって、Canvas APIで再現するには:
+                // gapPx = gap_actual * (currentFontSize / learnedFontSize) * (Canvas API / SVG bbox の比率)
+                
+                // 現在のフォントサイズでのmeasureText().width
+                const currentLeftWidth = leftFeatures.width; // measureText().width
+                const currentRightWidth = rightFeatures.width; // measureText().width
+                const currentAvgWidth = (currentLeftWidth + currentRightWidth) / 2;
+                
+                // 学習時のフォントサイズでのmeasureText().width
+                const learnedLeftWidth = leftFeaturesLearned.width; // measureText().width
+                const learnedRightWidth = rightFeaturesLearned.width; // measureText().width
+                const learnedAvgWidth = (learnedLeftWidth + learnedRightWidth) / 2;
+                
+                // 根本的な問題の再考:
+                // SVGのbbox: N.max_x = 340.05px, I.min_x = 348.67px, gap_actual = 8.615px
+                // Canvas API: fillText(x, y)のx座標はベースラインの左端
+                // 
+                // 重要な理解:
+                // gap_actualは「Iの左端（SVG bbox）からNの右端（SVG bbox）までの距離」
+                // Canvas APIで再現するには、この距離をCanvas APIの座標系に変換する必要がある
+                // 
+                // しかし、SVGのbboxとCanvas APIのmeasureText().widthの比率は約0.86
+                // これは文字幅の比率なので、gap_actualにも同じ比率を適用する必要がある
+                // 
+                // しかし、gap_actualは「距離」なので、文字幅の比率をそのまま適用するのは正しくない
+                // gap_actualは文字間の「空白」の距離なので、文字幅に比例する
+                // 
+                // したがって、gap_actualをCanvas APIで再現するには:
+                // gapPx = gap_actual * (currentFontSize / learnedFontSize) * (Canvas API measureText / SVG bbox の比率)
+                // 
+                // しかし、この比率は文字幅の比率なので、gap_actualにも同じ比率を適用する必要がある
+                // 
+                // より正確には:
+                // gap_actualは文字間の距離なので、文字幅に比例する
+                // したがって、gap_actualをCanvas APIで再現するには、文字幅の比率を適用する必要がある
+                // 
+                // しかし、試行1では「計算値は正しいが、視覚的に広い」という結果だった
+                // これは、計算値が正しいのに視覚的に広く見えるという矛盾
+                // 
+                // 本当の問題は、位置計算の基準点が異なることかもしれない
+                // SVG: bboxのmin_x/max_xで配置
+                // Canvas API: fillText(x, y)のx座標がベースラインの左端
+                // 
+                // したがって、位置計算でactualBoundingBoxRightとactualBoundingBoxLeftを使用することで、
+                // SVGのbboxを基準にした位置計算ができるはず
+                // 
+                // しかし、actualBoundingBoxRightとactualBoundingBoxLeftが正しく取得できているかどうかが問題
+                // 
+                // より確実なアプローチ:
+                // gap_actualはSVGのbboxで計算されているので、Canvas APIで再現するには、
+                // SVGのbboxとCanvas APIのmeasureText().widthの比率を考慮する必要がある
+                // 
+                // 学習データから: N|Iペアの場合
+                // - SVG bbox平均: 26.90px
+                // - Canvas API measureText平均: 約23px（学習時のフォントサイズ45pxで測定）
+                // - 比率: Canvas API / SVG bbox = 23 / 26.90 ≈ 0.855
+                // 
+                // 重要な理解:
+                // gap_actualはSVGのbbox基準で計算されている（I.min_x - N.max_x）
+                // 位置計算でactualBoundingBoxRightとactualBoundingBoxLeftを使用している場合、
+                // gap_actualはそのまま使用し、フォントサイズでスケールするだけ
+                // なぜなら、actualBoundingBoxRightとactualBoundingBoxLeftは既にCanvas APIの座標系に変換されているから
+                // 
+                // しかし、SVGのbboxとCanvas APIのactualBoundingBoxの比率を考慮する必要がある
+                // 学習データから: N|Iペアの場合
+                // - SVG bbox: N=36.72px, I=17.08px
+                // - Canvas API actualBoundingBox: N=約45px, I=約30px（フォントサイズ45pxで測定）
+                // 
+                // 実際には、位置計算でactualBoundingBoxRightとactualBoundingBoxLeftを使用しているため、
+                // gap_actualをそのまま使用し、フォントサイズでスケールするだけ
+                const fontSizeScale = baseWidthPx / learnedFontSize;
+                const gapPx = gapActualAvg * fontSizeScale;
+                
+                // デバッグ情報をコンソールに出力
+                if (leftChar === 'N' && rightChar === 'I') {
+                    console.log('N|I カーニング計算（SVG bbox基準）:');
+                    console.log('  学習時のフォントサイズ:', learnedFontSize.toFixed(2), 'px');
+                    console.log('  現在のフォントサイズ:', baseWidthPx, 'px');
+                    console.log('  学習時のgap_actual_avg (SVG bbox基準):', gapActualAvg.toFixed(3), 'px');
+                    console.log('  フォントサイズの比率:', fontSizeScale.toFixed(4));
+                    console.log('  計算されたgapPx:', gapPx.toFixed(3), 'px');
+                    console.log('  現在のNの幅（measureText）:', currentLeftWidth.toFixed(2), 'px');
+                    console.log('  現在のIの幅（measureText）:', currentRightWidth.toFixed(2), 'px');
+                }
+                
+                // トラッキング調整を係数として適用
+                return gapPx * trackingCoefficient;
+            }
+            
+            // フォールバック: gap_normを使用（旧方式）
+            const fontSizeToUse = (learnedFontSize !== undefined && learnedFontSize !== null) 
+                ? learnedFontSize 
+                : baseWidthPx;
+            
+            const leftFeatures = getCharFeatures(leftChar, fontName, fontSizeToUse);
+            const rightFeatures = getCharFeatures(rightChar, fontName, fontSizeToUse);
+            const avgWidth = (leftFeatures.width + rightFeatures.width) / 2;
+            const gapPx = gapNorm * avgWidth;
+            // トラッキング調整を係数として適用
+            return gapPx * trackingCoefficient;
+        }
+        
+        // ============================================
+        // モードに応じたラッパー関数
+        // ============================================
+        
+        function getKerning(leftChar, rightChar, fontName, baseWidthPx, styleId = "default", globalTracking = 0) {
+            // Phase1モードでモデルがロード済みの場合
+            if (phaseMode === "phase1" && phase1Model) {
+                const phase1Gap = getKerningPhase1(leftChar, rightChar, fontName, baseWidthPx, globalTracking);
+                if (phase1Gap !== null) {
+                    return phase1Gap;
+                }
+                // Phase1で値が見つからない場合はPhase0にフォールバック
+                return getKerningPhase0(leftChar, rightChar, fontName, baseWidthPx, styleId, globalTracking);
+            }
+            
+            // Phase0モードまたはモデル未ロードの場合はPhase0を使用
+            return getKerningPhase0(leftChar, rightChar, fontName, baseWidthPx, styleId, globalTracking);
+        }
+        
+        // ============================================
+        // Phase0カーニング位置計算（既存関数を保持）
+        // ============================================
+        
+        function computeKerningPositions(text, fontId, fontSize, styleId, globalTracking = 0) {
+            const fontFamily = fontFamilyMap[fontId] || "Gothic";
+            const base = baseTracking[fontFamily]?.[styleId] || 
+                        baseTracking[fontFamily]?.default || 0;
+
+            // 各文字の特徴量を取得
+            const chars = Array.from(text);
+            const features = chars.map(ch => getCharFeatures(ch, fontId, fontSize));
+
+            // 位置計算
+            const startX = 50;
+            const getInkLeft = (feature) => {
+                if (feature && Number.isFinite(feature.inkLeft)) return feature.inkLeft;
+                if (feature && Number.isFinite(feature.actualBoundingBoxLeft)) {
+                    return -feature.actualBoundingBoxLeft;
+                }
+                return 0;
+            };
+            const getInkRight = (feature) => {
+                if (feature && Number.isFinite(feature.inkRight)) return feature.inkRight;
+                if (feature && Number.isFinite(feature.actualBoundingBoxRight)) {
+                    return feature.actualBoundingBoxRight;
+                }
+                if (feature && Number.isFinite(feature.width)) return feature.width;
+                return fontSize * 0.6;
+            };
+            // 最初の文字をstartXに揃える（実際の左端がstartX）
+            let x = startX;
+            if (features.length > 0) {
+                x = startX - getInkLeft(features[0]);
+            }
+            const positions = [x];
+            const gaps = [];
+            const pairAdjusts = [];
+            const densityAdjusts = [];
+            const pairCategories = [];
+            const isLearned = [];  // 各ペアが学習済みかどうか（Phase1モード時のみ有効）
+
+            for (let i = 0; i < chars.length - 1; i++) {
+                const A = features[i];
+                const B = features[i + 1];
+                const leftChar = chars[i];
+                const rightChar = chars[i + 1];
+
+                // Phase1モードの場合、ペアが学習済みかどうかを判定
+                let pairIsLearned = true;  // デフォルトは学習済み（Phase0モード時）
+                if (phaseMode === "phase1" && phase1Model) {
+                    const pairKey = leftChar + "|" + rightChar;
+                    // フォント名で直接検索
+                    if (phase1Model[fontId] && phase1Model[fontId][pairKey]) {
+                        pairIsLearned = true;
+                    } else {
+                        // 長音符をハイフンに変換して検索
+                        const normalizedName = fontId.replace(/ー/g, '-').replace(/－/g, '-');
+                        if (normalizedName !== fontId && phase1Model[normalizedName] && phase1Model[normalizedName][pairKey]) {
+                            pairIsLearned = true;
+                        } else {
+                            // 正規化されたカテゴリで検索
+                            const fontKey = normalizeFontName(fontId);
+                            if (phase1Model[fontKey] && phase1Model[fontKey][pairKey]) {
+                                pairIsLearned = true;
+                            } else {
+                                // 学習データが見つからない = 未学習ペア
+                                pairIsLearned = false;
+                            }
+                        }
+                    }
+                }
+                isLearned.push(pairIsLearned);
+
+                // getKerning関数を使用（Phase0/Phase1自動切り替え）
+                let gap = getKerning(leftChar, rightChar, fontId, fontSize, styleId, globalTracking);
+                
+                // 最小・最大のガード
+                const minGap = -0.2 * fontSize;
+                const maxGap = 0.8 * fontSize;
+                if (gap < minGap) gap = minGap;
+                if (gap > maxGap) gap = maxGap;
+
+                // 次の文字のX座標を計算（インク領域基準）
+                if (leftChar === 'N' && rightChar === 'I') {
+                    console.log('N|I 位置計算:');
+                    console.log('  現在のx座標:', x.toFixed(2), 'px');
+                    console.log('  N.actualBoundingBoxRight:', (A.actualBoundingBoxRight !== undefined ? A.actualBoundingBoxRight : 'undefined'));
+                    console.log('  N.actualBoundingBoxLeft:', (A.actualBoundingBoxLeft !== undefined ? A.actualBoundingBoxLeft : 'undefined'));
+                    console.log('  N.inkLeft:', getInkLeft(A).toFixed(2), 'px');
+                    console.log('  N.inkRight:', getInkRight(A).toFixed(2), 'px');
+                    console.log('  N.width (measureText):', A.width.toFixed(2), 'px');
+                    console.log('  gap:', gap.toFixed(3), 'px');
+                    console.log('  I.actualBoundingBoxRight:', (B.actualBoundingBoxRight !== undefined ? B.actualBoundingBoxRight : 'undefined'));
+                    console.log('  I.actualBoundingBoxLeft:', (B.actualBoundingBoxLeft !== undefined ? B.actualBoundingBoxLeft : 'undefined'));
+                    console.log('  I.inkLeft:', getInkLeft(B).toFixed(2), 'px');
+                    console.log('  I.inkRight:', getInkRight(B).toFixed(2), 'px');
+                    console.log('  I.width (measureText):', B.width.toFixed(2), 'px');
+                }
+                
+                // 現在のx座標を保存（デバッグ用）
+                const prevX = x;
+                const currentRightEdge = prevX + getInkRight(A);
+                const nextLeftEdge = currentRightEdge + gap;
+                x = nextLeftEdge - getInkLeft(B);
+                
+                positions.push(x);
+                gaps.push(gap);
+                
+                // デバッグ情報（N|Iペアの場合）
+                if (leftChar === 'N' && rightChar === 'I') {
+                    console.log('  Nの幅（measureText）:', A.width.toFixed(2), 'px');
+                    console.log('  gap:', gap.toFixed(3), 'px');
+                    const dbgRight = currentRightEdge;
+                    const dbgLeft = nextLeftEdge;
+                    console.log('  Nの右端（インク基準）:', dbgRight.toFixed(2), 'px');
+                    console.log('  Iの左端（インク基準）:', dbgLeft.toFixed(2), 'px');
+                    console.log('  実際のgap（Iの左端 - Nの右端）:', (dbgLeft - dbgRight).toFixed(3), 'px');
+                    console.log('  次のx座標:', x.toFixed(2), 'px');
+                    console.log('  Iの幅（measureText）:', B.width.toFixed(2), 'px');
+                }
+                
+                // デバッグ情報（Phase0の計算値も保持）
+                const pairCat = getPairCategory(A.charType, B.charType);
+                const pairAdj = pairCategoryAdjust[pairCat] || 0;
+                const densityKey = A.density + "-" + B.density;
+                const densAdj = densityAdjust[densityKey] || 0;
+                pairAdjusts.push(pairAdj);
+                densityAdjusts.push(densAdj);
+                pairCategories.push(pairCat);
+            }
+
+            // 文字列全体の幅を計算（最後の文字の右端までの距離）
+            let totalWidth = 0;
+            if (positions.length > 0 && features.length > 0) {
+                const lastPos = positions[positions.length - 1];
+                const lastFeature = features[features.length - 1];
+                const getInkRight = (feature) => {
+                    if (feature && Number.isFinite(feature.inkRight)) return feature.inkRight;
+                    if (feature && Number.isFinite(feature.actualBoundingBoxRight)) {
+                        return feature.actualBoundingBoxRight;
+                    }
+                    if (feature && Number.isFinite(feature.width)) return feature.width;
+                    return fontSize * 0.6;
+                };
+                totalWidth = lastPos + getInkRight(lastFeature) - startX;
+            }
+            
+            // Phase0で計算した文字列全体の幅を保存
+            // Phase1モードの場合、実際に計算した文字列全体の幅も保存
+            let phase0TotalWidth = totalWidth;
+            let phase1TotalWidth = totalWidth;
+            
+            // Phase1モードの場合、Phase0で計算した幅も取得するため、
+            // Phase0モードで一度計算して幅を取得（無限ループ防止のためフラグをチェック）
+            if (phaseMode === "phase1" && !isComputingPhase0Width) {
+                // Phase0で計算した文字列全体の幅を取得
+                // 注意: globalTrackingはPhase0でもPhase1でも同じ値を使用する
+                // （幅アンカーは「学習による幅の変化」のみを補正するため）
+                const originalPhaseMode = phaseMode;
+                isComputingPhase0Width = true;
+                phaseMode = "phase0";
+                const phase0Result = computeKerningPositions(text, fontId, fontSize, styleId, globalTracking);
+                phase0TotalWidth = phase0Result.totalWidth || totalWidth;
+                phaseMode = originalPhaseMode;
+                isComputingPhase0Width = false;
+                
+                // Phase1で実際に計算した文字列全体の幅を使用
+                phase1TotalWidth = totalWidth;
+                
+                // ============================================
+                // 幅アンカー（全ギャップ均等割り）の適用
+                // ============================================
+                // 注意: 「Phase0のルールベースにフォールバック」の場合は適用しない
+                // （未学習ペアは既にPhase0を使用しているため、幅アンカーは不要）
+                // 「未学習ペアに平均値を使用」と「Phase0 × 係数」の場合のみ適用
+                const shouldApplyWidthAnchor = unlearnedPairAlgorithm !== "phase0";
+                
+                if (shouldApplyWidthAnchor) {
+                    // Phase1とPhase0の文字列全体の幅の差分を計算
+                    // これは「学習による幅の変化」のみを表す
+                    const deltaW = phase1TotalWidth - phase0TotalWidth;
+                    
+                    // ギャップ数が0より大きい場合のみ適用
+                    if (gaps.length > 0 && Math.abs(deltaW) > 0.001) {
+                    // 1ギャップあたりの調整値を計算（負の値でPhase0の幅に近づける）
+                    const adjustPerGap = -deltaW / gaps.length;
+                    
+                    // デバッグ: 調整前のギャップ値を記録
+                    const gapsBefore = [...gaps];
+                    
+                    // すべてのギャップに調整値を加算
+                    for (let i = 0; i < gaps.length; i++) {
+                        gaps[i] += adjustPerGap;
+                        
+                        // 調整後のギャップが最小・最大の範囲内に収まるように制限
+                        const minGap = -0.2 * fontSize;
+                        const maxGap = 0.8 * fontSize;
+                        if (gaps[i] < minGap) gaps[i] = minGap;
+                        if (gaps[i] > maxGap) gaps[i] = maxGap;
+                    }
+                    
+                    // 調整後のギャップで位置を再計算
+                    x = startX;
+                    if (features.length > 0) {
+                        x = startX - getInkLeft(features[0]);
+                    }
+                    positions[0] = x;
+                    
+                    for (let i = 0; i < chars.length - 1; i++) {
+                        const A = features[i];
+                        const B = features[i + 1];
+                        const prevX = x;
+                        const currentRightEdge = prevX + getInkRight(A);
+                        const nextLeftEdge = currentRightEdge + gaps[i];
+                        x = nextLeftEdge - getInkLeft(B);
+                        positions[i + 1] = x;
+                    }
+                    
+                    // 調整後の文字列全体の幅を再計算
+                    if (positions.length > 0 && features.length > 0) {
+                        const lastPos = positions[positions.length - 1];
+                        const lastFeature = features[features.length - 1];
+                        phase1TotalWidth = lastPos + getInkRight(lastFeature) - startX;
+                    }
+                    
+                        // デバッグ情報を出力
+                        console.log(`[幅アンカー] Phase0幅: ${phase0TotalWidth.toFixed(2)}px, Phase1幅(調整前): ${totalWidth.toFixed(2)}px, 差分: ${deltaW.toFixed(2)}px, 調整値/ギャップ: ${adjustPerGap.toFixed(3)}px`);
+                        console.log(`[幅アンカー] ギャップ調整例: [0] ${gapsBefore[0].toFixed(3)}px → ${gaps[0].toFixed(3)}px (調整: ${adjustPerGap.toFixed(3)}px)`);
+                    }
+                } else {
+                    // 「Phase0のルールベースにフォールバック」の場合は幅アンカーを適用しない
+                    console.log(`[幅アンカー] スキップ: 「Phase0のルールベースにフォールバック」が選択されているため`);
+                }
+            } else {
+                // Phase0モードの場合、または既にPhase0の幅計算中の場合
+                phase0TotalWidth = totalWidth;
+                phase1TotalWidth = totalWidth;
+            }
+            
+            // グローバル変数に文字列全体の情報を保存（アルゴリズム3用）
+            currentTextInfo = {
+                phase0TotalWidth: phase0TotalWidth,
+                estimatedPhase1TotalWidth: phase1TotalWidth,
+                text: text,
+                fontId: fontId,
+                fontSize: fontSize
+            };
+            
+            return {
+                positions,
+                gaps,
+                pairAdjusts,
+                densityAdjusts,
+                pairCategories,
+                features,
+                base,
+                fontFamily,
+                totalWidth: totalWidth,
+                isLearned: isLearned,  // 各ペアが学習済みかどうか
+            };
+        }
+
+        // ============================================
+        // Canvas描画関数
+        // ============================================
+
+        function drawTextWithoutKerning(ctx, text, fontId, fontSize, globalTracking = 0) {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.fillStyle = '#2c3e50';
+            ctx.font = `${fontSize}px "${fontId}"`;
+            ctx.textBaseline = 'middle';
+            
+            const chars = Array.from(text);
+            const y = ctx.canvas.height / 2;
+            const startX = 50;
+            let x = startX;
+            
+            // 全体トラッキング調整を適用して文字を描画
+            chars.forEach((char, i) => {
+                ctx.fillText(char, x, y);
+                
+                // 次の文字の位置を計算（文字幅 + トラッキング調整）
+                if (i < chars.length - 1) {
+                    const metrics = ctx.measureText(char);
+                    const charWidth = metrics.width;
+                    x += charWidth + globalTracking;
+                }
+            });
+            
+            // 文字列全体の幅を計算（最後の文字の右端までの距離）
+            let totalWidth = 0;
+            if (chars.length > 0) {
+                const lastMetrics = ctx.measureText(chars[chars.length - 1]);
+                const lastCharWidth = lastMetrics.width;
+                totalWidth = x - startX + lastCharWidth;
+            }
+            
+            return totalWidth;  // 文字列幅を返す
+        }
+
+        function drawTextWithKerning(ctx, text, fontId, fontSize, styleId, result) {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.fillStyle = '#2c3e50';
+            ctx.font = `${fontSize}px "${fontId}"`;
+            ctx.textBaseline = 'middle';
+            
+            const chars = Array.from(text);
+            const y = ctx.canvas.height / 2;
+
+            // Phase1モードの場合、未学習ペアの文字間に線を描画
+            const isPhase1 = phaseMode === "phase1" && result.isLearned && result.isLearned.length > 0;
+            const shouldShowUnlearned = showUnlearnedPairs && isPhase1;
+
+            chars.forEach((char, i) => {
+                const x = result.positions[i];
+                ctx.fillText(char, x, y);
+                
+                // 未学習ペアの文字間に線を描画（Phase1モード時かつ可視化がONの場合のみ）
+                if (shouldShowUnlearned && i < chars.length - 1 && result.isLearned[i] === false) {
+                    const nextX = result.positions[i + 1];
+                    
+                    // 文字の右端と次の文字の左端の間に線を引く
+                    const metrics = ctx.measureText(char);
+                    const charRight = x + (metrics.actualBoundingBoxRight || metrics.width * 0.5);
+                    const nextMetrics = ctx.measureText(chars[i + 1]);
+                    const nextCharLeft = nextX - (nextMetrics.actualBoundingBoxLeft || 0);
+                    
+                    // 未学習ペアの間隔を示す線を描画（半透明の赤色）
+                    ctx.strokeStyle = 'rgba(255, 0, 0, 0.5)';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(charRight, y - fontSize * 0.4);
+                    ctx.lineTo(charRight, y + fontSize * 0.4);
+                    ctx.moveTo(nextCharLeft, y - fontSize * 0.4);
+                    ctx.lineTo(nextCharLeft, y + fontSize * 0.4);
+                    ctx.stroke();
+                    
+                    // 間隔の中央に点線を引く（オプション）
+                    ctx.strokeStyle = 'rgba(255, 0, 0, 0.3)';
+                    ctx.setLineDash([3, 3]);
+                    ctx.beginPath();
+                    ctx.moveTo(charRight, y);
+                    ctx.lineTo(nextCharLeft, y);
+                    ctx.stroke();
+                    ctx.setLineDash([]);  // 点線をリセット
+                }
+            });
+        }
+
+        // ============================================
+        // フォント検出機能
+        // ============================================
+
+        // フォントが利用可能かチェック（より確実な方法）
+        function isFontAvailable(fontName) {
+            try {
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                
+                // 基準フォント（確実に存在するフォント）で測定
+                const baseFont = 'monospace';
+                const testString = 'mmmmmmmmmmlli';
+                context.font = `72px ${baseFont}`;
+                const baseWidth = context.measureText(testString).width;
+                
+                // テストフォントで測定
+                context.font = `72px "${fontName}", ${baseFont}`;
+                const testWidth = context.measureText(testString).width;
+                
+                // 幅が異なればフォントが利用可能
+                // さらに、日本語フォントの場合は日本語文字でもテスト
+                if (baseWidth === testWidth && /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(fontName)) {
+                    const japaneseTest = 'あいうえお';
+                    context.font = `72px ${baseFont}`;
+                    const baseWidthJP = context.measureText(japaneseTest).width;
+                    context.font = `72px "${fontName}", ${baseFont}`;
+                    const testWidthJP = context.measureText(japaneseTest).width;
+                    return baseWidthJP !== testWidthJP;
+                }
+                
+                return baseWidth !== testWidth;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // フォントファミリーの表示ラベル
+        const fontFamilyLabels = {
+            "Mincho": "Mincho（明朝系）",
+            "Gothic": "Gothic（角ゴシック系）",
+            "MaruGothic": "MaruGothic（丸ゴ系）",
+            "Brush": "Brush（筆文字系）",
+            "Script": "Script（アルファベット筆記体）",
+            "Design": "Design（装飾系・ロゴ風）"
+        };
+
+        // フォントセレクトボックスを更新する関数
+        function updateFontSelect(availableFonts, defaultFonts) {
+            const fontSelect = document.getElementById('fontSelect');
+            
+            // セレクトボックスを更新（利用可能なフォントが見つかった場合のみ）
+            if (availableFonts.length > 0) {
+                fontSelect.innerHTML = '';
+                
+                // フォントをファミリーごとに分類
+                const fontsByFamily = {
+                    "Mincho": [],
+                    "Gothic": [],
+                    "MaruGothic": [],
+                    "Brush": [],
+                    "Script": [],
+                    "Design": []
+                };
+                
+                availableFonts.forEach(font => {
+                    try {
+                        const family = fontFamilyMap[font.name] || "Gothic";
+                        if (fontsByFamily[family]) {
+                            fontsByFamily[family].push(font);
+                        } else {
+                            fontsByFamily["Gothic"].push(font);
+                        }
+                    } catch (e) {
+                        fontsByFamily["Gothic"].push(font);
+                    }
+                });
+                
+                // ファミリーの順序を定義
+                const familyOrder = ["Mincho", "Gothic", "MaruGothic", "Brush", "Script", "Design"];
+                
+                // optgroupを作成して追加
+                familyOrder.forEach(family => {
+                    const fonts = fontsByFamily[family];
+                    if (fonts.length > 0) {
+                        const optgroup = document.createElement('optgroup');
+                        optgroup.label = fontFamilyLabels[family] || family;
+                        fonts.forEach(font => {
+                            const option = document.createElement('option');
+                            option.value = font.name;
+                            option.textContent = font.display;
+                            optgroup.appendChild(option);
+                        });
+                        fontSelect.appendChild(optgroup);
+                    }
+                });
+                
+                // デフォルト値を設定
+                if (defaultFonts.find(f => f.name === "游明朝") && 
+                    availableFonts.find(f => f.name === "游明朝")) {
+                    fontSelect.value = "游明朝";
+                } else if (availableFonts.length > 0) {
+                    fontSelect.value = availableFonts[0].name;
+                }
+                
+                // 表示を更新
+                updateDisplay();
+            }
+        }
+
+        // 利用可能なフォントを検出してセレクトボックスに追加
+        function populateFontSelect() {
+            const fontSelect = document.getElementById('fontSelect');
+            
+            // デフォルトのフォントを追加
+            const defaultFonts = [
+                { name: "游明朝", display: "游明朝" },
+                { name: "游ゴシック", display: "游ゴシック" },
+                { name: "ヒラギノ明朝 ProN", display: "ヒラギノ明朝 ProN" },
+                { name: "ヒラギノ角ゴ ProN", display: "ヒラギノ角ゴ ProN" },
+                { name: "メイリオ", display: "メイリオ" },
+                { name: "Arial", display: "Arial" },
+            ];
+            
+            // まずデフォルトフォントを即座に表示（フォント検出を待たない）
+            fontSelect.innerHTML = '';
+            defaultFonts.forEach(font => {
+                const option = document.createElement('option');
+                option.value = font.name;
+                option.textContent = font.display;
+                fontSelect.appendChild(option);
+            });
+            if (defaultFonts.length > 0) {
+                fontSelect.value = defaultFonts[0].name;
+            }
+            updateDisplay();
+            
+            // 非同期でフォントをチェック（バックグラウンドで実行）
+            setTimeout(() => {
+                try {
+                    const availableFonts = [];
+                    
+                    // デフォルトフォントを先にチェック
+                    defaultFonts.forEach(font => {
+                        try {
+                            if (isFontAvailable(font.name)) {
+                                availableFonts.push(font);
+                            }
+                        } catch (e) {
+                            // エラーが発生してもフォントを追加（フォールバック）
+                            availableFonts.push(font);
+                        }
+                    });
+                    
+                    // すべてのフォントをバッチ処理でチェック
+                    if (typeof commonFonts !== 'undefined' && Array.isArray(commonFonts)) {
+                        // バッチサイズ（一度にチェックするフォント数）
+                        const batchSize = 10;
+                        let currentIndex = 0;
+                        
+                        // バッチ処理関数
+                        const processBatch = () => {
+                            const endIndex = Math.min(currentIndex + batchSize, commonFonts.length);
+                            
+                            for (let i = currentIndex; i < endIndex; i++) {
+                                const fontName = commonFonts[i];
+                                try {
+                                    // デフォルトフォントに含まれていない場合のみチェック
+                                    if (!defaultFonts.find(f => f.name === fontName)) {
+                                        if (isFontAvailable(fontName)) {
+                                            availableFonts.push({ name: fontName, display: fontName });
+                                        }
+                                    }
+                                } catch (e) {
+                                    // エラーは無視して続行
+                                }
+                            }
+                            
+                            currentIndex = endIndex;
+                            
+                            // まだ処理するフォントがある場合
+                            if (currentIndex < commonFonts.length) {
+                                // UIをブロックしないように、次のバッチを非同期で処理
+                                setTimeout(processBatch, 10);
+                            } else {
+                                // すべてのフォントをチェック完了したら、セレクトボックスを更新
+                                updateFontSelect(availableFonts, defaultFonts);
+                            }
+                        };
+                        
+                        // 最初のバッチを開始
+                        processBatch();
+                    } else {
+                        // commonFontsが定義されていない場合は、デフォルトフォントのみで更新
+                        updateFontSelect(availableFonts, defaultFonts);
+                    }
+                } catch (e) {
+                    console.error('フォント検出中にエラーが発生しました:', e);
+                    // エラーが発生しても、デフォルトフォントは表示されているので問題なし
+                }
+            }, 200);
+        }
+
+        // ============================================
+        // UI更新関数
+        // ============================================
+
+        function updateDisplay() {
+            const text = document.getElementById('textInput').value || 'Wave';
+            const fontSelect = document.getElementById('fontSelect');
+            const fontCustomInput = document.getElementById('fontCustomInput');
+            
+            // カスタムフォント入力がある場合はそれを優先、なければセレクトボックスの値を使用
+            let fontId = fontSelect.value;
+            if (fontCustomInput && fontCustomInput.value.trim()) {
+                fontId = fontCustomInput.value.trim();
+            }
+            if (!fontId) {
+                return; // フォントが選択されていない場合は何もしない
+            }
+            
+            const styleId = document.getElementById('styleSelect').value;
+            const fontSize = parseInt(document.getElementById('fontSizeInput').value) || 64;
+            const globalTracking = parseFloat(document.getElementById('trackingSlider').value) || 0;
+            const currentPhaseMode = document.getElementById('phaseModeSelect').value;
+
+            const canvasBefore = document.getElementById('canvasBefore');
+            const canvasAfter = document.getElementById('canvasAfter');
+            const ctxBefore = canvasBefore.getContext('2d');
+            const ctxAfter = canvasAfter.getContext('2d');
+            
+            // モードに応じてラベルを更新
+            const canvasBeforeLabel = document.getElementById('canvasBeforeLabel');
+            const canvasAfterLabel = document.getElementById('canvasAfterLabel');
+            
+            if (currentPhaseMode === "compare") {
+                // 比較モード：左=Phase0、右=Phase1
+                canvasBeforeLabel.textContent = "Phase0（ルールベース）";
+                canvasAfterLabel.textContent = "Phase1（学習値）";
+                
+                // Phase0で描画
+                phaseMode = "phase0";
+                const resultPhase0 = computeKerningPositions(text, fontId, fontSize, styleId, globalTracking);
+                drawTextWithKerning(ctxBefore, text, fontId, fontSize, styleId, resultPhase0);
+                
+                // Phase1で描画
+                phaseMode = "phase1";
+                const resultPhase1 = computeKerningPositions(text, fontId, fontSize, styleId, globalTracking);
+                drawTextWithKerning(ctxAfter, text, fontId, fontSize, styleId, resultPhase1);
+                
+                // 情報パネルはPhase1の結果を表示
+                updateInfoPanel(resultPhase1, text);
+                
+                // モードを元に戻す
+                phaseMode = currentPhaseMode;
+            } else {
+                // 通常モード：左=カーニング前、右=選択したモード
+                canvasBeforeLabel.textContent = "カーニング前（固定トラッキング）";
+                const modeLabel = currentPhaseMode === "phase1" ? "Phase1（学習値）" : "Phase0（ルールベース）";
+                canvasAfterLabel.textContent = `カーニング後（${modeLabel}）`;
+                
+                phaseMode = currentPhaseMode;
+                
+                // カーニング前（固定トラッキング + 全体トラッキング調整）
+                drawTextWithoutKerning(ctxBefore, text, fontId, fontSize, globalTracking);
+
+                // カーニング後（選択したモード）
+                const result = computeKerningPositions(text, fontId, fontSize, styleId, globalTracking);
+                drawTextWithKerning(ctxAfter, text, fontId, fontSize, styleId, result);
+
+                // 情報パネル更新
+                updateInfoPanel(result, text);
+            }
+        }
+
+        function updateInfoPanel(result, text) {
+            document.getElementById('infoFontFamily').textContent = result.fontFamily;
+            document.getElementById('infoBaseTracking').textContent = 
+                `${result.base.toFixed(2)}px (${result.fontFamily} × ${document.getElementById('styleSelect').value})`;
+
+            const charTypes = result.features.map((f, i) => 
+                `${text[i]}: ${f.charType} (${f.density})`
+            ).join(', ');
+            document.getElementById('infoCharTypes').textContent = charTypes;
+
+            const pairInfo = result.pairCategories.map((cat, i) => 
+                `${text[i]}-${text[i+1]}: ${cat} (${result.pairAdjusts[i].toFixed(2)}px)`
+            ).join(', ');
+            document.getElementById('infoPairAdjusts').textContent = pairInfo || '-';
+
+            const densityInfo = result.features.slice(0, -1).map((f, i) => {
+                const next = result.features[i + 1];
+                return `${f.density}-${next.density} (${result.densityAdjusts[i].toFixed(2)}px)`;
+            }).join(', ');
+            document.getElementById('infoDensityAdjusts').textContent = densityInfo || '-';
+
+            const gapsInfo = result.gaps.map((gap, i) => 
+                `${text[i]}-${text[i+1]}: ${gap.toFixed(2)}px`
+            ).join(', ');
+            document.getElementById('infoFinalGaps').textContent = gapsInfo || '-';
+            
+            // 文字ごとの詳細情報を表示（デバッグ用）
+            const charDetailsContainer = document.getElementById('charDetails');
+            charDetailsContainer.innerHTML = '';
+            
+            result.features.forEach((feature, i) => {
+                const char = text[i];
+                const detailDiv = document.createElement('div');
+                detailDiv.className = 'info-item';
+                detailDiv.style.cssText = 'background: white; padding: 15px; border-radius: 4px; border-left: 3px solid #3498db;';
+                
+                detailDiv.innerHTML = `
+                    <strong style="display: block; font-size: 14px; color: #2c3e50; margin-bottom: 10px;">文字: "${char}"</strong>
+                    <div style="font-size: 12px; line-height: 1.8;">
+                        <div><strong>文字種:</strong> ${feature.charCategory || '-'}</div>
+                        <div><strong>文字タイプ:</strong> ${feature.charType || '-'}</div>
+                        <div><strong>黒密度:</strong> ${feature.density || '-'}</div>
+                        <div><strong>fillRatio:</strong> ${(feature.fillRatio || 0).toFixed(3)}</div>
+                        <div><strong>aspectRatio:</strong> ${(feature.aspectRatio || 0).toFixed(3)}</div>
+                        <div><strong>幅:</strong> ${(feature.width || 0).toFixed(2)}px</div>
+                        <div><strong>高さ:</strong> ${(feature.height || 0).toFixed(2)}px</div>
+                    </div>
+                `;
+                
+                charDetailsContainer.appendChild(detailDiv);
+            });
+        }
+
+        // ============================================
+        // イベントリスナー
+        // ============================================
+
+        document.getElementById('textInput').addEventListener('input', updateDisplay);
+        document.getElementById('fontSelect').addEventListener('change', function() {
+            // セレクトボックスが変更されたら、カスタム入力欄をクリア（存在する場合）
+            const fontCustomInput = document.getElementById('fontCustomInput');
+            if (fontCustomInput) {
+                fontCustomInput.value = '';
+            }
+            updateDisplay();
+        });
+        
+        // カスタムフォント入力フィールドが存在する場合のみイベントリスナーを追加
+        const fontCustomInput = document.getElementById('fontCustomInput');
+        if (fontCustomInput) {
+            fontCustomInput.addEventListener('input', function() {
+                // カスタム入力がある場合は、セレクトボックスの選択をクリア
+                if (this.value.trim()) {
+                    document.getElementById('fontSelect').value = '';
+                }
+                updateDisplay();
+            });
+        }
+        document.getElementById('styleSelect').addEventListener('change', updateDisplay);
+        document.getElementById('fontSizeInput').addEventListener('input', updateDisplay);
+        
+        // Phaseモード切り替え
+        document.getElementById('phaseModeSelect').addEventListener('change', function() {
+            phaseMode = this.value;
+            // Phase1モードの時のみ未学習ペアアルゴリズムのセレクトボックスと可視化チェックボックスを表示
+            const unlearnedPairAlgorithmGroup = document.getElementById('unlearnedPairAlgorithmGroup');
+            if (unlearnedPairAlgorithmGroup) {
+                unlearnedPairAlgorithmGroup.style.display = (phaseMode === "phase1") ? "flex" : "none";
+            }
+            const showUnlearnedPairsGroup = document.getElementById('showUnlearnedPairsGroup');
+            if (showUnlearnedPairsGroup) {
+                showUnlearnedPairsGroup.style.display = (phaseMode === "phase1") ? "flex" : "none";
+            }
+            updateDisplay();
+        });
+        
+        // 未学習ペアアルゴリズムの選択
+        const unlearnedPairAlgorithmSelect = document.getElementById('unlearnedPairAlgorithmSelect');
+        if (unlearnedPairAlgorithmSelect) {
+            unlearnedPairAlgorithmSelect.addEventListener('change', function() {
+                unlearnedPairAlgorithm = this.value;
+                updateDisplay();
+            });
+        }
+        
+        // 未学習ペアの可視化のOn/Off
+        const showUnlearnedPairsCheckbox = document.getElementById('showUnlearnedPairsCheckbox');
+        if (showUnlearnedPairsCheckbox) {
+            showUnlearnedPairsCheckbox.addEventListener('change', function() {
+                showUnlearnedPairs = this.checked;
+                updateDisplay();
+            });
+        }
+        
+        // 全体トラッキング調整スライドバー
+        const trackingSlider = document.getElementById('trackingSlider');
+        const trackingValue = document.getElementById('trackingValue');
+        
+        trackingSlider.addEventListener('input', function() {
+            const value = parseFloat(this.value);
+            trackingValue.textContent = value > 0 ? `+${value}px` : `${value}px`;
+            updateDisplay();
+        });
+        
+        // 初期表示
+        trackingValue.textContent = '0px';
+
+        // ページ読み込み時にPhase1モデルを読み込み、フォント検出を実行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初期表示時に未学習ペアアルゴリズムのセレクトボックスと可視化チェックボックスの表示/非表示を設定
+            const unlearnedPairAlgorithmGroup = document.getElementById('unlearnedPairAlgorithmGroup');
+            if (unlearnedPairAlgorithmGroup) {
+                unlearnedPairAlgorithmGroup.style.display = (phaseMode === "phase1") ? "flex" : "none";
+            }
+            const showUnlearnedPairsGroup = document.getElementById('showUnlearnedPairsGroup');
+            if (showUnlearnedPairsGroup) {
+                showUnlearnedPairsGroup.style.display = (phaseMode === "phase1") ? "flex" : "none";
+            }
+            
+            loadPhase1Model().then(() => {
+                populateFontSelect();
+            }).catch(() => {
+                populateFontSelect();
+            });
+        });
+        
+        // 既にDOMが読み込まれている場合のフォールバック
+        if (document.readyState === 'loading') {
+            // DOMContentLoadedを待つ
+        } else {
+            // 既に読み込み済み
+            // 初期表示時に未学習ペアアルゴリズムのセレクトボックスと可視化チェックボックスの表示/非表示を設定
+            const unlearnedPairAlgorithmGroup = document.getElementById('unlearnedPairAlgorithmGroup');
+            if (unlearnedPairAlgorithmGroup) {
+                unlearnedPairAlgorithmGroup.style.display = (phaseMode === "phase1") ? "flex" : "none";
+            }
+            const showUnlearnedPairsGroup = document.getElementById('showUnlearnedPairsGroup');
+            if (showUnlearnedPairsGroup) {
+                showUnlearnedPairsGroup.style.display = (phaseMode === "phase1") ? "flex" : "none";
+            }
+            
+            loadPhase1Model().then(() => {
+                populateFontSelect();
+            }).catch(() => {
+                populateFontSelect();
+            });
+        }
+    </script>
+</body>
+</html>

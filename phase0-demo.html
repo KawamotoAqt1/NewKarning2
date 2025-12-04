@@ -235,6 +235,13 @@
                     <span id="trackingValue" style="min-width: 60px; text-align: right; font-weight: 600;">0px</span>
                 </div>
             </div>
+            <div class="control-group" style="grid-column: 1 / -1;">
+                <label for="beforeKerningGapSlider">カーニング前の文字間（px）</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <input type="range" id="beforeKerningGapSlider" min="0" max="100" value="30" step="1" style="flex: 1;">
+                    <span id="beforeKerningGapValue" style="min-width: 60px; text-align: right; font-weight: 600;">30px</span>
+                </div>
+            </div>
         </div>
 
         <div class="canvas-container" id="canvasContainer">
@@ -329,6 +336,7 @@
         // 設定定数
         // ============================================
         const DEFAULT_BLEND_RATIO_PERCENT = 55;  // ブレンド比率のデフォルト値（0-100の範囲、0 = Phase0のみ、100 = Phase1のみ）
+        const DEFAULT_BEFORE_KERNING_GAP = 30;  // カーニング前の文字間のデフォルト値（px）
         
         // ============================================
         // Phase0/Phase1 カーニングエンジン実装
@@ -344,6 +352,7 @@
         let currentTextInfo = null;  // 現在の文字列全体の情報（文字列全体の幅計算用）
         let isComputingPhase0Width = false;  // Phase0の幅計算中フラグ（無限ループ防止用）
         let blendRatio = DEFAULT_BLEND_RATIO_PERCENT / 100.0;  // Phase0とPhase1のブレンド比率（0.0 = Phase0のみ、1.0 = Phase1のみ、0.5 = 50%ずつ）
+        let beforeKerningGap = DEFAULT_BEFORE_KERNING_GAP;  // カーニング前の文字間（px）
 
         // 一般的なフォントリスト（日本語・英語）
         const commonFonts = [
@@ -1179,9 +1188,14 @@
             // 平均文字幅を計算
             const avgWidth = (leftFeatures.width + rightFeatures.width) / 2;
             
-            // baseが0の場合は、そのまま0を使用（補正値なし）
-            // （以前はPhase1の学習データに基づいてデフォルト値0.35を設定していたが、
-            //  カーニング前の表示に補正値が入らないようにするため削除）
+            // baseが0の場合は、Phase1の学習データに基づいてデフォルト値を設定
+            // Phase1のgap_norm_avgの平均は約0.35（文字幅の35%）
+            // これをベースラインとして使用
+            if (base === 0) {
+                // 文字幅に対する比率として0.35をデフォルト値とする
+                // ただし、fontSizeに対する比率として扱うため、avgWidth/baseWidthPxでスケール
+                base = 0.35 * (avgWidth / baseWidthPx);
+            }
             
             // ペアカテゴリ補正
             const pairCat = getPairCategory(leftFeatures.charType, rightFeatures.charType);
@@ -1465,19 +1479,7 @@
                 // 実際には、位置計算でactualBoundingBoxRightとactualBoundingBoxLeftを使用しているため、
                 // gap_actualをそのまま使用し、フォントサイズでスケールするだけ
                 const fontSizeScale = baseWidthPx / learnedFontSize;
-                let gapPx = gapActualAvg * fontSizeScale;
-                
-                // 文字列全体の幅による補正（オプション: モデルJSONにtext_total_width_avgが含まれる場合のみ）
-                const textTotalWidthAvg = record.text_total_width_avg;
-                if (textTotalWidthAvg !== undefined && textTotalWidthAvg !== null && textTotalWidthAvg > 0 &&
-                    currentTextInfo !== null && currentTextInfo.phase0TotalWidth !== undefined && 
-                    currentTextInfo.phase0TotalWidth > 0) {
-                    // 学習時の文字列全体の幅と現在の文字列全体の幅の比率で補正
-                    const widthScale = currentTextInfo.phase0TotalWidth / textTotalWidthAvg;
-                    // 補正係数を制限（0.5 ～ 2.0）して極端な値を防ぐ
-                    const clampedWidthScale = Math.max(0.5, Math.min(2.0, widthScale));
-                    gapPx = gapPx * clampedWidthScale;
-                }
+                const gapPx = gapActualAvg * fontSizeScale;
                 
                 // デバッグ情報をコンソールに出力
                 if (leftChar === 'N' && rightChar === 'I') {
@@ -1486,15 +1488,6 @@
                     console.log('  現在のフォントサイズ:', baseWidthPx, 'px');
                     console.log('  学習時のgap_actual_avg (SVG bbox基準):', gapActualAvg.toFixed(3), 'px');
                     console.log('  フォントサイズの比率:', fontSizeScale.toFixed(4));
-                    if (textTotalWidthAvg !== undefined && textTotalWidthAvg !== null && textTotalWidthAvg > 0 &&
-                        currentTextInfo !== null && currentTextInfo.phase0TotalWidth !== undefined && 
-                        currentTextInfo.phase0TotalWidth > 0) {
-                        const widthScale = currentTextInfo.phase0TotalWidth / textTotalWidthAvg;
-                        const clampedWidthScale = Math.max(0.5, Math.min(2.0, widthScale));
-                        console.log('  学習時の文字列全体の幅:', textTotalWidthAvg.toFixed(2), 'px');
-                        console.log('  現在の文字列全体の幅:', currentTextInfo.phase0TotalWidth.toFixed(2), 'px');
-                        console.log('  文字列幅の比率:', widthScale.toFixed(4), '(制限後:', clampedWidthScale.toFixed(4), ')');
-                    }
                     console.log('  計算されたgapPx:', gapPx.toFixed(3), 'px');
                     console.log('  現在のNの幅（measureText）:', currentLeftWidth.toFixed(2), 'px');
                     console.log('  現在のIの幅（measureText）:', currentRightWidth.toFixed(2), 'px');
@@ -1512,20 +1505,7 @@
             const leftFeatures = getCharFeatures(leftChar, fontName, fontSizeToUse);
             const rightFeatures = getCharFeatures(rightChar, fontName, fontSizeToUse);
             const avgWidth = (leftFeatures.width + rightFeatures.width) / 2;
-            let gapPx = gapNorm * avgWidth;
-            
-            // 文字列全体の幅による補正（オプション: モデルJSONにtext_total_width_avgが含まれる場合のみ）
-            const textTotalWidthAvg = record.text_total_width_avg;
-            if (textTotalWidthAvg !== undefined && textTotalWidthAvg !== null && textTotalWidthAvg > 0 &&
-                currentTextInfo !== null && currentTextInfo.phase0TotalWidth !== undefined && 
-                currentTextInfo.phase0TotalWidth > 0) {
-                // 学習時の文字列全体の幅と現在の文字列全体の幅の比率で補正
-                const widthScale = currentTextInfo.phase0TotalWidth / textTotalWidthAvg;
-                // 補正係数を制限（0.5 ～ 2.0）して極端な値を防ぐ
-                const clampedWidthScale = Math.max(0.5, Math.min(2.0, widthScale));
-                gapPx = gapPx * clampedWidthScale;
-            }
-            
+            const gapPx = gapNorm * avgWidth;
             // Phase0と同じ方法（px単位で直接加算）
             return gapPx + globalTracking;
         }
@@ -1576,34 +1556,6 @@
         // ============================================
         // Phase0カーニング位置計算（既存関数を保持）
         // ============================================
-        
-        // カーニング前の幅を計算（固定トラッキング + 全体トラッキング調整）
-        function calculateWidthWithoutKerning(text, fontId, fontSize, globalTracking) {
-            const chars = Array.from(text);
-            const startX = 50;
-            let x = startX;
-            
-            // 一時的なCanvasを作成して文字幅を測定
-            const tempCanvas = document.createElement('canvas');
-            const tempCtx = tempCanvas.getContext('2d');
-            tempCtx.font = `${fontSize}px "${fontId}"`;
-            
-            chars.forEach((char, i) => {
-                if (i < chars.length - 1) {
-                    const metrics = tempCtx.measureText(char);
-                    const charWidth = metrics.width;
-                    x += charWidth + globalTracking;
-                }
-            });
-            
-            // 最後の文字の幅を加算
-            if (chars.length > 0) {
-                const lastMetrics = tempCtx.measureText(chars[chars.length - 1]);
-                const lastCharWidth = lastMetrics.width;
-                return x - startX + lastCharWidth;
-            }
-            return 0;
-        }
         
         function computeKerningPositions(text, fontId, fontSize, styleId, globalTracking = 0) {
             const fontFamily = fontFamilyMap[fontId] || "Gothic";
@@ -1789,9 +1741,6 @@
                 totalWidth = lastPos + getInkRight(lastFeature) - startX;
             }
             
-            // カーニング前の幅を計算（固定トラッキング + 全体トラッキング調整）
-            const widthWithoutKerning = calculateWidthWithoutKerning(text, fontId, fontSize, globalTracking);
-            
             // Phase0で計算した文字列全体の幅を保存
             // Phase1モードの場合、実際に計算した文字列全体の幅も保存
             let phase0TotalWidth = totalWidth;
@@ -1823,13 +1772,14 @@
                 const shouldApplyWidthAnchor = unlearnedPairAlgorithm !== "phase0";
                 
                 if (shouldApplyWidthAnchor) {
-                    // Phase1のカーニング後の幅をカーニング前の幅に合わせる
-                    const deltaW = widthWithoutKerning - phase1TotalWidth;
+                    // Phase1とPhase0の文字列全体の幅の差分を計算
+                    // これは「学習による幅の変化」のみを表す
+                    const deltaW = phase1TotalWidth - phase0TotalWidth;
                     
                     // ギャップ数が0より大きい場合のみ適用
                     if (gaps.length > 0 && Math.abs(deltaW) > 0.001) {
-                    // 1ギャップあたりの調整値を計算（正の値でカーニング前の幅に近づける）
-                    const adjustPerGap = deltaW / gaps.length;
+                    // 1ギャップあたりの調整値を計算（負の値でPhase0の幅に近づける）
+                    const adjustPerGap = -deltaW / gaps.length;
                     
                     // デバッグ: 調整前のギャップ値を記録
                     const gapsBefore = [...gaps];
@@ -1870,8 +1820,8 @@
                     }
                     
                         // デバッグ情報を出力
-                        console.log(`[幅アンカー(Phase1)] カーニング前幅: ${widthWithoutKerning.toFixed(2)}px, Phase1幅(調整前): ${totalWidth.toFixed(2)}px, 差分: ${deltaW.toFixed(2)}px, 調整値/ギャップ: ${adjustPerGap.toFixed(3)}px`);
-                        console.log(`[幅アンカー(Phase1)] ギャップ調整例: [0] ${gapsBefore[0].toFixed(3)}px → ${gaps[0].toFixed(3)}px (調整: ${adjustPerGap.toFixed(3)}px)`);
+                        console.log(`[幅アンカー] Phase0幅: ${phase0TotalWidth.toFixed(2)}px, Phase1幅(調整前): ${totalWidth.toFixed(2)}px, 差分: ${deltaW.toFixed(2)}px, 調整値/ギャップ: ${adjustPerGap.toFixed(3)}px`);
+                        console.log(`[幅アンカー] ギャップ調整例: [0] ${gapsBefore[0].toFixed(3)}px → ${gaps[0].toFixed(3)}px (調整: ${adjustPerGap.toFixed(3)}px)`);
                     }
                 } else {
                     // 「Phase0のルールベースにフォールバック」の場合は幅アンカーを適用しない
@@ -1881,62 +1831,6 @@
                 // Phase0モードの場合、または既にPhase0の幅計算中の場合
                 phase0TotalWidth = totalWidth;
                 phase1TotalWidth = totalWidth;
-                
-                // Phase0モードでも、カーニング後の幅をカーニング前の幅に合わせる
-                if (phaseMode === "phase0" && !isComputingPhase0Width) {
-                    const kerningTotalWidth = totalWidth; // カーニング後の幅
-                    const deltaW = widthWithoutKerning - kerningTotalWidth;
-                    
-                    // ギャップ数が0より大きい場合のみ適用
-                    if (gaps.length > 0 && Math.abs(deltaW) > 0.001) {
-                        // 1ギャップあたりの調整値を計算（正の値でカーニング前の幅に近づける）
-                        const adjustPerGap = deltaW / gaps.length;
-                        
-                        // デバッグ: 調整前のギャップ値を記録
-                        const gapsBefore = [...gaps];
-                        
-                        // すべてのギャップに調整値を加算
-                        for (let i = 0; i < gaps.length; i++) {
-                            gaps[i] += adjustPerGap;
-                            
-                            // 調整後のギャップが最小・最大の範囲内に収まるように制限
-                            const minGap = -0.2 * fontSize;
-                            const maxGap = 0.8 * fontSize;
-                            if (gaps[i] < minGap) gaps[i] = minGap;
-                            if (gaps[i] > maxGap) gaps[i] = maxGap;
-                        }
-                        
-                        // 調整後のギャップで位置を再計算
-                        x = startX;
-                        if (features.length > 0) {
-                            x = startX - getInkLeft(features[0]);
-                        }
-                        positions[0] = x;
-                        
-                        for (let i = 0; i < chars.length - 1; i++) {
-                            const A = features[i];
-                            const B = features[i + 1];
-                            const prevX = x;
-                            const currentRightEdge = prevX + getInkRight(A);
-                            const nextLeftEdge = currentRightEdge + gaps[i];
-                            x = nextLeftEdge - getInkLeft(B);
-                            positions[i + 1] = x;
-                        }
-                        
-                        // 調整後の文字列全体の幅を再計算
-                        if (positions.length > 0 && features.length > 0) {
-                            const lastPos = positions[positions.length - 1];
-                            const lastFeature = features[features.length - 1];
-                            totalWidth = lastPos + getInkRight(lastFeature) - startX;
-                            phase0TotalWidth = totalWidth;
-                            phase1TotalWidth = totalWidth;
-                        }
-                        
-                        // デバッグ情報を出力
-                        console.log(`[幅アンカー(Phase0)] カーニング前幅: ${widthWithoutKerning.toFixed(2)}px, カーニング後幅(調整前): ${kerningTotalWidth.toFixed(2)}px, 差分: ${deltaW.toFixed(2)}px, 調整値/ギャップ: ${adjustPerGap.toFixed(3)}px`);
-                        console.log(`[幅アンカー(Phase0)] ギャップ調整例: [0] ${gapsBefore[0].toFixed(3)}px → ${gaps[0].toFixed(3)}px (調整: ${adjustPerGap.toFixed(3)}px)`);
-                    }
-                }
             }
             
             // グローバル変数に文字列全体の情報を保存（アルゴリズム3用）
@@ -1953,11 +1847,10 @@
             };
             
             // 評価データを準備
-            const shouldApplyWidthAnchor = (phaseMode === "phase1" && unlearnedPairAlgorithm !== "phase0") || phaseMode === "phase0";
-            const deltaW = phaseMode === "phase1" ? (widthWithoutKerning - phase1TotalWidth) : 
-                          phaseMode === "phase0" ? (widthWithoutKerning - phase0TotalWidth) : 0;
+            const shouldApplyWidthAnchor = phaseMode === "phase1" && unlearnedPairAlgorithm !== "phase0";
+            const deltaW = phaseMode === "phase1" ? (phase1TotalWidth - phase0TotalWidth) : 0;
             const adjustPerGap = shouldApplyWidthAnchor && gaps.length > 0 && Math.abs(deltaW) > 0.001 ? 
-                (deltaW / gaps.length) : 0;
+                (-deltaW / gaps.length) : 0;
             const widthAnchorApplied = shouldApplyWidthAnchor && Math.abs(deltaW) > 0.001;
             
             return {
@@ -1991,7 +1884,7 @@
         // Canvas描画関数
         // ============================================
 
-        function drawTextWithoutKerning(ctx, text, fontId, fontSize, globalTracking = 0) {
+        function drawTextWithoutKerning(ctx, text, fontId, fontSize, beforeKerningGapPx = DEFAULT_BEFORE_KERNING_GAP) {
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
             ctx.fillStyle = '#2c3e50';
             ctx.font = `${fontSize}px "${fontId}"`;
@@ -2000,26 +1893,51 @@
             const chars = Array.from(text);
             const y = ctx.canvas.height / 2;
             const startX = 50;
-            let x = startX;
             
-            // 全体トラッキング調整を適用して文字を描画
+            // 各文字の特徴量を取得（inkLeft/inkRightを含む）
+            const features = chars.map(ch => getCharFeatures(ch, fontId, fontSize));
+            
+            // inkLeft/inkRightを取得する関数
+            const getInkLeft = (feature) => {
+                if (feature && Number.isFinite(feature.inkLeft)) return feature.inkLeft;
+                if (feature && Number.isFinite(feature.actualBoundingBoxLeft)) {
+                    return -feature.actualBoundingBoxLeft;
+                }
+                return 0;
+            };
+            const getInkRight = (feature) => {
+                if (feature && Number.isFinite(feature.inkRight)) return feature.inkRight;
+                if (feature && Number.isFinite(feature.actualBoundingBoxRight)) {
+                    return feature.actualBoundingBoxRight;
+                }
+                if (feature && Number.isFinite(feature.width)) return feature.width;
+                return fontSize * 0.6;
+            };
+            
+            // 最初の文字をstartXに揃える（inkLeftを考慮）
+            let x = startX;
+            if (features.length > 0) {
+                x = startX - getInkLeft(features[0]);
+            }
+            
+            // bboxベース（inkLeft/inkRight）で文字を描画
             chars.forEach((char, i) => {
                 ctx.fillText(char, x, y);
                 
-                // 次の文字の位置を計算（文字幅 + トラッキング調整）
+                // 次の文字の位置を計算（inkRight + 文字間 - 次の文字のinkLeft）
                 if (i < chars.length - 1) {
-                    const metrics = ctx.measureText(char);
-                    const charWidth = metrics.width;
-                    x += charWidth + globalTracking;
+                    const currentInkRight = getInkRight(features[i]);
+                    const nextInkLeft = getInkLeft(features[i + 1]);
+                    x = x + currentInkRight + beforeKerningGapPx - nextInkLeft;
                 }
             });
             
-            // 文字列全体の幅を計算（最後の文字の右端までの距離）
+            // 文字列全体の幅を計算（最後の文字のinkRightまでの距離）
             let totalWidth = 0;
-            if (chars.length > 0) {
-                const lastMetrics = ctx.measureText(chars[chars.length - 1]);
-                const lastCharWidth = lastMetrics.width;
-                totalWidth = x - startX + lastCharWidth;
+            if (features.length > 0) {
+                const firstInkLeft = getInkLeft(features[0]);
+                const lastInkRight = getInkRight(features[features.length - 1]);
+                totalWidth = (x + lastInkRight) - (startX - firstInkLeft);
             }
             
             return totalWidth;  // 文字列幅を返す
@@ -2441,8 +2359,8 @@
                 
                 phaseMode = currentPhaseMode;
                 
-                // カーニング前（固定トラッキング + 全体トラッキング調整）
-                drawTextWithoutKerning(ctxBefore, text, fontId, fontSize, globalTracking);
+                // カーニング前（bboxベース + 文字間調整）
+                drawTextWithoutKerning(ctxBefore, text, fontId, fontSize, beforeKerningGap);
 
                 // カーニング後（選択したモード）
                 const result = computeKerningPositions(text, fontId, fontSize, styleId, globalTracking);
@@ -2583,6 +2501,23 @@
             trackingValue.textContent = value > 0 ? `+${value}px` : `${value}px`;
             updateDisplay();
         });
+        
+        // カーニング前の文字間調整スライドバー
+        const beforeKerningGapSlider = document.getElementById('beforeKerningGapSlider');
+        const beforeKerningGapValue = document.getElementById('beforeKerningGapValue');
+        
+        if (beforeKerningGapSlider && beforeKerningGapValue) {
+            // スライダーの初期値を設定（定数から）
+            beforeKerningGapSlider.value = DEFAULT_BEFORE_KERNING_GAP;
+            beforeKerningGapValue.textContent = `${DEFAULT_BEFORE_KERNING_GAP}px`;
+            
+            beforeKerningGapSlider.addEventListener('input', function() {
+                const value = parseFloat(this.value);
+                beforeKerningGap = value;
+                beforeKerningGapValue.textContent = `${value}px`;
+                updateDisplay();
+            });
+        }
         
         // Phase0とのブレンド比率スライダー
         const blendRatioSlider = document.getElementById('blendRatioSlider');

@@ -238,8 +238,8 @@
             <div class="control-group" style="grid-column: 1 / -1;">
                 <label for="beforeKerningGapSlider">カーニング前の文字間（px）</label>
                 <div style="display: flex; align-items: center; gap: 10px;">
-                    <input type="range" id="beforeKerningGapSlider" min="0" max="100" value="30" step="1" style="flex: 1;">
-                    <span id="beforeKerningGapValue" style="min-width: 60px; text-align: right; font-weight: 600;">30px</span>
+                    <input type="range" id="beforeKerningGapSlider" min="0" max="100" value="3" step="1" style="flex: 1;">
+                    <span id="beforeKerningGapValue" style="min-width: 60px; text-align: right; font-weight: 600;">3px</span>
                 </div>
             </div>
         </div>
@@ -336,7 +336,7 @@
         // 設定定数
         // ============================================
         const DEFAULT_BLEND_RATIO_PERCENT = 55;  // ブレンド比率のデフォルト値（0-100の範囲、0 = Phase0のみ、100 = Phase1のみ）
-        const DEFAULT_BEFORE_KERNING_GAP = 30;  // カーニング前の文字間のデフォルト値（px）
+        const DEFAULT_BEFORE_KERNING_GAP = 3;  // カーニング前の文字間のデフォルト値（px）
         
         // ============================================
         // Phase0/Phase1 カーニングエンジン実装

@@ -202,7 +202,7 @@
             </div>
             <div class="control-group">
                 <label for="textInput">文字列</label>
-                <input type="text" id="textInput" value="WAVE" placeholder="文字列を入力">
+                <input type="text" id="textInput" value="ＷＡＶＥ" placeholder="文字列を入力">
             </div>
             <div class="control-group">
                 <label for="fontSelect">フォント</label>
@@ -1074,6 +1074,34 @@
         }
         
         // ============================================
+        // 半角文字を全角文字に変換する関数
+        // ============================================
+        
+        function convertHalfToFullWidth(text) {
+            if (!text) return text;
+            
+            let result = '';
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                const code = char.charCodeAt(0);
+                
+                // 半角大文字 A-Z (0x41-0x5A) を全角大文字 Ａ-Ｚ (0xFF21-0xFF3A) に変換
+                if (code >= 0x41 && code <= 0x5A) {
+                    result += String.fromCharCode(code - 0x41 + 0xFF21);
+                }
+                // 半角小文字 a-z (0x61-0x7A) を全角小文字 ａ-ｚ (0xFF41-0xFF5A) に変換
+                else if (code >= 0x61 && code <= 0x7A) {
+                    result += String.fromCharCode(code - 0x61 + 0xFF41);
+                }
+                // その他の文字はそのまま
+                else {
+                    result += char;
+                }
+            }
+            return result;
+        }
+        
+        // ============================================
         // フォント名正規化関数
         // ============================================
         
@@ -1107,7 +1135,7 @@
             
             // 丸ゴシック系
             if (fontLower.includes("maru") || fontLower.includes("丸") ||
-                fontLower.includes("round")) {
+                fontLower.includes("round") || fontLower.includes("ゴシック")){
                 return "MaruGothic";
             }
             
@@ -2236,7 +2264,9 @@
         }
 
         function updateDisplay() {
-            const text = document.getElementById('textInput').value || 'Wave';
+            let text = document.getElementById('textInput').value || 'Ｗａｖｅ';
+            // 半角アルファベットを全角アルファベットに変換
+            text = convertHalfToFullWidth(text);
             const fontSelect = document.getElementById('fontSelect');
             const fontCustomInput = document.getElementById('fontCustomInput');
             

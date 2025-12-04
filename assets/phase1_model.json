@@ -1,108 +1,1384 @@
 {
+  "Gothic": {
+    "Ｔ|ａ": {
+      "gap_norm_avg": 0.4333041228745427,
+      "gap_norm_left_avg": 0.4251603725841749,
+      "gap_norm_right_avg": 0.44176594522845103,
+      "gap_actual_avg": 9.546267327099983,
+      "font_size_avg": 33.832940330647084,
+      "count": 2
+    },
+    "ａ|ｋ": {
+      "gap_norm_avg": 0.758094711257836,
+      "gap_norm_left_avg": 0.7276670806245776,
+      "gap_norm_right_avg": 0.7911780743111848,
+      "gap_actual_avg": 15.724400107800022,
+      "font_size_avg": 34.963136380823535,
+      "count": 2
+    },
+    "ｋ|ｅ": {
+      "gap_norm_avg": 0.528029382845513,
+      "gap_norm_left_avg": 0.5429960012711287,
+      "gap_norm_right_avg": 0.5138656843976541,
+      "gap_actual_avg": 10.791864256799983,
+      "font_size_avg": 34.99058736052943,
+      "count": 2
+    },
+    "ｅ|ｕ": {
+      "gap_norm_avg": 0.680404938508631,
+      "gap_norm_left_avg": 0.6507714049033411,
+      "gap_norm_right_avg": 0.712866012840429,
+      "gap_actual_avg": 13.667066856500014,
+      "font_size_avg": 26.745881684294158,
+      "count": 2
+    },
+    "ｕ|ｃ": {
+      "gap_norm_avg": 0.6215366877868767,
+      "gap_norm_left_avg": 0.5995133939258702,
+      "gap_norm_right_avg": 0.6452397523398267,
+      "gap_actual_avg": 11.493870501000004,
+      "font_size_avg": 26.663528745176496,
+      "count": 2
+    },
+    "ｃ|ｈ": {
+      "gap_norm_avg": 0.6915638802141328,
+      "gap_norm_left_avg": 0.7215868630378008,
+      "gap_norm_right_avg": 0.6639394276986919,
+      "gap_actual_avg": 12.853866998900003,
+      "font_size_avg": 34.90823442141177,
+      "count": 2
+    },
+    "ｈ|ｉ": {
+      "gap_norm_avg": 0.9171140001084,
+      "gap_norm_left_avg": 0.5840285538569111,
+      "gap_norm_right_avg": 2.1344310601566123,
+      "gap_actual_avg": 11.306792519999988,
+      "font_size_avg": 41.63607739047059,
+      "count": 2
+    },
+    "Ｋ|Ａ": {
+      "gap_norm_avg": 0.3543110321786244,
+      "gap_norm_left_avg": 0.402360803272037,
+      "gap_norm_right_avg": 0.31654283709031067,
+      "gap_actual_avg": 11.916721932739955,
+      "font_size_avg": 57.8307436522706,
+      "count": 10
+    },
+    "Ａ|Ｔ": {
+      "gap_norm_avg": 0.2697467477482087,
+      "gap_norm_left_avg": 0.23540944380709297,
+      "gap_norm_right_avg": 0.31588644233391056,
+      "gap_actual_avg": 7.941287263099999,
+      "font_size_avg": 44.66901849111764,
+      "count": 6
+    },
+    "Ｔ|Ａ": {
+      "gap_norm_avg": 0.2577125027155629,
+      "gap_norm_left_avg": 0.2991609976476906,
+      "gap_norm_right_avg": 0.2264880382351854,
+      "gap_actual_avg": 8.044828091239987,
+      "font_size_avg": 46.00046943822353,
+      "count": 10
+    },
+    "Ａ|Ｏ": {
+      "gap_norm_avg": 0.25412876014374175,
+      "gap_norm_left_avg": 0.2723032088316377,
+      "gap_norm_right_avg": 0.23822856957214686,
+      "gap_actual_avg": 9.417333938799999,
+      "font_size_avg": 46.84470471123528,
+      "count": 2
+    },
+    "Ｏ|Ｋ": {
+      "gap_norm_avg": 0.3767242727237787,
+      "gap_norm_left_avg": 0.3154277976961374,
+      "gap_norm_right_avg": 0.46759016730475406,
+      "gap_actual_avg": 12.469070816400006,
+      "font_size_avg": 45.956077282470595,
+      "count": 2
+    },
+    "Ｎ|Ａ": {
+      "gap_norm_avg": 0.4660497223329019,
+      "gap_norm_left_avg": 0.49348660683277373,
+      "gap_norm_right_avg": 0.44246014954925045,
+      "gap_actual_avg": 16.3320347944,
+      "font_size_avg": 59.379606358647095,
+      "count": 8
+    },
+    "Ａ|Ｋ": {
+      "gap_norm_avg": 0.46859321562954376,
+      "gap_norm_left_avg": 0.4160157596102934,
+      "gap_norm_right_avg": 0.5370654160859626,
+      "gap_actual_avg": 15.874369151349995,
+      "font_size_avg": 63.1488219506912,
+      "count": 8
+    },
+    "Ａ|Ｓ": {
+      "gap_norm_avg": 0.4134218933062458,
+      "gap_norm_left_avg": 0.3547349205041649,
+      "gap_norm_right_avg": 0.4973125034362358,
+      "gap_actual_avg": 12.965095055080013,
+      "font_size_avg": 58.82211617650588,
+      "count": 10
+    },
+    "Ｓ|Ｈ": {
+      "gap_norm_avg": 0.5134592778778478,
+      "gap_norm_left_avg": 0.5635556088306174,
+      "gap_norm_right_avg": 0.47295807973826687,
+      "gap_actual_avg": 15.523865577971431,
+      "font_size_avg": 57.38621705273949,
+      "count": 14
+    },
+    "Ｈ|Ｉ": {
+      "gap_norm_avg": 0.8163562153937637,
+      "gap_norm_left_avg": 0.4810126255364998,
+      "gap_norm_right_avg": 2.8062485827095855,
+      "gap_actual_avg": 18.720370667000008,
+      "font_size_avg": 64.17913565042352,
+      "count": 10
+    },
+    "Ｉ|Ｍ": {
+      "gap_norm_avg": 0.41568733275557884,
+      "gap_norm_left_avg": 2.1341866405106886,
+      "gap_norm_right_avg": 0.2302690612641911,
+      "gap_actual_avg": 11.346603951549966,
+      "font_size_avg": 71.42431193988236,
+      "count": 4
+    },
+    "Ｍ|Ａ": {
+      "gap_norm_avg": 0.23056764187567536,
+      "gap_norm_left_avg": 0.2225617768209287,
+      "gap_norm_right_avg": 0.23999021055320557,
+      "gap_actual_avg": 12.442102168150036,
+      "font_size_avg": 74.33882167094119,
+      "count": 8
+    },
+    "Ｇ|Ａ": {
+      "gap_norm_avg": 0.3823012931648614,
+      "gap_norm_left_avg": 0.36306409851264054,
+      "gap_norm_right_avg": 0.40369115996628235,
+      "gap_actual_avg": 14.255332563750045,
+      "font_size_avg": 50.963528137676455,
+      "count": 4
+    },
+    "Ａ|Ｒ": {
+      "gap_norm_avg": 0.9228733786907516,
+      "gap_norm_left_avg": 0.7919393153533216,
+      "gap_norm_right_avg": 1.1056791295518928,
+      "gap_actual_avg": 26.919600534500034,
+      "font_size_avg": 44.94509691558824,
+      "count": 2
+    },
+    "Ｒ|Ａ": {
+      "gap_norm_avg": 0.8731452516579026,
+      "gap_norm_left_avg": 1.04610069389485,
+      "gap_norm_right_avg": 0.7492664419282936,
+      "gap_actual_avg": 25.469064257299976,
+      "font_size_avg": 44.94509691558824,
+      "count": 2
+    },
+    "?|Ａ": {
+      "gap_norm_avg": 0.3491012618909481,
+      "gap_norm_left_avg": 0.35920847742242085,
+      "gap_norm_right_avg": 0.3395472630667459,
+      "gap_actual_avg": 4.2597334911000075,
+      "font_size_avg": 19.981175971058814,
+      "count": 2
+    },
+    "Ａ|Ｍ": {
+      "gap_norm_avg": 0.5009960375635467,
+      "gap_norm_left_avg": 0.5035583530707706,
+      "gap_norm_right_avg": 0.4984983701374523,
+      "gap_actual_avg": 17.67880290895001,
+      "font_size_avg": 54.47411628520588,
+      "count": 4
+    },
+    "Ｍ|Ｏ": {
+      "gap_norm_avg": 0.6453865443626674,
+      "gap_norm_left_avg": 0.6421959772445655,
+      "gap_norm_right_avg": 0.6486089726148812,
+      "gap_actual_avg": 8.053993614600003,
+      "font_size_avg": 20.207842632058796,
+      "count": 2
+    },
+    "Ｏ|Ｔ": {
+      "gap_norm_avg": 0.57276982803373,
+      "gap_norm_left_avg": 0.5260281691369586,
+      "gap_norm_right_avg": 0.628628299650005,
+      "gap_actual_avg": 6.53186695559998,
+      "font_size_avg": 20.206274004647018,
+      "count": 2
+    },
+    "Ｔ|Ｏ": {
+      "gap_norm_avg": 0.41609115461464063,
+      "gap_norm_left_avg": 0.5066152816218586,
+      "gap_norm_right_avg": 0.35537600047998297,
+      "gap_actual_avg": 9.879602512924997,
+      "font_size_avg": 36.436665755749985,
+      "count": 8
+    },
+    "Ｏ|Ｍ": {
+      "gap_norm_avg": 0.20426261399223808,
+      "gap_norm_left_avg": 0.2077223762382267,
+      "gap_norm_right_avg": 0.20091621317808914,
+      "gap_actual_avg": 5.175333633799994,
+      "font_size_avg": 29.156077702470583,
+      "count": 2
+    },
+    "Ｍ|Ｉ": {
+      "gap_norm_avg": 0.5777594148438135,
+      "gap_norm_left_avg": 0.3199745800896105,
+      "gap_norm_right_avg": 2.9726722274253126,
+      "gap_actual_avg": 9.288261315400007,
+      "font_size_avg": 31.855685478117636,
+      "count": 4
+    },
+    "Ｉ|Ｚ": {
+      "gap_norm_avg": 0.7200634993256656,
+      "gap_norm_left_avg": 2.671175888659448,
+      "gap_norm_right_avg": 0.4161182197414887,
+      "gap_actual_avg": 8.366672455049994,
+      "font_size_avg": 30.66235217461764,
+      "count": 4
+    },
+    "Ｚ|Ａ": {
+      "gap_norm_avg": 0.3402096371729749,
+      "gap_norm_left_avg": 0.3907737971993265,
+      "gap_norm_right_avg": 0.3019575448677133,
+      "gap_actual_avg": 8.60986557104998,
+      "font_size_avg": 41.44862641476472,
+      "count": 4
+    },
+    "Ａ|Ｗ": {
+      "gap_norm_avg": 0.1258693439124511,
+      "gap_norm_left_avg": 0.15028029099599502,
+      "gap_norm_right_avg": 0.1084376091243744,
+      "gap_actual_avg": 4.003468473600019,
+      "font_size_avg": 39.8614369119608,
+      "count": 6
+    },
+    "Ｗ|Ａ": {
+      "gap_norm_avg": 0.12497526054803931,
+      "gap_norm_left_avg": 0.1076613178639083,
+      "gap_norm_right_avg": 0.14922349517571354,
+      "gap_actual_avg": 3.976534234299985,
+      "font_size_avg": 39.8614369119608,
+      "count": 6
+    },
+    "Ｉ|Ｓ": {
+      "gap_norm_avg": 0.8259769180305764,
+      "gap_norm_left_avg": 2.297926817044861,
+      "gap_norm_right_avg": 0.5053101876006659,
+      "gap_actual_avg": 25.77072886085,
+      "font_size_avg": 85.53019394017647,
+      "count": 4
+    },
+    "Ｓ|Ｏ": {
+      "gap_norm_avg": 0.21688003736561504,
+      "gap_norm_left_avg": 0.2927978526146906,
+      "gap_norm_right_avg": 0.1722248733924396,
+      "gap_actual_avg": 12.092941407799998,
+      "font_size_avg": 81.08705679635294,
+      "count": 2
+    },
+    "Ｏ|Ｙ": {
+      "gap_norm_avg": 0.15727834332388893,
+      "gap_norm_left_avg": 0.13627086417497256,
+      "gap_norm_right_avg": 0.18594331370633785,
+      "gap_actual_avg": 9.568394759699999,
+      "font_size_avg": 79.19529213776467,
+      "count": 2
+    },
+    "Ｙ|Ａ": {
+      "gap_norm_avg": 0.2001275217930374,
+      "gap_norm_left_avg": 0.2116590264887419,
+      "gap_norm_right_avg": 0.189859360668206,
+      "gap_actual_avg": 9.07679912436663,
+      "font_size_avg": 70.38039039735293,
+      "count": 6
+    },
+    "Ｓ|Ｕ": {
+      "gap_norm_avg": 0.5301591658500227,
+      "gap_norm_left_avg": 0.56735749100891,
+      "gap_norm_right_avg": 0.5004871778630121,
+      "gap_actual_avg": 14.11066904064998,
+      "font_size_avg": 44.780783194205895,
+      "count": 4
+    },
+    "Ｕ|Ｄ": {
+      "gap_norm_avg": 0.5343533780596182,
+      "gap_norm_left_avg": 0.5485036588872606,
+      "gap_norm_right_avg": 0.5209268977791014,
+      "gap_actual_avg": 15.465800500650033,
+      "font_size_avg": 43.704704789735295,
+      "count": 4
+    },
+    "Ｄ|Ａ": {
+      "gap_norm_avg": 0.27444546761125777,
+      "gap_norm_left_avg": 0.28970911087864526,
+      "gap_norm_right_avg": 0.26071338529164034,
+      "gap_actual_avg": 8.609467619399993,
+      "font_size_avg": 43.538430284088236,
+      "count": 4
+    },
+    "Ａ|Ｎ": {
+      "gap_norm_avg": 0.5115298326794965,
+      "gap_norm_left_avg": 0.49375862220329086,
+      "gap_norm_right_avg": 0.5306282119012836,
+      "gap_actual_avg": 17.282754875033323,
+      "font_size_avg": 47.16052169680393,
+      "count": 6
+    },
+    "Ｈ|Ａ": {
+      "gap_norm_avg": 0.4706349328181372,
+      "gap_norm_left_avg": 0.5124846555926822,
+      "gap_norm_right_avg": 0.4351041372638918,
+      "gap_actual_avg": 8.986930695799998,
+      "font_size_avg": 27.30274441547057,
+      "count": 2
+    },
+    "Ｋ|Ｏ": {
+      "gap_norm_avg": 0.21679140472464284,
+      "gap_norm_left_avg": 0.26893706538268997,
+      "gap_norm_right_avg": 0.1815832477373426,
+      "gap_actual_avg": 7.7654679231000046,
+      "font_size_avg": 48.22117526505885,
+      "count": 2
+    },
+    "Ｏ|Ｂ": {
+      "gap_norm_avg": 0.4559964852391244,
+      "gap_norm_left_avg": 0.35686835986250165,
+      "gap_norm_right_avg": 0.6313749117011356,
+      "gap_actual_avg": 15.261593984099989,
+      "font_size_avg": 48.221175265058825,
+      "count": 2
+    },
+    "Ｎ|Ｉ": {
+      "gap_norm_avg": 0.9363109259543875,
+      "gap_norm_left_avg": 0.5880432816057176,
+      "gap_norm_right_avg": 2.2962772857162843,
+      "gap_actual_avg": 34.04613703839999,
+      "font_size_avg": 88.96705659935294,
+      "count": 2
+    },
+    "Ｉ|Ｙ": {
+      "gap_norm_avg": 0.7727013103695087,
+      "gap_norm_left_avg": 2.009370844600273,
+      "gap_norm_right_avg": 0.4783192146242047,
+      "gap_actual_avg": 29.7922709778,
+      "font_size_avg": 88.96627228564707,
+      "count": 2
+    },
+    "Ｋ|Ｅ": {
+      "gap_norm_avg": 0.5168123670635717,
+      "gap_norm_left_avg": 0.5059235176486325,
+      "gap_norm_right_avg": 0.5281802416829648,
+      "gap_actual_avg": 12.390403919800008,
+      "font_size_avg": 54.50588099029413,
+      "count": 2
+    },
+    "Ｅ|Ｚ": {
+      "gap_norm_avg": 0.5563866579233723,
+      "gap_norm_left_avg": 0.5744912027489454,
+      "gap_norm_right_avg": 0.5393883462919548,
+      "gap_actual_avg": 13.476797291299988,
+      "font_size_avg": 54.509802558823544,
+      "count": 2
+    },
+    "Ｋ|Ｕ": {
+      "gap_norm_avg": 0.2456946675915093,
+      "gap_norm_left_avg": 0.2551129798197053,
+      "gap_norm_right_avg": 0.2369470102755625,
+      "gap_actual_avg": 8.372127487100016,
+      "font_size_avg": 54.2580378592353,
+      "count": 2
+    },
+    "Ｕ|Ｍ": {
+      "gap_norm_avg": 0.2467024142979706,
+      "gap_norm_left_avg": 0.298966088028869,
+      "gap_norm_right_avg": 0.20999261378193987,
+      "gap_actual_avg": 10.563468179599994,
+      "font_size_avg": 56.3427436894706,
+      "count": 2
+    },
+    "Ａ|Ｇ": {
+      "gap_norm_avg": 0.1471257232707937,
+      "gap_norm_left_avg": 0.15530254203166166,
+      "gap_norm_right_avg": 0.13976687155755735,
+      "gap_actual_avg": 6.41213119509996,
+      "font_size_avg": 55.87372409335293,
+      "count": 2
+    },
+    "Ａ|Ｉ": {
+      "gap_norm_avg": 0.44403181179879003,
+      "gap_norm_left_avg": 0.2511462626025286,
+      "gap_norm_right_avg": 1.9141016903150303,
+      "gap_actual_avg": 10.369326631100023,
+      "font_size_avg": 54.60862608576471,
+      "count": 2
+    },
+    "Ｋ|Ｉ": {
+      "gap_norm_avg": 0.922483941193605,
+      "gap_norm_left_avg": 0.5375581120638808,
+      "gap_norm_right_avg": 3.2489111497546137,
+      "gap_actual_avg": 11.167590312900018,
+      "font_size_avg": 33.90431287788233,
+      "count": 2
+    },
+    "Ｂ|Ｅ": {
+      "gap_norm_avg": 0.7631598592746368,
+      "gap_norm_left_avg": 0.7143755159229318,
+      "gap_norm_right_avg": 0.8190954758232603,
+      "gap_actual_avg": 12.456803684900024,
+      "font_size_avg": 33.89646974082352,
+      "count": 2
+    },
+    "Ｚ|Ｕ": {
+      "gap_norm_avg": 0.41307483786498017,
+      "gap_norm_left_avg": 0.41535218005846825,
+      "gap_norm_right_avg": 0.4108223324571593,
+      "gap_actual_avg": 9.141070550199998,
+      "font_size_avg": 34.32627365164706,
+      "count": 2
+    },
+    "Ｓ|ｈ": {
+      "gap_norm_avg": 0.6576840170830079,
+      "gap_norm_left_avg": 0.5867551720737006,
+      "gap_norm_right_avg": 0.7481190438841039,
+      "gap_actual_avg": 16.521460552100024,
+      "font_size_avg": 64.439998389,
+      "count": 2
+    },
+    "ｈ|ｏ": {
+      "gap_norm_avg": 0.6476458512175804,
+      "gap_norm_left_avg": 0.709974383901323,
+      "gap_norm_right_avg": 0.5953777388768975,
+      "gap_actual_avg": 15.679073902099958,
+      "font_size_avg": 54.83293980564706,
+      "count": 2
+    },
+    "ｏ|ｕ": {
+      "gap_norm_avg": 0.6373546884824074,
+      "gap_norm_left_avg": 0.5958077206619883,
+      "gap_norm_right_avg": 0.6851303150206642,
+      "gap_actual_avg": 15.690397328799975,
+      "font_size_avg": 45.835292971764694,
+      "count": 2
+    },
+    "ｕ|ｄ": {
+      "gap_norm_avg": 0.6446341206881053,
+      "gap_norm_left_avg": 0.6843795523257798,
+      "gap_norm_right_avg": 0.6092517461774442,
+      "gap_actual_avg": 15.673203862500031,
+      "font_size_avg": 54.786665297000006,
+      "count": 2
+    },
+    "ｄ|ａ": {
+      "gap_norm_avg": 0.6539308017569013,
+      "gap_norm_left_avg": 0.6106664362317286,
+      "gap_norm_right_avg": 0.7037929765638236,
+      "gap_actual_avg": 15.709597234800015,
+      "font_size_avg": 55.52078292570589,
+      "count": 2
+    },
+    "Ｎ|Ｎ": {
+      "gap_norm_avg": 0.44982481203785707,
+      "gap_norm_left_avg": 0.44981549542272015,
+      "gap_norm_right_avg": 0.449834129038935,
+      "gap_actual_avg": 14.478660804699985,
+      "font_size_avg": 48.346665458000004,
+      "count": 2
+    },
+    "Ｎ|Ｏ": {
+      "gap_norm_avg": 0.32403178900724283,
+      "gap_norm_left_avg": 0.3670257335055945,
+      "gap_norm_right_avg": 0.29005438377610926,
+      "gap_actual_avg": 11.813334647100021,
+      "font_size_avg": 47.67215567094117,
+      "count": 2
+    },
+    "Ｏ|Ｓ": {
+      "gap_norm_avg": 0.3077443225138896,
+      "gap_norm_left_avg": 0.24399613287509422,
+      "gap_norm_right_avg": 0.41658408556272136,
+      "gap_actual_avg": 9.937474251299989,
+      "font_size_avg": 46.99764588388235,
+      "count": 2
+    },
+    "Ｉ|Ｔ": {
+      "gap_norm_avg": 0.8361203622104777,
+      "gap_norm_left_avg": 2.8257817067760755,
+      "gap_norm_right_avg": 0.49064927131451863,
+      "gap_actual_avg": 12.80267466609996,
+      "font_size_avg": 44.853332212,
+      "count": 2
+    },
+    "Ｓ|Ａ": {
+      "gap_norm_avg": 0.405677583371562,
+      "gap_norm_left_avg": 0.49687582569035166,
+      "gap_norm_right_avg": 0.342765299759278,
+      "gap_actual_avg": 15.776800822900015,
+      "font_size_avg": 62.287057266352946,
+      "count": 2
+    },
+    "Ｏ|Ｕ": {
+      "gap_norm_avg": 0.377077765600549,
+      "gap_norm_left_avg": 0.3253828913353446,
+      "gap_norm_right_avg": 0.4483011530531643,
+      "gap_actual_avg": 17.64573067790002,
+      "font_size_avg": 61.932547471294114,
+      "count": 2
+    },
+    "植|田": {
+      "gap_norm_avg": 0.5342136854741895,
+      "gap_norm_left_avg": 0.47849462365591383,
+      "gap_norm_right_avg": 0.604619565217391,
+      "gap_actual_avg": 45.093332205999985,
+      "font_size_avg": 97.04078188770592,
+      "count": 2
+    }
+  },
+  "Brush": {
+    "竹|内": {
+      "gap_norm_avg": 0.38867906522172485,
+      "gap_norm_left_avg": 0.36607137186909594,
+      "gap_norm_right_avg": 0.4142629556554201,
+      "gap_actual_avg": 33.9436010366,
+      "font_size_avg": 81.67058619352945,
+      "count": 2
+    },
+    "今|村": {
+      "gap_norm_avg": 0.09207278659202481,
+      "gap_norm_left_avg": 0.09243631178931802,
+      "gap_norm_right_avg": 0.09171210947234375,
+      "gap_actual_avg": 14.000403433600013,
+      "font_size_avg": 109.65019333717649,
+      "count": 2
+    },
+    "片|岡": {
+      "gap_norm_avg": 0.30812912827318245,
+      "gap_norm_left_avg": 0.2931476890035085,
+      "gap_norm_right_avg": 0.32472430409648706,
+      "gap_actual_avg": 29.01693012290002,
+      "font_size_avg": 90.26588009629414,
+      "count": 2
+    },
+    "中|谷": {
+      "gap_norm_avg": 0.11270553418901676,
+      "gap_norm_left_avg": 0.12092346189759631,
+      "gap_norm_right_avg": 0.10553350409745046,
+      "gap_actual_avg": 15.417741006499995,
+      "font_size_avg": 102.97097781788236,
+      "count": 2
+    },
+    "中|村": {
+      "gap_norm_avg": 0.16775273568429158,
+      "gap_norm_left_avg": 0.18113316504826985,
+      "gap_norm_right_avg": 0.1562131636702111,
+      "gap_actual_avg": 20.038399282,
+      "font_size_avg": 160.55215284894118,
+      "count": 2
+    },
+    "落|合": {
+      "gap_norm_avg": null,
+      "gap_norm_left_avg": null,
+      "gap_norm_right_avg": null,
+      "gap_actual_avg": -34.410665806400004,
+      "font_size_avg": 46.77176353658818,
+      "count": 2
+    },
+    "先|川": {
+      "gap_norm_avg": 0.10309712778233765,
+      "gap_norm_left_avg": 0.09709105700534476,
+      "gap_norm_right_avg": 0.10989526951793643,
+      "gap_actual_avg": 14.280670126300038,
+      "font_size_avg": 91.4525467332941,
+      "count": 2
+    },
+    "遠|藤": {
+      "gap_norm_avg": 0.09016580792994439,
+      "gap_norm_left_avg": 0.0897959685773395,
+      "gap_norm_right_avg": 0.09053870636937147,
+      "gap_actual_avg": 13.675207304699995,
+      "font_size_avg": 119.30195780176471,
+      "count": 2
+    },
+    "加|藤": {
+      "gap_norm_avg": 0.24945473575188593,
+      "gap_norm_left_avg": 0.2515884975910972,
+      "gap_norm_right_avg": 0.24735686307428553,
+      "gap_actual_avg": 21.41252876899999,
+      "font_size_avg": 110.34431096688238,
+      "count": 2
+    },
+    "髙|橋": {
+      "gap_norm_avg": 0.3551997104432264,
+      "gap_norm_left_avg": 0.3650862864854428,
+      "gap_norm_right_avg": 0.3458344755198293,
+      "gap_actual_avg": 26.766665510800067,
+      "font_size_avg": 71.2980374332353,
+      "count": 2
+    },
+    "小|澤": {
+      "gap_norm_avg": 0.6132088929488516,
+      "gap_norm_left_avg": 0.6206986350753085,
+      "gap_norm_right_avg": 0.6058977476865095,
+      "gap_actual_avg": 57.6960056833,
+      "font_size_avg": 116.74744806170588,
+      "count": 2
+    },
+    "磯|谷": {
+      "gap_norm_avg": 0.18219136180091808,
+      "gap_norm_left_avg": 0.1725405033706559,
+      "gap_norm_right_avg": 0.19298580512235053,
+      "gap_actual_avg": 26.77253410370008,
+      "font_size_avg": 166.73176053758826,
+      "count": 2
+    },
+    "高橋|高橋": {
+      "gap_norm_avg": 0.6770565283678792,
+      "gap_norm_left_avg": 0.7585318001294435,
+      "gap_norm_right_avg": 0.6113864090407507,
+      "gap_actual_avg": 95.36160415249998,
+      "font_size_avg": 188.3741129377059,
+      "count": 2
+    },
+    "伊|藤": {
+      "gap_norm_avg": 0.5222856534892658,
+      "gap_norm_left_avg": 0.5134331006932439,
+      "gap_norm_right_avg": 0.5315788721111361,
+      "gap_actual_avg": 47.87951025763338,
+      "font_size_avg": 103.78248106556863,
+      "count": 6
+    },
+    "増|田": {
+      "gap_norm_avg": null,
+      "gap_norm_left_avg": null,
+      "gap_norm_right_avg": null,
+      "gap_actual_avg": -139.55493020520004,
+      "font_size_avg": 170.67842710558824,
+      "count": 2
+    },
+    "武|田": {
+      "gap_norm_avg": 0.2812159465048586,
+      "gap_norm_left_avg": 0.25548666180795293,
+      "gap_norm_right_avg": 0.31270779777819646,
+      "gap_actual_avg": 32.45906859790006,
+      "font_size_avg": 111.79529132276471,
+      "count": 2
+    },
+    "髙|根": {
+      "gap_norm_avg": 0.16723147556446094,
+      "gap_norm_left_avg": 0.16929499650203353,
+      "gap_norm_right_avg": 0.16521765298706823,
+      "gap_actual_avg": 15.750528900799964,
+      "font_size_avg": 109.67293843464708,
+      "count": 2
+    },
+    "根|澤": {
+      "gap_norm_avg": 0.14187510022250988,
+      "gap_norm_left_avg": 0.14016563017619177,
+      "gap_norm_right_avg": 0.14362678273285293,
+      "gap_actual_avg": 13.362269521899975,
+      "font_size_avg": 109.06509531258826,
+      "count": 2
+    },
+    "佐|藤": {
+      "gap_norm_avg": 0.27831015510094514,
+      "gap_norm_left_avg": 0.27470364200016545,
+      "gap_norm_right_avg": 0.282012625962686,
+      "gap_actual_avg": 26.96454255309999,
+      "font_size_avg": 110.24313449882344,
+      "count": 2
+    },
+    "上|田": {
+      "gap_norm_avg": 0.4498541160213758,
+      "gap_norm_left_avg": 0.43156265104783365,
+      "gap_norm_right_avg": 0.46976474875764784,
+      "gap_actual_avg": 48.00932976979999,
+      "font_size_avg": 116.19529121276472,
+      "count": 2
+    },
+    "石|畑": {
+      "gap_norm_avg": 0.3374642244724309,
+      "gap_norm_left_avg": 0.34312925646034925,
+      "gap_norm_right_avg": 0.33198321262754243,
+      "gap_actual_avg": 32.554273016399975,
+      "font_size_avg": 105.17882089994119,
+      "count": 2
+    },
+    "Ａ|Ｋ": {
+      "gap_norm_avg": 0.9132828572735952,
+      "gap_norm_left_avg": 0.8197489689392244,
+      "gap_norm_right_avg": 1.0309104018830737,
+      "gap_actual_avg": 35.437200542,
+      "font_size_avg": 57.17646915882356,
+      "count": 2
+    },
+    "Ｋ|Ａ": {
+      "gap_norm_avg": 0.9009536176503806,
+      "gap_norm_left_avg": 1.0169932005761042,
+      "gap_norm_right_avg": 0.8086824287228597,
+      "gap_actual_avg": 34.95880139810001,
+      "font_size_avg": 57.17646915882356,
+      "count": 2
+    },
+    "Ａ|Ｇ": {
+      "gap_norm_avg": 0.7180566356450055,
+      "gap_norm_left_avg": 0.7580655589777026,
+      "gap_norm_right_avg": 0.6820591523012369,
+      "gap_actual_avg": 32.770667918300035,
+      "font_size_avg": 58.516861282176464,
+      "count": 2
+    },
+    "赤|木": {
+      "gap_norm_avg": 0.45618375187674826,
+      "gap_norm_left_avg": 0.4656043084035998,
+      "gap_norm_right_avg": 0.4471368468861742,
+      "gap_actual_avg": 58.66614139220002,
+      "font_size_avg": 119.44862446476472,
+      "count": 2
+    },
+    "川|中": {
+      "gap_norm_avg": 0.6782179180749333,
+      "gap_norm_left_avg": 0.6520637256940648,
+      "gap_norm_right_avg": 0.7065578633248293,
+      "gap_actual_avg": 67.4894633404,
+      "font_size_avg": 127.86431052888234,
+      "count": 2
+    },
+    "竹|沢": {
+      "gap_norm_avg": 0.39806260642952407,
+      "gap_norm_left_avg": 0.3955890574976338,
+      "gap_norm_right_avg": 0.40056728333365227,
+      "gap_actual_avg": 32.297472202899996,
+      "font_size_avg": 119.99999700000001,
+      "count": 2
+    },
+    "熊|谷": {
+      "gap_norm_avg": 0.29223853369309294,
+      "gap_norm_left_avg": 0.3046979602471829,
+      "gap_norm_right_avg": 0.28082129842002634,
+      "gap_actual_avg": 32.99279902194999,
+      "font_size_avg": 130.71254575179412,
+      "count": 4
+    },
+    "深|井": {
+      "gap_norm_avg": 0.2412334009936991,
+      "gap_norm_left_avg": 0.23566820253356546,
+      "gap_norm_right_avg": 0.24706779571248558,
+      "gap_actual_avg": 20.267464911199994,
+      "font_size_avg": 103.1474484017059,
+      "count": 2
+    },
+    "菰|野": {
+      "gap_norm_avg": 0.0900615272091202,
+      "gap_norm_left_avg": 0.0883819882593768,
+      "gap_norm_right_avg": 0.09180613585657493,
+      "gap_actual_avg": 2.8309339344999955,
+      "font_size_avg": 29.44548945994116,
+      "count": 2
+    },
+    "野|町": {
+      "gap_norm_avg": 0.0943490036212091,
+      "gap_norm_left_avg": 0.097427064901626,
+      "gap_norm_right_avg": 0.09145947921658977,
+      "gap_actual_avg": 3.004260898200016,
+      "font_size_avg": 28.22509733358823,
+      "count": 2
+    },
+    "町|竹": {
+      "gap_norm_avg": 0.09061805066649004,
+      "gap_norm_left_avg": 0.09126910582836573,
+      "gap_norm_right_avg": 0.08997621813475856,
+      "gap_actual_avg": 2.9980075132999673,
+      "font_size_avg": 28.349803212823538,
+      "count": 2
+    },
+    "竹|成": {
+      "gap_norm_avg": 0.031144237885697052,
+      "gap_norm_left_avg": 0.030688103789411923,
+      "gap_norm_right_avg": 0.031614136107568816,
+      "gap_actual_avg": 1.0225275927000155,
+      "font_size_avg": 29.269803189823534,
+      "count": 2
+    },
+    "成|4": {
+      "gap_norm_avg": 0.26238154549194925,
+      "gap_norm_left_avg": 0.22228556110994513,
+      "gap_norm_right_avg": 0.320126047340599,
+      "gap_actual_avg": 7.189604008799961,
+      "font_size_avg": 27.57646989882346,
+      "count": 2
+    },
+    "4|5": {
+      "gap_norm_avg": 0.17471022889988858,
+      "gap_norm_left_avg": 0.1571240740020163,
+      "gap_norm_right_avg": 0.19672919813349898,
+      "gap_actual_avg": 3.5287971151000193,
+      "font_size_avg": 25.392156227941115,
+      "count": 2
+    },
+    "5|0": {
+      "gap_norm_avg": 0.21344107972593612,
+      "gap_norm_left_avg": 0.23112338726734372,
+      "gap_norm_right_avg": 0.19827209086261793,
+      "gap_actual_avg": 4.145737134900003,
+      "font_size_avg": 25.376469953823545,
+      "count": 2
+    },
+    "0|-": {
+      "gap_norm_avg": 0.4157291255852006,
+      "gap_norm_left_avg": 0.3638756521988561,
+      "gap_norm_right_avg": 0.48481716038933437,
+      "gap_actual_avg": 7.608397113500018,
+      "font_size_avg": 13.740391813352932,
+      "count": 2
+    },
+    "-|1": {
+      "gap_norm_avg": 0.5113236531760805,
+      "gap_norm_left_avg": 0.4189639176915989,
+      "gap_norm_right_avg": 0.6559198338959992,
+      "gap_actual_avg": 6.57494025059998,
+      "font_size_avg": 13.749019264117605,
+      "count": 2
+    },
+    "1|3": {
+      "gap_norm_avg": 0.28415012205766527,
+      "gap_norm_left_avg": 0.3997869002480655,
+      "gap_norm_right_avg": 0.22040022850076654,
+      "gap_actual_avg": 4.007463787900008,
+      "font_size_avg": 25.38588171829414,
+      "count": 2
+    },
+    "岐|部": {
+      "gap_norm_avg": 0.15969738063820704,
+      "gap_norm_left_avg": 0.15334962087111562,
+      "gap_norm_right_avg": 0.1665933518872224,
+      "gap_actual_avg": 17.05227294840006,
+      "font_size_avg": 120.00391856852944,
+      "count": 2
+    },
+    "志|水": {
+      "gap_norm_avg": 0.3039949101934286,
+      "gap_norm_left_avg": 0.3241351454722797,
+      "gap_norm_right_avg": 0.2862110971263691,
+      "gap_actual_avg": 29.834262403799983,
+      "font_size_avg": 118.1239186155294,
+      "count": 2
+    },
+    "福|田": {
+      "gap_norm_avg": 0.6459531110340265,
+      "gap_norm_left_avg": 0.6091701054116008,
+      "gap_norm_right_avg": 0.6874636498350224,
+      "gap_actual_avg": 58.57373473800004,
+      "font_size_avg": 116.99764413388236,
+      "count": 2
+    },
+    "庄|田": {
+      "gap_norm_avg": 0.6077952179633888,
+      "gap_norm_left_avg": 0.542083781520309,
+      "gap_norm_right_avg": 0.6916353007228825,
+      "gap_actual_avg": 43.2272052145,
+      "font_size_avg": 127.77097719788236,
+      "count": 2
+    },
+    "中|島": {
+      "gap_norm_avg": 0.7188540986198035,
+      "gap_norm_left_avg": 0.727527527906511,
+      "gap_norm_right_avg": 0.7103850384658893,
+      "gap_actual_avg": 99.85266569049998,
+      "font_size_avg": 204.3168576371765,
+      "count": 2
+    },
+    "渡|部": {
+      "gap_norm_avg": 0.29879261582082806,
+      "gap_norm_left_avg": 0.2910728180340078,
+      "gap_norm_right_avg": 0.30693305692965983,
+      "gap_actual_avg": 38.02614009439998,
+      "font_size_avg": 120.19372248535296,
+      "count": 2
+    },
+    "竹|石": {
+      "gap_norm_avg": 0.2557071487646673,
+      "gap_norm_left_avg": 0.2546108210184779,
+      "gap_norm_right_avg": 0.25681295868689763,
+      "gap_actual_avg": 25.93160225079987,
+      "font_size_avg": 83.6760763394706,
+      "count": 2
+    },
+    "小|山": {
+      "gap_norm_avg": 0.3315174890611765,
+      "gap_norm_left_avg": 0.3156893587179919,
+      "gap_norm_right_avg": 0.3490165904166434,
+      "gap_actual_avg": 34.356261590800045,
+      "font_size_avg": 117.80784019205883,
+      "count": 2
+    },
+    "高|橋": {
+      "gap_norm_avg": 0.2212424418582139,
+      "gap_norm_left_avg": 0.23500543986769012,
+      "gap_norm_right_avg": 0.20900230676354503,
+      "gap_actual_avg": 36.99173535389997,
+      "font_size_avg": 218.09411219470593,
+      "count": 2
+    },
+    "安|田": {
+      "gap_norm_avg": 0.4327713643295026,
+      "gap_norm_left_avg": 0.38996751588078765,
+      "gap_norm_right_avg": 0.4861302887490004,
+      "gap_actual_avg": 45.452532687999906,
+      "font_size_avg": 99.57725241252942,
+      "count": 2
+    },
+    "植|田": {
+      "gap_norm_avg": 0.2900248072074063,
+      "gap_norm_left_avg": 0.26701242039246637,
+      "gap_norm_right_avg": 0.3173779306948448,
+      "gap_actual_avg": 31.096265701499988,
+      "font_size_avg": 114.15999714600001,
+      "count": 2
+    },
+    "山|﨑": {
+      "gap_norm_avg": 0.9153798584268938,
+      "gap_norm_left_avg": 0.9187740676831676,
+      "gap_norm_right_avg": 0.9120106351883861,
+      "gap_actual_avg": 112.49346900270001,
+      "font_size_avg": 140.0596043416471,
+      "count": 2
+    },
+    "合|蔵": {
+      "gap_norm_avg": 0.35337106464478185,
+      "gap_norm_left_avg": 0.34932633721584944,
+      "gap_norm_right_avg": 0.35751055425919204,
+      "gap_actual_avg": 25.025738172499985,
+      "font_size_avg": 63.694900368411744,
+      "count": 2
+    },
+    "氏|川": {
+      "gap_norm_avg": 0.4384014884271713,
+      "gap_norm_left_avg": 0.4664551554676532,
+      "gap_norm_right_avg": 0.4135308110467183,
+      "gap_actual_avg": 60.647875857500026,
+      "font_size_avg": 192.11607362847056,
+      "count": 2
+    },
+    "土|井": {
+      "gap_norm_avg": 0.3056968030173632,
+      "gap_norm_left_avg": 0.31687861959901925,
+      "gap_norm_right_avg": 0.29527724246097764,
+      "gap_actual_avg": 25.625339569099992,
+      "font_size_avg": 104.93019345517646,
+      "count": 2
+    },
+    "井|口": {
+      "gap_norm_avg": 0.27530886398735843,
+      "gap_norm_left_avg": 0.26837200101815867,
+      "gap_norm_right_avg": 0.2826138493766167,
+      "gap_actual_avg": 23.290395154099997,
+      "font_size_avg": 96.56078189970589,
+      "count": 2
+    },
+    "合|田": {
+      "gap_norm_avg": null,
+      "gap_norm_left_avg": null,
+      "gap_norm_right_avg": null,
+      "gap_actual_avg": -115.8942631774,
+      "font_size_avg": 116.90666374400001,
+      "count": 2
+    },
+    "本|谷": {
+      "gap_norm_avg": 0.21807596400087767,
+      "gap_norm_left_avg": 0.22123886377248514,
+      "gap_norm_right_avg": 0.2150022251592668,
+      "gap_actual_avg": 20.186128411100015,
+      "font_size_avg": 105.27921305429412,
+      "count": 2
+    },
+    "北|尾": {
+      "gap_norm_avg": 0.4392749197532568,
+      "gap_norm_left_avg": 0.4373398718737459,
+      "gap_norm_right_avg": 0.44122716730576006,
+      "gap_actual_avg": 47.058935276799986,
+      "font_size_avg": 98.9168602721765,
+      "count": 2
+    },
+    "亥|ノ": {
+      "gap_norm_avg": 0.26282120744581544,
+      "gap_norm_left_avg": 0.23035260275214398,
+      "gap_norm_right_avg": 0.30594464326375387,
+      "gap_actual_avg": 19.33733267559998,
+      "font_size_avg": 100.47842886058825,
+      "count": 2
+    },
+    "ノ|瀬": {
+      "gap_norm_avg": 0.3628416609441394,
+      "gap_norm_left_avg": 0.42365843625912686,
+      "gap_norm_right_avg": 0.31729369638087745,
+      "gap_actual_avg": 26.777472013800036,
+      "font_size_avg": 100.1239190655294,
+      "count": 2
+    },
+    "早|坂": {
+      "gap_norm_avg": 0.33939863738697734,
+      "gap_norm_left_avg": 0.3407635112638687,
+      "gap_norm_right_avg": 0.3380446534612314,
+      "gap_actual_avg": 31.860933155300017,
+      "font_size_avg": 85.75842922858826,
+      "count": 2
+    },
+    "毛|利": {
+      "gap_norm_avg": 0.31902579724591057,
+      "gap_norm_left_avg": 0.316234688771124,
+      "gap_norm_right_avg": 0.3218666134640216,
+      "gap_actual_avg": 35.25426386909999,
+      "font_size_avg": 130.33176144758824,
+      "count": 2
+    },
+    "日|野": {
+      "gap_norm_avg": 0.7809938733871011,
+      "gap_norm_left_avg": 0.9264982980880494,
+      "gap_norm_right_avg": 0.674988485689478,
+      "gap_actual_avg": 107.08467061589994,
+      "font_size_avg": 174.97568190011768,
+      "count": 2
+    },
+    "田|路": {
+      "gap_norm_avg": 0.5078498243312729,
+      "gap_norm_left_avg": 0.5992187594891392,
+      "gap_norm_right_avg": 0.44065821632995145,
+      "gap_actual_avg": 82.93187423999996,
+      "font_size_avg": 145.41019244317647,
+      "count": 2
+    },
+    "松|原": {
+      "gap_norm_avg": 0.5365195679758226,
+      "gap_norm_left_avg": 0.5220680237396775,
+      "gap_norm_right_avg": 0.551793966233624,
+      "gap_actual_avg": 46.7752054856,
+      "font_size_avg": 104.75215424394118,
+      "count": 2
+    },
+    "黒|川": {
+      "gap_norm_avg": 0.6445481855372766,
+      "gap_norm_left_avg": 0.6364877390831971,
+      "gap_norm_right_avg": 0.652815404669122,
+      "gap_actual_avg": 57.07173251099999,
+      "font_size_avg": 123.81176161058825,
+      "count": 2
+    },
+    "田|﨑": {
+      "gap_norm_avg": 0.912839744178174,
+      "gap_norm_left_avg": 0.9584186061647535,
+      "gap_norm_right_avg": 0.8713992046991539,
+      "gap_actual_avg": 95.16840943,
+      "font_size_avg": 108.4360757204706,
+      "count": 2
+    },
+    "石|丸": {
+      "gap_norm_avg": 0.377360485332719,
+      "gap_norm_left_avg": 0.38299198091663167,
+      "gap_norm_right_avg": 0.3718922003854729,
+      "gap_actual_avg": 42.157202925499945,
+      "font_size_avg": 127.25960466164706,
+      "count": 2
+    },
+    "太|原": {
+      "gap_norm_avg": 0.5627153259720923,
+      "gap_norm_left_avg": 0.5509888246326216,
+      "gap_norm_right_avg": 0.5749518233848094,
+      "gap_actual_avg": 50.11279967339999,
+      "font_size_avg": 116.63999708400002,
+      "count": 2
+    },
+    "宇|畑": {
+      "gap_norm_avg": 0.18635667245478346,
+      "gap_norm_left_avg": 0.19583720268802746,
+      "gap_norm_right_avg": 0.17775166770318812,
+      "gap_actual_avg": 14.44599617419999,
+      "font_size_avg": 95.81882113394119,
+      "count": 2
+    },
+    "菊|池": {
+      "gap_norm_avg": 0.5687990406568536,
+      "gap_norm_left_avg": 0.5868972941004661,
+      "gap_norm_right_avg": 0.5517835944472409,
+      "gap_actual_avg": 59.41826309900006,
+      "font_size_avg": 133.41960450764705,
+      "count": 2
+    },
+    "大|山": {
+      "gap_norm_avg": 0.3357503760043215,
+      "gap_norm_left_avg": 0.32097436706233684,
+      "gap_norm_right_avg": 0.35195245686644233,
+      "gap_actual_avg": 34.38106147689996,
+      "font_size_avg": 119.87685974817649,
+      "count": 2
+    },
+    "髙|杉": {
+      "gap_norm_avg": 0.5128486047685941,
+      "gap_norm_left_avg": 0.5574910028716211,
+      "gap_norm_right_avg": 0.47482581522793305,
+      "gap_actual_avg": 49.51040306659996,
+      "font_size_avg": 125.05725177552941,
+      "count": 2
+    },
+    "三|輪": {
+      "gap_norm_avg": 0.42925457476325724,
+      "gap_norm_left_avg": 0.44992653689022155,
+      "gap_norm_right_avg": 0.41039872560338103,
+      "gap_actual_avg": 43.21334313080001,
+      "font_size_avg": 111.5247030942353,
+      "count": 2
+    },
+    "畑|田": {
+      "gap_norm_avg": 0.4696657206260198,
+      "gap_norm_left_avg": 0.4226991485634178,
+      "gap_norm_right_avg": 0.5283739357042724,
+      "gap_actual_avg": 41.6358650926,
+      "font_size_avg": 94.64313488882354,
+      "count": 2
+    },
+    "津|田": {
+      "gap_norm_avg": 0.41163325954842617,
+      "gap_norm_left_avg": 0.39780961976231477,
+      "gap_norm_right_avg": 0.4264522118037481,
+      "gap_actual_avg": 42.30519555920003,
+      "font_size_avg": 119.69568328211766,
+      "count": 2
+    },
+    "小|南": {
+      "gap_norm_avg": 0.4946770874466779,
+      "gap_norm_left_avg": 0.4603048492240935,
+      "gap_norm_right_avg": 0.5345969204291569,
+      "gap_actual_avg": 46.10720124459996,
+      "font_size_avg": 112.23764425288236,
+      "count": 2
+    },
+    "高|久": {
+      "gap_norm_avg": 0.506205169785741,
+      "gap_norm_left_avg": 0.5395025881314421,
+      "gap_norm_right_avg": 0.47677897370244016,
+      "gap_actual_avg": 40.54973284700003,
+      "font_size_avg": 111.79450700905885,
+      "count": 2
+    },
+    "和|田": {
+      "gap_norm_avg": 0.5280981748584637,
+      "gap_norm_left_avg": 0.4731895224632455,
+      "gap_norm_right_avg": 0.5974227870721099,
+      "gap_actual_avg": 83.85107404230007,
+      "font_size_avg": 175.39764267388242,
+      "count": 2
+    },
+    "高|本": {
+      "gap_norm_avg": 0.345581543181647,
+      "gap_norm_left_avg": 0.34634097432090327,
+      "gap_norm_right_avg": 0.344825435205638,
+      "gap_actual_avg": 41.50226880929998,
+      "font_size_avg": 113.80078146870589,
+      "count": 2
+    },
+    "三|室": {
+      "gap_norm_avg": 0.24321306937514778,
+      "gap_norm_left_avg": 0.2275073776697723,
+      "gap_norm_right_avg": 0.26124800365308487,
+      "gap_actual_avg": 24.16613639510001,
+      "font_size_avg": 118.59842840758826,
+      "count": 2
+    },
+    "大|島": {
+      "gap_norm_avg": 0.1933804109605326,
+      "gap_norm_left_avg": 0.18439618572849592,
+      "gap_norm_right_avg": 0.20328494177254816,
+      "gap_actual_avg": 27.608533821799966,
+      "font_size_avg": 139.61176121558825,
+      "count": 2
+    },
+    "吉|田": {
+      "gap_norm_avg": 0.2626240479694018,
+      "gap_norm_left_avg": 0.2711206742798915,
+      "gap_norm_right_avg": 0.2546437892692687,
+      "gap_actual_avg": 40.98440757070006,
+      "font_size_avg": 169.9388192809412,
+      "count": 2
+    },
+    "長|郷": {
+      "gap_norm_avg": 0.49241379031343624,
+      "gap_norm_left_avg": 0.49217597052933215,
+      "gap_norm_right_avg": 0.49265184003803025,
+      "gap_actual_avg": 61.14400364219989,
+      "font_size_avg": 150.3019570267647,
+      "count": 2
+    },
+    "大|竹": {
+      "gap_norm_avg": 0.4496714212870068,
+      "gap_norm_left_avg": 0.4633905092592518,
+      "gap_norm_right_avg": 0.4367413066486974,
+      "gap_actual_avg": 40.96866282640002,
+      "font_size_avg": 117.22352648117645,
+      "count": 2
+    },
+    "小|野": {
+      "gap_norm_avg": 0.21983344678746586,
+      "gap_norm_left_avg": 0.2287191209100843,
+      "gap_norm_right_avg": 0.21161236535206573,
+      "gap_actual_avg": 33.71746700280005,
+      "font_size_avg": 180.2274464747059,
+      "count": 2
+    },
+    "野|田": {
+      "gap_norm_avg": 0.23550907279696873,
+      "gap_norm_left_avg": 0.21712193576833555,
+      "gap_norm_right_avg": 0.2572986014576034,
+      "gap_actual_avg": 34.5953398927,
+      "font_size_avg": 173.52783879905886,
+      "count": 2
+    },
+    "金|子": {
+      "gap_norm_avg": 0.007157919503162824,
+      "gap_norm_left_avg": 0.006552814897689806,
+      "gap_norm_right_avg": 0.007886147652176222,
+      "gap_actual_avg": 0.937463149999985,
+      "font_size_avg": 155.7348980674118,
+      "count": 2
+    },
+    "佐|々": {
+      "gap_norm_avg": 0.2635360921262872,
+      "gap_norm_left_avg": 0.21319972067934298,
+      "gap_norm_right_avg": 0.34498750943697803,
+      "gap_actual_avg": 21.221331133300026,
+      "font_size_avg": 101.91215431494118,
+      "count": 2
+    },
+    "々|木": {
+      "gap_norm_avg": 0.24323747783907979,
+      "gap_norm_left_avg": 0.3194907268254591,
+      "gap_norm_right_avg": 0.196369681753408,
+      "gap_actual_avg": 19.652939084799925,
+      "font_size_avg": 101.25960531164705,
+      "count": 2
+    },
+    "岡|本": {
+      "gap_norm_avg": 0.4225613672596775,
+      "gap_norm_left_avg": 0.43410058852844197,
+      "gap_norm_right_avg": 0.41161973006918523,
+      "gap_actual_avg": 39.3069391073999,
+      "font_size_avg": 112.53882071594118,
+      "count": 2
+    },
+    "山|口": {
+      "gap_norm_avg": 0.5841266378078301,
+      "gap_norm_left_avg": 0.5425236753401674,
+      "gap_norm_right_avg": 0.6326401010458065,
+      "gap_actual_avg": 53.40747599510004,
+      "font_size_avg": 103.00705624835295,
+      "count": 2
+    }
+  },
   "Mincho": {
     "Ｉ|Ｍ": {
       "gap_norm_avg": 0.40633511406940154,
       "gap_norm_left_avg": 0.7047885032098243,
-      "gap_norm_right_avg": 0.2854549058815747,
+      "gap_norm_right_avg": 0.28545490588157474,
       "gap_actual_avg": 13.2283084831,
-      "font_size_avg": 50.16365887662747,
-      "count": 3
+      "font_size_avg": 50.16365887662749,
+      "count": 6
     },
     "Ｍ|Ａ": {
-      "gap_norm_avg": 0.3175613139198179,
-      "gap_norm_left_avg": 0.28228128427458954,
+      "gap_norm_avg": 0.31756131391981796,
+      "gap_norm_left_avg": 0.2822812842745896,
       "gap_norm_right_avg": 0.3629196934167351,
       "gap_actual_avg": 12.09635852706667,
-      "font_size_avg": 48.60862623576472,
-      "count": 6
+      "font_size_avg": 48.60862623576471,
+      "count": 12
     },
     "Ａ|Ｍ": {
-      "gap_norm_avg": 0.3651435431195069,
-      "gap_norm_left_avg": 0.4117130586924542,
-      "gap_norm_right_avg": 0.32849008295241816,
-      "gap_actual_avg": 11.672710544149998,
-      "font_size_avg": 38.66431275888235,
-      "count": 6
+      "gap_norm_avg": 0.35137701349239864,
+      "gap_norm_left_avg": 0.3964089269296011,
+      "gap_norm_right_avg": 0.31595253657630246,
+      "gap_actual_avg": 11.363640301561535,
+      "font_size_avg": 39.506846674470594,
+      "count": 13
     },
     "Ｍ|Ｕ": {
-      "gap_norm_avg": 0.3419923949831057,
-      "gap_norm_left_avg": 0.3195041628547708,
-      "gap_norm_right_avg": 0.36788758898035934,
-      "gap_actual_avg": 12.442897065749982,
-      "font_size_avg": 41.03117544480883,
-      "count": 4
+      "gap_norm_avg": 0.32259264501659746,
+      "gap_norm_left_avg": 0.3013640028929303,
+      "gap_norm_right_avg": 0.34704017667210746,
+      "gap_actual_avg": 11.86330164207776,
+      "font_size_avg": 42.02370265311111,
+      "count": 9
     },
     "Ｕ|Ｒ": {
-      "gap_norm_avg": 0.3229066565745674,
-      "gap_norm_left_avg": 0.31899940809945665,
-      "gap_norm_right_avg": 0.3273632808216447,
-      "gap_actual_avg": 11.440535564300001,
-      "font_size_avg": 44.357018498917654,
-      "count": 5
+      "gap_norm_avg": 0.3069215075505602,
+      "gap_norm_left_avg": 0.30346484597263446,
+      "gap_norm_right_avg": 0.31087894343388195,
+      "gap_actual_avg": 10.94030513334546,
+      "font_size_avg": 44.91258354741712,
+      "count": 11
     },
     "Ｒ|Ａ": {
-      "gap_norm_avg": 0.29291685516496335,
-      "gap_norm_left_avg": 0.2948385995229817,
-      "gap_norm_right_avg": 0.2934868933354544,
-      "gap_actual_avg": 10.235958699166682,
-      "font_size_avg": 43.39450871905883,
-      "count": 3
+      "gap_norm_avg": 0.27345702019514256,
+      "gap_norm_left_avg": 0.2738152469856919,
+      "gap_norm_right_avg": 0.27540236964124737,
+      "gap_actual_avg": 9.631488543214298,
+      "font_size_avg": 44.35551709839496,
+      "count": 7
     },
     "Ｎ|Ａ": {
-      "gap_norm_avg": 0.154624137735061,
-      "gap_norm_left_avg": 0.14640106347052323,
-      "gap_norm_right_avg": 0.16382593446567154,
-      "gap_actual_avg": 5.95456587782499,
-      "font_size_avg": 49.72431248238236,
-      "count": 4
+      "gap_norm_avg": 0.1424963953809621,
+      "gap_norm_left_avg": 0.1349182181568327,
+      "gap_norm_right_avg": 0.15097654766747598,
+      "gap_actual_avg": 5.425452634599988,
+      "font_size_avg": 49.25348896474118,
+      "count": 10
     },
     "Ａ|Ｋ": {
-      "gap_norm_avg": 0.3226318040602932,
-      "gap_norm_left_avg": 0.33440595288771496,
-      "gap_norm_right_avg": 0.3122138495680758,
-      "gap_actual_avg": 14.319239002542856,
-      "font_size_avg": 53.50756168752101,
-      "count": 7
+      "gap_norm_avg": 0.30029109112841196,
+      "gap_norm_left_avg": 0.3122432215626195,
+      "gap_norm_right_avg": 0.2896245886342227,
+      "gap_actual_avg": 13.030168058214997,
+      "font_size_avg": 52.75274377922059,
+      "count": 20
     },
     "Ｋ|Ａ": {
-      "gap_norm_avg": 0.2892494277753122,
-      "gap_norm_left_avg": 0.2794677575091394,
-      "gap_norm_right_avg": 0.3002640528990793,
-      "gap_actual_avg": 11.103221646642867,
-      "font_size_avg": 50.82307996191597,
-      "count": 7
+      "gap_norm_avg": 0.28518495046345393,
+      "gap_norm_left_avg": 0.27446395955211067,
+      "gap_norm_right_avg": 0.297148138549569,
+      "gap_actual_avg": 10.587843171838102,
+      "font_size_avg": 49.20604919001682,
+      "count": 21
     },
     "Ａ|Ｔ": {
-      "gap_norm_avg": 0.22675255273709197,
-      "gap_norm_left_avg": 0.22010938118274176,
-      "gap_norm_right_avg": 0.23452722974263107,
-      "gap_actual_avg": 7.7287701770000155,
-      "font_size_avg": 44.469410652970595,
-      "count": 4
+      "gap_norm_avg": 0.21165708363729863,
+      "gap_norm_left_avg": 0.20562370768767188,
+      "gap_norm_right_avg": 0.21869958884185253,
+      "gap_actual_avg": 7.229915119200017,
+      "font_size_avg": 45.055336564248385,
+      "count": 9
     },
     "Ｔ|Ａ": {
-      "gap_norm_avg": 0.27927646736646283,
-      "gap_norm_left_avg": 0.30193179190055586,
-      "gap_norm_right_avg": 0.26088504256990497,
-      "gap_actual_avg": 8.363982983437506,
-      "font_size_avg": 40.25588134654412,
-      "count": 8
+      "gap_norm_avg": 0.26048631567121616,
+      "gap_norm_left_avg": 0.2807836850379222,
+      "gap_norm_right_avg": 0.24398312067071876,
+      "gap_actual_avg": 8.012192702416675,
+      "font_size_avg": 41.26082685518955,
+      "count": 18
     },
     "Ａ|Ｎ": {
-      "gap_norm_avg": 0.2608867214968476,
-      "gap_norm_left_avg": 0.27051415216283553,
-      "gap_norm_right_avg": 0.2524544136355496,
-      "gap_actual_avg": 11.360667455133324,
-      "font_size_avg": 53.985096689588225,
-      "count": 3
+      "gap_norm_avg": 0.24912307801807435,
+      "gap_norm_left_avg": 0.2595258378742675,
+      "gap_norm_right_avg": 0.23995520608885929,
+      "gap_actual_avg": 10.187217012287487,
+      "font_size_avg": 50.308234036411754,
+      "count": 8
     },
     "Ｎ|Ｉ": {
-      "gap_norm_avg": 0.3705864059207863,
-      "gap_norm_left_avg": 0.2715053160939226,
-      "gap_norm_right_avg": 0.5835385285954019,
-      "gap_actual_avg": 8.89053719559999,
-      "font_size_avg": 40.71960682514707,
-      "count": 2
+      "gap_norm_avg": 0.3699599107801217,
+      "gap_norm_left_avg": 0.27104646999793147,
+      "gap_norm_right_avg": 0.5825513460358291,
+      "gap_actual_avg": 9.083844539739994,
+      "font_size_avg": 41.55152837297648,
+      "count": 5
     },
     "O|C": {
       "gap_norm_avg": 0.2506008018072277,
@@ -137,6 +1413,46 @@
       "count": 1
     },
     "A|I": {
+      "gap_norm_avg": 0.6051282275446404,
+      "gap_norm_left_avg": 0.46009325174400206,
+      "gap_norm_right_avg": 0.8836949707319232,
+      "gap_actual_avg": 12.297737065799993,
+      "font_size_avg": 39.719606850147045,
+      "count": 2
+    },
+    "Ｏ|Ｃ": {
+      "gap_norm_avg": 0.2506008018072277,
+      "gap_norm_left_avg": 0.2396622632441526,
+      "gap_norm_right_avg": 0.2625855949821732,
+      "gap_actual_avg": 8.246938046899999,
+      "font_size_avg": 46.670587068529365,
+      "count": 1
+    },
+    "Ｃ|Ｈ": {
+      "gap_norm_avg": 0.30805702791295025,
+      "gap_norm_left_avg": 0.34355424658858985,
+      "gap_norm_right_avg": 0.2792082602979888,
+      "gap_actual_avg": 11.148845869500017,
+      "font_size_avg": 47.15816875568627,
+      "count": 3
+    },
+    "Ｈ|Ｉ": {
+      "gap_norm_avg": 0.5012280356765312,
+      "gap_norm_left_avg": 0.3571112240213132,
+      "gap_norm_right_avg": 0.8424141064094334,
+      "gap_actual_avg": 17.258012185092294,
+      "font_size_avg": 53.33351299547059,
+      "count": 13
+    },
+    "Ｉ|Ａ": {
+      "gap_norm_avg": 0.3840686622885662,
+      "gap_norm_left_avg": 0.5608757335840558,
+      "gap_norm_right_avg": 0.2920154723450835,
+      "gap_actual_avg": 9.582000792999992,
+      "font_size_avg": 45.22117534005882,
+      "count": 1
+    },
+    "Ａ|Ｉ": {
       "gap_norm_avg": 0.6051282275446404,
       "gap_norm_left_avg": 0.46009325174400206,
       "gap_norm_right_avg": 0.8836949707319232,
@@ -200,13 +1516,53 @@
       "font_size_avg": 39.57254803029414,
       "count": 2
     },
+    "Ｓ|Ａ": {
+      "gap_norm_avg": 0.26863395836545917,
+      "gap_norm_left_avg": 0.3238984241169982,
+      "gap_norm_right_avg": 0.22978603184404447,
+      "gap_actual_avg": 13.367514986233326,
+      "font_size_avg": 69.53908322884315,
+      "count": 3
+    },
+    "Ｋ|Ｉ": {
+      "gap_norm_avg": 0.510048253668597,
+      "gap_norm_left_avg": 0.3684295689967761,
+      "gap_norm_right_avg": 0.8336526934262388,
+      "gap_actual_avg": 12.427243426450005,
+      "font_size_avg": 42.06182901381373,
+      "count": 6
+    },
+    "Ｉ|Ｋ": {
+      "gap_norm_avg": 0.45832038861802665,
+      "gap_norm_left_avg": 0.7367748081020099,
+      "gap_norm_right_avg": 0.33332263188445255,
+      "gap_actual_avg": 15.248734163500004,
+      "font_size_avg": 54.87509666733824,
+      "count": 4
+    },
+    "Ａ|Ｗ": {
+      "gap_norm_avg": 0.048260612231380416,
+      "gap_norm_left_avg": 0.056275050710216094,
+      "gap_norm_right_avg": 0.04224435609276735,
+      "gap_actual_avg": 2.5157791509499816,
+      "font_size_avg": 51.12156734941177,
+      "count": 6
+    },
+    "Ｗ|Ａ": {
+      "gap_norm_avg": 0.12143404093513081,
+      "gap_norm_left_avg": 0.10895122101910186,
+      "gap_norm_right_avg": 0.1374278735332221,
+      "gap_actual_avg": 6.705457351210015,
+      "font_size_avg": 54.17960648864706,
+      "count": 10
+    },
     "Ｅ|Ｎ": {
       "gap_norm_avg": 0.24029826219138756,
       "gap_norm_left_avg": 0.25901042542355646,
       "gap_norm_right_avg": 0.2241076443223248,
       "gap_actual_avg": 8.22893368359999,
       "font_size_avg": 45.006273384647066,
-      "count": 1
+      "count": 2
     },
     "Ｎ|Ｄ": {
       "gap_norm_avg": 0.20148328826187675,
@@ -214,7 +1570,7 @@
       "gap_norm_right_avg": 0.20478140028941402,
       "gap_actual_avg": 7.280934244799994,
       "font_size_avg": 45.107449852705855,
-      "count": 1
+      "count": 2
     },
     "Ｄ|Ｏ": {
       "gap_norm_avg": 0.26527234721408327,
@@ -222,7 +1578,7 @@
       "gap_norm_right_avg": 0.26968626088202263,
       "gap_actual_avg": 9.540132512699998,
       "font_size_avg": 47.01882235394116,
-      "count": 2
+      "count": 4
     },
     "A|T": {
       "gap_norm_avg": 0.0908933308389521,
@@ -239,6 +1595,14 @@
       "gap_actual_avg": 5.471067014200003,
       "font_size_avg": 50.46117520905886,
       "count": 1
+    },
+    "Ｔ|Ｏ": {
+      "gap_norm_avg": 0.4033050058633707,
+      "gap_norm_left_avg": 0.41863043683612305,
+      "gap_norm_right_avg": 0.3890620298551108,
+      "gap_actual_avg": 13.547125505111117,
+      "font_size_avg": 46.44914916556863,
+      "count": 9
     },
     "N|A": {
       "gap_norm_avg": 0.09398542596456623,
@@ -280,6 +1644,22 @@
       "font_size_avg": 50.121567374411775,
       "count": 1
     },
+    "宮|本": {
+      "gap_norm_avg": 0.3058275245846279,
+      "gap_norm_left_avg": 0.31427277246999785,
+      "gap_norm_right_avg": 0.2978242861771719,
+      "gap_actual_avg": 15.67508743819974,
+      "font_size_avg": 59.94509654058822,
+      "count": 2
+    },
+    "灰|野": {
+      "gap_norm_avg": 0.27596845613377957,
+      "gap_norm_left_avg": 0.27063962278859105,
+      "gap_norm_right_avg": 0.28151135137128963,
+      "gap_actual_avg": 14.529738852200012,
+      "font_size_avg": 60.476861233176464,
+      "count": 2
+    },
     "T|A": {
       "gap_norm_avg": 0.11016510210924291,
       "gap_norm_left_avg": 0.11159883013685351,
@@ -320,6 +1700,38 @@
       "font_size_avg": 52.803528091676455,
       "count": 4
     },
+    "Ａ|Ｈ": {
+      "gap_norm_avg": 0.3138459462984695,
+      "gap_norm_left_avg": 0.31366541399335784,
+      "gap_norm_right_avg": 0.3158689978620172,
+      "gap_actual_avg": 15.064133004766651,
+      "font_size_avg": 57.037645632882366,
+      "count": 3
+    },
+    "Ｈ|Ａ": {
+      "gap_norm_avg": 0.39628473773018813,
+      "gap_norm_left_avg": 0.38270470496134684,
+      "gap_norm_right_avg": 0.4136604285006974,
+      "gap_actual_avg": 22.87064308378,
+      "font_size_avg": 68.27811594010589,
+      "count": 5
+    },
+    "Ａ|Ｓ": {
+      "gap_norm_avg": 0.4094322450022698,
+      "gap_norm_left_avg": 0.3496900934120632,
+      "gap_norm_right_avg": 0.49468372919438847,
+      "gap_actual_avg": 16.787380917066628,
+      "font_size_avg": 58.174900506411774,
+      "count": 3
+    },
+    "Ｓ|Ｈ": {
+      "gap_norm_avg": 0.3538720845491853,
+      "gap_norm_left_avg": 0.42889344646989935,
+      "gap_norm_right_avg": 0.30159970109689394,
+      "gap_actual_avg": 13.344701042200004,
+      "font_size_avg": 52.06490065916176,
+      "count": 8
+    },
     "A|N": {
       "gap_norm_avg": 0.21383214758175484,
       "gap_norm_left_avg": 0.2265608950085634,
@@ -351,6 +1763,30 @@
       "gap_actual_avg": 10.234332090299986,
       "font_size_avg": 50.743528143176476,
       "count": 2
+    },
+    "Ｎ|Ｅ": {
+      "gap_norm_avg": 0.40934961804983877,
+      "gap_norm_left_avg": 0.3818146414419326,
+      "gap_norm_right_avg": 0.44116468862232994,
+      "gap_actual_avg": 24.013606489633304,
+      "font_size_avg": 67.57490027141178,
+      "count": 3
+    },
+    "Ｅ|Ｚ": {
+      "gap_norm_avg": 0.24903155703948476,
+      "gap_norm_left_avg": 0.22207176221287697,
+      "gap_norm_right_avg": 0.28344174608669775,
+      "gap_actual_avg": 5.213060463700032,
+      "font_size_avg": 33.23137171823529,
+      "count": 1
+    },
+    "Ｚ|Ａ": {
+      "gap_norm_avg": 0.3893561281999669,
+      "gap_norm_left_avg": 0.45125992197352816,
+      "gap_norm_right_avg": 0.34238745012593935,
+      "gap_actual_avg": 11.107699534699996,
+      "font_size_avg": 44.54313614132354,
+      "count": 4
     },
     "H|O": {
       "gap_norm_avg": 0.2904901826293253,
@@ -392,13 +1828,53 @@
       "font_size_avg": 32.55843055858824,
       "count": 1
     },
+    "Ｈ|Ｏ": {
+      "gap_norm_avg": 0.2904901826293253,
+      "gap_norm_left_avg": 0.2798168469478573,
+      "gap_norm_right_avg": 0.30201005623424737,
+      "gap_actual_avg": 7.412534634899998,
+      "font_size_avg": 31.77254822529412,
+      "count": 1
+    },
+    "Ｏ|Ｒ": {
+      "gap_norm_avg": 0.2999730364270308,
+      "gap_norm_left_avg": 0.3020426026822585,
+      "gap_norm_right_avg": 0.29793163809747175,
+      "gap_actual_avg": 7.4133334549000125,
+      "font_size_avg": 31.77176391158825,
+      "count": 1
+    },
+    "Ｒ|Ｉ": {
+      "gap_norm_avg": 0.42102537264787987,
+      "gap_norm_left_avg": 0.29786721654002574,
+      "gap_norm_right_avg": 0.7178199890327935,
+      "gap_actual_avg": 7.4117304748000095,
+      "font_size_avg": 30.985881578294123,
+      "count": 1
+    },
+    "Ｋ|Ｏ": {
+      "gap_norm_avg": 0.25289975117368,
+      "gap_norm_left_avg": 0.24501451420492854,
+      "gap_norm_right_avg": 0.2613490515545094,
+      "gap_actual_avg": 7.715813736180001,
+      "font_size_avg": 40.558430358588254,
+      "count": 5
+    },
+    "Ｏ|Ｓ": {
+      "gap_norm_avg": 0.3515982270321866,
+      "gap_norm_left_avg": 0.3151017877597972,
+      "gap_norm_right_avg": 0.39765650781364065,
+      "gap_actual_avg": 10.567644862533333,
+      "font_size_avg": 44.247842031058845,
+      "count": 3
+    },
     "浅|井": {
       "gap_norm_avg": 0.597588157202232,
       "gap_norm_left_avg": 0.6020393753411405,
       "gap_norm_right_avg": 0.5932022767392352,
       "gap_actual_avg": 74.1977389196,
       "font_size_avg": 150.02274134747057,
-      "count": 1
+      "count": 2
     },
     "N|O": {
       "gap_norm_avg": 0.7984409331790409,
@@ -430,7 +1906,31 @@
       "gap_norm_right_avg": 0.33763708991843566,
       "gap_actual_avg": 34.09639321870003,
       "font_size_avg": 131.91685944717648,
-      "count": 1
+      "count": 2
+    },
+    "Ｎ|Ｏ": {
+      "gap_norm_avg": 0.4745756841425764,
+      "gap_norm_left_avg": 0.45804155872668373,
+      "gap_norm_right_avg": 0.4924401598806222,
+      "gap_actual_avg": 24.045070635757156,
+      "font_size_avg": 67.51854172940338,
+      "count": 7
+    },
+    "Ｏ|Ｄ": {
+      "gap_norm_avg": 0.558816847944876,
+      "gap_norm_left_avg": 0.5680497898179877,
+      "gap_norm_right_avg": 0.5498792754115106,
+      "gap_actual_avg": 21.869653692940027,
+      "font_size_avg": 52.26556732081177,
+      "count": 5
+    },
+    "Ｄ|Ａ": {
+      "gap_norm_avg": 0.5228267654669759,
+      "gap_norm_left_avg": 0.5026706166001245,
+      "gap_norm_right_avg": 0.5446668873689398,
+      "gap_actual_avg": 21.02348392384444,
+      "font_size_avg": 53.093244860032684,
+      "count": 9
     },
     "I|N": {
       "gap_norm_avg": 0.5200586498104278,
@@ -448,6 +1948,22 @@
       "font_size_avg": 67.7521551689412,
       "count": 1
     },
+    "Ｉ|Ｎ": {
+      "gap_norm_avg": 0.7790222202387357,
+      "gap_norm_left_avg": 1.2267390791307522,
+      "gap_norm_right_avg": 0.5707268728829641,
+      "gap_actual_avg": 33.414532313899976,
+      "font_size_avg": 71.19137076923529,
+      "count": 3
+    },
+    "Ｎ|Ｚ": {
+      "gap_norm_avg": 0.3266411009889779,
+      "gap_norm_left_avg": 0.27404728226306546,
+      "gap_norm_right_avg": 0.404216328666393,
+      "gap_actual_avg": 15.147871799300049,
+      "font_size_avg": 67.7521551689412,
+      "count": 1
+    },
     "F|U": {
       "gap_norm_avg": 0.6614032912106577,
       "gap_norm_left_avg": 0.7149399950657929,
@@ -457,6 +1973,22 @@
       "count": 1
     },
     "U|K": {
+      "gap_norm_avg": 0.5305678429204049,
+      "gap_norm_left_avg": 0.5273459262878938,
+      "gap_norm_right_avg": 0.5338293713493444,
+      "gap_actual_avg": 14.589200468000001,
+      "font_size_avg": 34.387450120705864,
+      "count": 1
+    },
+    "Ｆ|Ｕ": {
+      "gap_norm_avg": 0.6614032912106577,
+      "gap_norm_left_avg": 0.7149399950657929,
+      "gap_norm_right_avg": 0.6153259642336947,
+      "gap_actual_avg": 17.023197483599972,
+      "font_size_avg": 34.45725404052944,
+      "count": 1
+    },
+    "Ｕ|Ｋ": {
       "gap_norm_avg": 0.5305678429204049,
       "gap_norm_left_avg": 0.5273459262878938,
       "gap_norm_right_avg": 0.5338293713493444,
@@ -486,6 +2018,14 @@
       "gap_norm_right_avg": 0.7821527360913716,
       "gap_actual_avg": 80.77134673140006,
       "font_size_avg": 130.67293790964703,
+      "count": 2
+    },
+    "Ｉ|Ｓ": {
+      "gap_norm_avg": 0.6122761719832785,
+      "gap_norm_left_avg": 0.756875322719722,
+      "gap_norm_right_avg": 0.5140652773968688,
+      "gap_actual_avg": 12.894127675499988,
+      "font_size_avg": 45.367842003058826,
       "count": 1
     },
     "Ｕ|Ｊ": {
@@ -494,15 +2034,15 @@
       "gap_norm_right_avg": 0.24808412675278638,
       "gap_actual_avg": 22.316540104050006,
       "font_size_avg": 139.14391809002942,
-      "count": 2
+      "count": 4
     },
     "Ｊ|Ｉ": {
-      "gap_norm_avg": 0.5063135147504897,
+      "gap_norm_avg": 0.5063135147504898,
       "gap_norm_left_avg": 0.39860244969486996,
       "gap_norm_right_avg": 0.6937909692629655,
       "gap_actual_avg": 31.972666673133347,
       "font_size_avg": 115.80365723562745,
-      "count": 3
+      "count": 6
     },
     "Ｉ|Ｉ": {
       "gap_norm_avg": 0.8842132957106453,
@@ -510,7 +2050,7 @@
       "gap_norm_right_avg": 0.8842132957106457,
       "gap_actual_avg": 63.82133513780002,
       "font_size_avg": 200.0250930385883,
-      "count": 1
+      "count": 2
     },
     "Ｉ|Ｅ": {
       "gap_norm_avg": 0.578228830673693,
@@ -518,7 +2058,7 @@
       "gap_norm_right_avg": 0.4446159629070402,
       "gap_actual_avg": 59.66627508790009,
       "font_size_avg": 200.0282302934118,
-      "count": 1
+      "count": 2
     },
     "Ａ|Ｊ": {
       "gap_norm_avg": 0.23287144049637093,
@@ -526,79 +2066,31 @@
       "gap_norm_right_avg": 0.24492407561930687,
       "gap_actual_avg": 11.619197856899973,
       "font_size_avg": 72.90901778511765,
-      "count": 1
-    },
-    "Ｋ|Ｏ": {
-      "gap_norm_avg": 0.24372883618920343,
-      "gap_norm_left_avg": 0.2367253017413925,
-      "gap_norm_right_avg": 0.25119334443020147,
-      "gap_actual_avg": 7.791867760550005,
-      "font_size_avg": 42.75490089191179,
       "count": 2
     },
     "Ｏ|Ｙ": {
       "gap_norm_avg": 0.4682141430178789,
-      "gap_norm_left_avg": 0.46677483800958064,
-      "gap_norm_right_avg": 0.4696623531419553,
+      "gap_norm_left_avg": 0.4667748380095807,
+      "gap_norm_right_avg": 0.46966235314195537,
       "gap_actual_avg": 12.418329365999988,
       "font_size_avg": 35.68588146079413,
-      "count": 2
+      "count": 4
     },
     "Ｙ|Ａ": {
-      "gap_norm_avg": 0.34089412993583396,
-      "gap_norm_left_avg": 0.3339817995161925,
+      "gap_norm_avg": 0.340894129935834,
+      "gap_norm_left_avg": 0.33398179951619245,
       "gap_norm_right_avg": 0.3480986334476726,
       "gap_actual_avg": 8.808203878900017,
       "font_size_avg": 35.17725402252941,
-      "count": 2
-    },
-    "Ａ|Ｈ": {
-      "gap_norm_avg": 0.3357952829008845,
-      "gap_norm_left_avg": 0.3235592087169789,
-      "gap_norm_right_avg": 0.34899319701781395,
-      "gap_actual_avg": 15.6455972933,
-      "font_size_avg": 52.961567303411776,
-      "count": 1
-    },
-    "Ｈ|Ａ": {
-      "gap_norm_avg": 0.4277607913978921,
-      "gap_norm_left_avg": 0.41587638380339337,
-      "gap_norm_right_avg": 0.4434870436077641,
-      "gap_actual_avg": 25.107470151299992,
-      "font_size_avg": 69.05019435217648,
-      "count": 2
-    },
-    "Ａ|Ｓ": {
-      "gap_norm_avg": 0.4178436569211857,
-      "gap_norm_left_avg": 0.3511333835639455,
-      "gap_norm_right_avg": 0.5158471720136946,
-      "gap_actual_avg": 16.978937293299964,
-      "font_size_avg": 54.292547662294126,
-      "count": 1
-    },
-    "Ｓ|Ｈ": {
-      "gap_norm_avg": 0.3745286239960405,
-      "gap_norm_left_avg": 0.44232553081928483,
-      "gap_norm_right_avg": 0.32475256958156,
-      "gap_actual_avg": 14.102800785450029,
-      "font_size_avg": 51.326273226647075,
-      "count": 2
-    },
-    "Ｈ|Ｉ": {
-      "gap_norm_avg": 0.5541914051069861,
-      "gap_norm_left_avg": 0.39392262558585844,
-      "gap_norm_right_avg": 0.9367735044218438,
-      "gap_actual_avg": 19.790001809399982,
-      "font_size_avg": 54.99764568388236,
       "count": 4
     },
     "Ｕ|Ｅ": {
-      "gap_norm_avg": 0.6138010972584454,
+      "gap_norm_avg": 0.6138010972584453,
       "gap_norm_left_avg": 0.5647320569859051,
       "gap_norm_right_avg": 0.6727050222859764,
       "gap_actual_avg": 17.304354128133312,
       "font_size_avg": 38.564966356137255,
-      "count": 3
+      "count": 6
     },
     "Ｅ|Ｄ": {
       "gap_norm_avg": 0.6829933247753566,
@@ -606,39 +2098,7 @@
       "gap_norm_right_avg": 0.6466527455003497,
       "gap_actual_avg": 18.54600027730001,
       "font_size_avg": 36.35999909100001,
-      "count": 1
-    },
-    "Ｄ|Ａ": {
-      "gap_norm_avg": 0.4838763801674591,
-      "gap_norm_left_avg": 0.4652223880122889,
-      "gap_norm_right_avg": 0.5040887977636981,
-      "gap_actual_avg": 19.947802627175,
-      "font_size_avg": 53.84509669308824,
-      "count": 4
-    },
-    "Ｉ|Ｋ": {
-      "gap_norm_avg": 0.4857943918167144,
-      "gap_norm_left_avg": 0.7560975006097558,
-      "gap_norm_right_avg": 0.3578601981506707,
-      "gap_actual_avg": 20.666664500000024,
-      "font_size_avg": 71.81490016541177,
-      "count": 1
-    },
-    "Ａ|Ｗ": {
-      "gap_norm_avg": 0.060795744325464335,
-      "gap_norm_left_avg": 0.07088314535700316,
-      "gap_norm_right_avg": 0.053221742997057266,
-      "gap_actual_avg": 3.150466528449982,
-      "font_size_avg": 56.896077008970586,
       "count": 2
-    },
-    "Ｗ|Ａ": {
-      "gap_norm_avg": 0.1510792037067027,
-      "gap_norm_left_avg": 0.13556800315746617,
-      "gap_norm_right_avg": 0.17094701317524155,
-      "gap_actual_avg": 8.26463862235002,
-      "font_size_avg": 57.831371103235284,
-      "count": 4
     },
     "Ｐ|Ｌ": {
       "gap_norm_avg": 0.20500763960937007,
@@ -646,7 +2106,7 @@
       "gap_norm_right_avg": 0.20696173138131857,
       "gap_actual_avg": 37.33148022430004,
       "font_size_avg": 264.7968561251765,
-      "count": 1
+      "count": 2
     },
     "Ｌ|Ｕ": {
       "gap_norm_avg": 0.164822479350492,
@@ -654,7 +2114,7 @@
       "gap_norm_right_avg": 0.14674877111554177,
       "gap_actual_avg": 33.90640055109998,
       "font_size_avg": 268.100385454353,
-      "count": 1
+      "count": 2
     },
     "Ｕ|Ｓ": {
       "gap_norm_avg": 0.22245388858102402,
@@ -662,7 +2122,7 @@
       "gap_norm_right_avg": 0.27124333855722615,
       "gap_actual_avg": 43.56240239879992,
       "font_size_avg": 272.5678363230589,
-      "count": 1
+      "count": 2
     },
     "株|式": {
       "gap_norm_avg": 0.06299784309899881,
@@ -670,7 +2130,7 @@
       "gap_norm_right_avg": 0.06474556019587707,
       "gap_actual_avg": 10.12560106959998,
       "font_size_avg": 186.519995337,
-      "count": 1
+      "count": 2
     },
     "式|会": {
       "gap_norm_avg": 0.03210644993164629,
@@ -678,7 +2138,7 @@
       "gap_norm_right_avg": 0.030971546857788464,
       "gap_actual_avg": 5.212139547300012,
       "font_size_avg": 187.14430904688237,
-      "count": 1
+      "count": 2
     },
     "会|社": {
       "gap_norm_avg": 0.03677862478994439,
@@ -686,7 +2146,7 @@
       "gap_norm_right_avg": 0.03785414402513447,
       "gap_actual_avg": 6.018404971999985,
       "font_size_avg": 185.32940713147062,
-      "count": 1
+      "count": 2
     },
     "Ｏ|Ｉ": {
       "gap_norm_avg": 0.5724966316816958,
@@ -694,7 +2154,7 @@
       "gap_norm_right_avg": 0.8627624677448713,
       "gap_actual_avg": 15.408937288699974,
       "font_size_avg": 47.95607723247058,
-      "count": 1
+      "count": 2
     },
     "Ｉ|Ｇ": {
       "gap_norm_avg": 0.6207253799219273,
@@ -702,7 +2162,7 @@
       "gap_norm_right_avg": 0.45861560458998857,
       "gap_actual_avg": 17.147331283199975,
       "font_size_avg": 47.921567429411766,
-      "count": 1
+      "count": 2
     },
     "Ｇ|Ｕ": {
       "gap_norm_avg": 0.318882636245856,
@@ -710,7 +2170,7 @@
       "gap_norm_right_avg": 0.31541192590926537,
       "gap_actual_avg": 12.05546405610005,
       "font_size_avg": 48.50823408141177,
-      "count": 1
+      "count": 2
     },
     "Ｕ|Ｃ": {
       "gap_norm_avg": 0.3285406400015028,
@@ -718,38 +2178,14 @@
       "gap_norm_right_avg": 0.3555131820866685,
       "gap_actual_avg": 11.671734484900014,
       "font_size_avg": 48.43764584788236,
-      "count": 1
-    },
-    "Ｃ|Ｈ": {
-      "gap_norm_avg": 0.339045993142028,
-      "gap_norm_left_avg": 0.3781100179377041,
-      "gap_norm_right_avg": 0.3072978503376601,
-      "gap_actual_avg": 12.413603651900019,
-      "font_size_avg": 47.850979195882346,
-      "count": 1
+      "count": 2
     },
     "Ｇ|Ｏ": {
       "gap_norm_avg": 0.7742740799009251,
       "gap_norm_left_avg": 0.7530319036470392,
-      "gap_norm_right_avg": 0.7968238267512112,
+      "gap_norm_right_avg": 0.7968238267512113,
       "gap_actual_avg": 23.21220041145,
       "font_size_avg": 41.64666562549999,
-      "count": 2
-    },
-    "Ｏ|Ｄ": {
-      "gap_norm_avg": 0.48158160547286905,
-      "gap_norm_left_avg": 0.4895134644761989,
-      "gap_norm_right_avg": 0.47390272607961503,
-      "gap_actual_avg": 19.454066043450027,
-      "font_size_avg": 53.392547684794124,
-      "count": 2
-    },
-    "Ｔ|Ｏ": {
-      "gap_norm_avg": 0.4349884421530179,
-      "gap_norm_left_avg": 0.4515182170914718,
-      "gap_norm_right_avg": 0.41962621186740745,
-      "gap_actual_avg": 14.556632816475005,
-      "font_size_avg": 45.94764591013235,
       "count": 4
     },
     "伊|藤": {
@@ -758,15 +2194,15 @@
       "gap_norm_right_avg": 0.27262955327562755,
       "gap_actual_avg": 40.04600882040012,
       "font_size_avg": 171.16940748547063,
-      "count": 1
+      "count": 2
     },
     "Ｍ|Ｏ": {
       "gap_norm_avg": 0.293823318057697,
       "gap_norm_left_avg": 0.26676771186421144,
-      "gap_norm_right_avg": 0.3269862996181279,
+      "gap_norm_right_avg": 0.326986299618128,
       "gap_actual_avg": 8.391936181999995,
       "font_size_avg": 34.97215598844117,
-      "count": 2
+      "count": 4
     },
     "Ｏ|Ｔ": {
       "gap_norm_avg": 0.3462305913428807,
@@ -774,15 +2210,7 @@
       "gap_norm_right_avg": 0.3593895136725203,
       "gap_actual_avg": 8.722268711766674,
       "font_size_avg": 35.67816904268628,
-      "count": 3
-    },
-    "Ｋ|Ｉ": {
-      "gap_norm_avg": 0.5573510975936052,
-      "gap_norm_left_avg": 0.39960952930906957,
-      "gap_norm_right_avg": 0.9272546336533671,
-      "gap_actual_avg": 11.664333930599994,
-      "font_size_avg": 34.9799991255,
-      "count": 2
+      "count": 6
     },
     "Ｉ|Ｔ": {
       "gap_norm_avg": 0.6830295919821507,
@@ -790,7 +2218,7 @@
       "gap_norm_right_avg": 0.4956032725026958,
       "gap_actual_avg": 11.677073612599997,
       "font_size_avg": 31.90274430047058,
-      "count": 1
+      "count": 2
     },
     "Ａ|Ｏ": {
       "gap_norm_avg": 0.22946729927075596,
@@ -798,7 +2226,7 @@
       "gap_norm_right_avg": 0.2483010046324944,
       "gap_actual_avg": 6.2744006962000185,
       "font_size_avg": 33.02901878211765,
-      "count": 1
+      "count": 2
     },
     "Ｒ|G": {
       "gap_norm_avg": 0.18387659323537084,
@@ -808,21 +2236,13 @@
       "font_size_avg": 81.10039012935293,
       "count": 1
     },
-    "Ｓ|Ａ": {
-      "gap_norm_avg": 0.2618993422003612,
-      "gap_norm_left_avg": 0.3233284171439211,
-      "gap_norm_right_avg": 0.22008538236709274,
-      "gap_actual_avg": 15.962939107599993,
-      "font_size_avg": 81.43764502288236,
+    "Ｒ|Ｇ": {
+      "gap_norm_avg": 0.18387659323537084,
+      "gap_norm_left_avg": 0.1806049559543503,
+      "gap_norm_right_avg": 0.18726894793800894,
+      "gap_actual_avg": 11.720538928600035,
+      "font_size_avg": 81.10039012935293,
       "count": 1
-    },
-    "Ｎ|Ｏ": {
-      "gap_norm_avg": 0.42059814263649903,
-      "gap_norm_left_avg": 0.4054927526126426,
-      "gap_norm_right_avg": 0.43697479418506213,
-      "gap_actual_avg": 23.136581705700014,
-      "font_size_avg": 70.82431195488236,
-      "count": 3
     },
     "Ｏ|Ｈ": {
       "gap_norm_avg": 0.25258744787174453,
@@ -830,7 +2250,7 @@
       "gap_norm_right_avg": 0.24330729438891827,
       "gap_actual_avg": 16.361604114300007,
       "font_size_avg": 80.65489994441178,
-      "count": 1
+      "count": 2
     },
     "三|王": {
       "gap_norm_avg": 0.6402267081404435,
@@ -838,7 +2258,7 @@
       "gap_norm_right_avg": 0.6391871019882557,
       "gap_actual_avg": 35.164664474399956,
       "font_size_avg": 55.509018220117646,
-      "count": 1
+      "count": 2
     },
     "Ｙ|Ｕ": {
       "gap_norm_avg": 0.3266991203638363,
@@ -846,15 +2266,7 @@
       "gap_norm_right_avg": 0.3161533877851832,
       "gap_actual_avg": 14.175474478199988,
       "font_size_avg": 55.87999860300001,
-      "count": 1
-    },
-    "Ｉ|Ｎ": {
-      "gap_norm_avg": 0.9085040054528897,
-      "gap_norm_left_avg": 1.4306224304405935,
-      "gap_norm_right_avg": 0.6655907284025953,
-      "gap_actual_avg": 39.59199789849998,
-      "font_size_avg": 72.91058641252943,
-      "count": 1
+      "count": 2
     },
     "Ｋ|Ｕ": {
       "gap_norm_avg": 0.37910289080661935,
@@ -862,7 +2274,7 @@
       "gap_norm_right_avg": 0.3766245356069593,
       "gap_actual_avg": 22.49680020935,
       "font_size_avg": 71.18431194588237,
-      "count": 2
+      "count": 4
     },
     "Ｕ|Ｎ": {
       "gap_norm_avg": 0.4886912976591148,
@@ -870,15 +2282,7 @@
       "gap_norm_right_avg": 0.48765451695471335,
       "gap_actual_avg": 33.71253122329995,
       "font_size_avg": 85.79372334535294,
-      "count": 1
-    },
-    "Ｎ|Ｅ": {
-      "gap_norm_avg": 0.5228197253130586,
-      "gap_norm_left_avg": 0.48765853836313433,
-      "gap_norm_right_avg": 0.563445293717886,
-      "gap_actual_avg": 33.71280923129996,
-      "font_size_avg": 84.73646846982355,
-      "count": 1
+      "count": 2
     },
     "Ｉ|Ｗ": {
       "gap_norm_avg": 0.5428182349217541,
@@ -886,7 +2290,7 @@
       "gap_norm_right_avg": 0.35448278989923476,
       "gap_actual_avg": 16.558127024100003,
       "font_size_avg": 43.25097931088236,
-      "count": 1
+      "count": 2
     },
     "後|藤": {
       "gap_norm_avg": 0.6430589145018694,
@@ -894,7 +2298,7 @@
       "gap_norm_right_avg": 0.6389838429391395,
       "gap_actual_avg": 60.76906590119998,
       "font_size_avg": 107.34980123782356,
-      "count": 1
+      "count": 2
     },
     "Ａ|Ｚ": {
       "gap_norm_avg": 0.46764568924836253,
@@ -902,15 +2306,7 @@
       "gap_norm_right_avg": 0.5419881511847062,
       "gap_actual_avg": 11.441730910899992,
       "font_size_avg": 38.3427441394706,
-      "count": 1
-    },
-    "Ｚ|Ａ": {
-      "gap_norm_avg": 0.4896893983089926,
-      "gap_norm_left_avg": 0.5675361876441619,
-      "gap_norm_right_avg": 0.43062253601236467,
-      "gap_actual_avg": 11.981066979100007,
-      "font_size_avg": 38.3427441394706,
-      "count": 1
+      "count": 2
     },
     "Ｕ|Ｂ": {
       "gap_norm_avg": 0.16333331671072687,
@@ -918,7 +2314,7 @@
       "gap_norm_right_avg": 0.170879979385635,
       "gap_actual_avg": 4.711730513799978,
       "font_size_avg": 37.546665728000015,
-      "count": 1
+      "count": 2
     },
     "Ｂ|Ａ": {
       "gap_norm_avg": 0.10424623869142417,
@@ -926,7 +2322,7 @@
       "gap_norm_right_avg": 0.1052926605122551,
       "gap_actual_avg": 2.8461307375999922,
       "font_size_avg": 37.286273577647066,
-      "count": 1
+      "count": 2
     },
     "Ｔ|Ｅ": {
       "gap_norm_avg": 0.3272768451346104,
@@ -934,7 +2330,7 @@
       "gap_norm_right_avg": 0.3312438756650231,
       "gap_actual_avg": 11.386397526699994,
       "font_size_avg": 47.67215567094118,
-      "count": 1
+      "count": 2
     },
     "Ｅ|Ｋ": {
       "gap_norm_avg": 0.30219404331172534,
@@ -942,15 +2338,7 @@
       "gap_norm_right_avg": 0.27781483549763075,
       "gap_actual_avg": 11.387074192700027,
       "font_size_avg": 47.67215567094118,
-      "count": 1
-    },
-    "Ｏ|Ｓ": {
-      "gap_norm_avg": 0.3588818416772726,
-      "gap_norm_left_avg": 0.3216313765074159,
-      "gap_norm_right_avg": 0.4058910290401505,
-      "gap_actual_avg": 12.144800473299995,
-      "font_size_avg": 50.09254776729414,
-      "count": 1
+      "count": 2
     },
     "Ａ|Ｄ": {
       "gap_norm_avg": 0.6225935168634995,
@@ -958,7 +2346,7 @@
       "gap_norm_right_avg": 0.598585629394717,
       "gap_actual_avg": 34.533601267699964,
       "font_size_avg": 73.5411746320588,
-      "count": 1
+      "count": 2
     },
     "Ｏ|Ｋ": {
       "gap_norm_avg": 0.37896656163817327,
@@ -966,7 +2354,7 @@
       "gap_norm_right_avg": 0.370072548118649,
       "gap_actual_avg": 12.331202547749996,
       "font_size_avg": 44.96352828767647,
-      "count": 2
+      "count": 4
     },
     "Ｕ|Ｍ": {
       "gap_norm_avg": 0.26340157481118587,
@@ -974,7 +2362,7 @@
       "gap_norm_right_avg": 0.2458396938782868,
       "gap_actual_avg": 12.964273985999966,
       "font_size_avg": 56.959214262294125,
-      "count": 1
+      "count": 2
     },
     "Ａ|Ｒ": {
       "gap_norm_avg": 0.3124740901507001,
@@ -982,7 +2370,7 @@
       "gap_norm_right_avg": 0.29448027065804355,
       "gap_actual_avg": 13.650534445000005,
       "font_size_avg": 57.13882210094118,
-      "count": 1
+      "count": 2
     },
     "Ｒ|Ｕ": {
       "gap_norm_avg": 0.32738272148201275,
@@ -990,7 +2378,7 @@
       "gap_norm_right_avg": 0.3358613066269387,
       "gap_actual_avg": 11.336265964550051,
       "font_size_avg": 46.11568512161766,
-      "count": 2
+      "count": 4
     },
     "Ｍ|Ｉ": {
       "gap_norm_avg": 0.5130808068864852,
@@ -998,7 +2386,7 @@
       "gap_norm_right_avg": 0.8899982728131601,
       "gap_actual_avg": 11.377737635199992,
       "font_size_avg": 33.68156778541178,
-      "count": 1
+      "count": 2
     },
     "Ｏ|Ｎ": {
       "gap_norm_avg": 0.39653045938873926,
@@ -1006,7 +2394,7 @@
       "gap_norm_right_avg": 0.3841330676211305,
       "gap_actual_avg": 17.463200994900035,
       "font_size_avg": 56.821959363764705,
-      "count": 1
+      "count": 2
     },
     "Ａ|Ｇ": {
       "gap_norm_avg": 0.16421616116107562,
@@ -1014,7 +2402,7 @@
       "gap_norm_right_avg": 0.1574441152440976,
       "gap_actual_avg": 5.067601129299987,
       "font_size_avg": 41.48627347264706,
-      "count": 1
+      "count": 2
     },
     "Ｇ|Ａ": {
       "gap_norm_avg": 0.21215830685508147,
@@ -1022,7 +2410,7 @@
       "gap_norm_right_avg": 0.22169388834743908,
       "gap_actual_avg": 6.5470637469999815,
       "font_size_avg": 41.48627347264706,
-      "count": 1
+      "count": 2
     },
     "Ｔ|Ｓ": {
       "gap_norm_avg": 0.66804664352839,
@@ -1030,7 +2418,7 @@
       "gap_norm_right_avg": 0.7586295263946049,
       "gap_actual_avg": 19.943863997299957,
       "font_size_avg": 47.54509685058823,
-      "count": 1
+      "count": 2
     },
     "Ｓ|Ｕ": {
       "gap_norm_avg": 0.6213251009346794,
@@ -1038,7 +2426,7 @@
       "gap_norm_right_avg": 0.5244015939304054,
       "gap_actual_avg": 20.037734004200047,
       "font_size_avg": 48.13333213,
-      "count": 1
+      "count": 2
     },
     "松|江": {
       "gap_norm_avg": 0.5588937259842996,
@@ -1046,331 +2434,1097 @@
       "gap_norm_right_avg": 0.5689030656429793,
       "gap_actual_avg": 74.41707035019999,
       "font_size_avg": 148.15450610005882,
-      "count": 1
-    }
-  },
-  "Brush": {
-    "今|村": {
-      "gap_norm_avg": 0.09207278659202481,
-      "gap_norm_left_avg": 0.09243631178931802,
-      "gap_norm_right_avg": 0.09171210947234375,
-      "gap_actual_avg": 14.000403433600013,
-      "font_size_avg": 109.65019333717649,
-      "count": 1
-    },
-    "中|谷": {
-      "gap_norm_avg": 0.11270553418901676,
-      "gap_norm_left_avg": 0.12092346189759631,
-      "gap_norm_right_avg": 0.10553350409745046,
-      "gap_actual_avg": 15.417741006499995,
-      "font_size_avg": 102.97097781788236,
-      "count": 1
-    },
-    "中|村": {
-      "gap_norm_avg": 0.16775273568429158,
-      "gap_norm_left_avg": 0.18113316504826985,
-      "gap_norm_right_avg": 0.1562131636702111,
-      "gap_actual_avg": 20.038399282,
-      "font_size_avg": 160.55215284894118,
-      "count": 1
-    },
-    "落|合": {
-      "gap_norm_avg": null,
-      "gap_norm_left_avg": null,
-      "gap_norm_right_avg": null,
-      "gap_actual_avg": -34.410665806400004,
-      "font_size_avg": 46.77176353658818,
-      "count": 1
-    },
-    "先|川": {
-      "gap_norm_avg": 0.10309712778233765,
-      "gap_norm_left_avg": 0.09709105700534476,
-      "gap_norm_right_avg": 0.10989526951793643,
-      "gap_actual_avg": 14.280670126300038,
-      "font_size_avg": 91.4525467332941,
-      "count": 1
-    },
-    "遠|藤": {
-      "gap_norm_avg": 0.09016580792994439,
-      "gap_norm_left_avg": 0.0897959685773395,
-      "gap_norm_right_avg": 0.09053870636937147,
-      "gap_actual_avg": 13.675207304699995,
-      "font_size_avg": 119.30195780176471,
-      "count": 1
-    },
-    "加|藤": {
-      "gap_norm_avg": 0.24945473575188593,
-      "gap_norm_left_avg": 0.2515884975910972,
-      "gap_norm_right_avg": 0.24735686307428553,
-      "gap_actual_avg": 21.41252876899999,
-      "font_size_avg": 110.34431096688238,
-      "count": 1
-    },
-    "高|橋": {
-      "gap_norm_avg": 0.44914948511304653,
-      "gap_norm_left_avg": 0.4967686199985668,
-      "gap_norm_right_avg": 0.41019435790214787,
-      "gap_actual_avg": 66.17666975319997,
-      "font_size_avg": 203.2341125662059,
       "count": 2
     },
-    "髙|根": {
-      "gap_norm_avg": 0.16723147556446094,
-      "gap_norm_left_avg": 0.16929499650203353,
-      "gap_norm_right_avg": 0.16521765298706823,
-      "gap_actual_avg": 15.750528900799964,
-      "font_size_avg": 109.67293843464708,
-      "count": 1
-    },
-    "根|澤": {
-      "gap_norm_avg": 0.14187510022250988,
-      "gap_norm_left_avg": 0.14016563017619177,
-      "gap_norm_right_avg": 0.14362678273285293,
-      "gap_actual_avg": 13.362269521899975,
-      "font_size_avg": 109.06509531258826,
-      "count": 1
-    },
-    "深|井": {
-      "gap_norm_avg": 0.2412334009936991,
-      "gap_norm_left_avg": 0.23566820253356546,
-      "gap_norm_right_avg": 0.24706779571248558,
-      "gap_actual_avg": 20.267464911199994,
-      "font_size_avg": 103.1474484017059,
-      "count": 1
-    },
-    "菰|野": {
-      "gap_norm_avg": 0.0900615272091202,
-      "gap_norm_left_avg": 0.0883819882593768,
-      "gap_norm_right_avg": 0.09180613585657493,
-      "gap_actual_avg": 2.8309339344999955,
-      "font_size_avg": 29.44548945994116,
-      "count": 1
-    },
-    "野|町": {
-      "gap_norm_avg": 0.0943490036212091,
-      "gap_norm_left_avg": 0.097427064901626,
-      "gap_norm_right_avg": 0.09145947921658977,
-      "gap_actual_avg": 3.004260898200016,
-      "font_size_avg": 28.22509733358823,
-      "count": 1
-    },
-    "町|竹": {
-      "gap_norm_avg": 0.09061805066649004,
-      "gap_norm_left_avg": 0.09126910582836573,
-      "gap_norm_right_avg": 0.08997621813475856,
-      "gap_actual_avg": 2.9980075132999673,
-      "font_size_avg": 28.349803212823538,
-      "count": 1
-    },
-    "竹|成": {
-      "gap_norm_avg": 0.031144237885697052,
-      "gap_norm_left_avg": 0.030688103789411923,
-      "gap_norm_right_avg": 0.031614136107568816,
-      "gap_actual_avg": 1.0225275927000155,
-      "font_size_avg": 29.269803189823534,
-      "count": 1
-    },
-    "成|4": {
-      "gap_norm_avg": 0.26238154549194925,
-      "gap_norm_left_avg": 0.22228556110994513,
-      "gap_norm_right_avg": 0.320126047340599,
-      "gap_actual_avg": 7.189604008799961,
-      "font_size_avg": 27.57646989882346,
-      "count": 1
-    },
-    "4|5": {
-      "gap_norm_avg": 0.17471022889988858,
-      "gap_norm_left_avg": 0.1571240740020163,
-      "gap_norm_right_avg": 0.19672919813349898,
-      "gap_actual_avg": 3.5287971151000193,
-      "font_size_avg": 25.392156227941115,
-      "count": 1
-    },
-    "5|0": {
-      "gap_norm_avg": 0.21344107972593612,
-      "gap_norm_left_avg": 0.23112338726734372,
-      "gap_norm_right_avg": 0.19827209086261793,
-      "gap_actual_avg": 4.145737134900003,
-      "font_size_avg": 25.376469953823545,
-      "count": 1
-    },
-    "0|-": {
-      "gap_norm_avg": 0.4157291255852006,
-      "gap_norm_left_avg": 0.3638756521988561,
-      "gap_norm_right_avg": 0.48481716038933437,
-      "gap_actual_avg": 7.608397113500018,
-      "font_size_avg": 13.740391813352932,
-      "count": 1
-    },
-    "-|1": {
-      "gap_norm_avg": 0.5113236531760805,
-      "gap_norm_left_avg": 0.4189639176915989,
-      "gap_norm_right_avg": 0.6559198338959992,
-      "gap_actual_avg": 6.57494025059998,
-      "font_size_avg": 13.749019264117605,
-      "count": 1
-    },
-    "1|3": {
-      "gap_norm_avg": 0.28415012205766527,
-      "gap_norm_left_avg": 0.3997869002480655,
-      "gap_norm_right_avg": 0.22040022850076654,
-      "gap_actual_avg": 4.007463787900008,
-      "font_size_avg": 25.38588171829414,
-      "count": 1
-    },
-    "中|島": {
-      "gap_norm_avg": 0.7188540986198035,
-      "gap_norm_left_avg": 0.727527527906511,
-      "gap_norm_right_avg": 0.7103850384658893,
-      "gap_actual_avg": 99.85266569049998,
-      "font_size_avg": 204.3168576371765,
-      "count": 1
-    },
-    "小|山": {
-      "gap_norm_avg": 0.3315174890611765,
-      "gap_norm_left_avg": 0.3156893587179919,
-      "gap_norm_right_avg": 0.3490165904166434,
-      "gap_actual_avg": 34.356261590800045,
-      "font_size_avg": 117.80784019205883,
-      "count": 1
-    },
-    "植|田": {
-      "gap_norm_avg": 0.2900248072074063,
-      "gap_norm_left_avg": 0.26701242039246637,
-      "gap_norm_right_avg": 0.3173779306948448,
-      "gap_actual_avg": 31.096265701499988,
-      "font_size_avg": 114.15999714600001,
-      "count": 1
-    },
-    "氏|川": {
-      "gap_norm_avg": 0.4384014884271713,
-      "gap_norm_left_avg": 0.4664551554676532,
-      "gap_norm_right_avg": 0.4135308110467183,
-      "gap_actual_avg": 60.647875857500026,
-      "font_size_avg": 192.11607362847056,
-      "count": 1
-    },
-    "土|井": {
-      "gap_norm_avg": 0.3056968030173632,
-      "gap_norm_left_avg": 0.31687861959901925,
-      "gap_norm_right_avg": 0.29527724246097764,
-      "gap_actual_avg": 25.625339569099992,
-      "font_size_avg": 104.93019345517646,
-      "count": 1
-    },
-    "井|口": {
-      "gap_norm_avg": 0.27530886398735843,
-      "gap_norm_left_avg": 0.26837200101815867,
-      "gap_norm_right_avg": 0.2826138493766167,
-      "gap_actual_avg": 23.290395154099997,
-      "font_size_avg": 96.56078189970589,
-      "count": 1
-    },
-    "合|田": {
-      "gap_norm_avg": null,
-      "gap_norm_left_avg": null,
-      "gap_norm_right_avg": null,
-      "gap_actual_avg": -115.8942631774,
-      "font_size_avg": 116.90666374400001,
-      "count": 1
-    },
-    "本|谷": {
-      "gap_norm_avg": 0.21807596400087767,
-      "gap_norm_left_avg": 0.22123886377248514,
-      "gap_norm_right_avg": 0.2150022251592668,
-      "gap_actual_avg": 20.186128411100015,
-      "font_size_avg": 105.27921305429412,
-      "count": 1
-    },
-    "北|尾": {
-      "gap_norm_avg": 0.4392749197532568,
-      "gap_norm_left_avg": 0.4373398718737459,
-      "gap_norm_right_avg": 0.44122716730576006,
-      "gap_actual_avg": 47.058935276799986,
-      "font_size_avg": 98.9168602721765,
-      "count": 1
-    },
-    "日|野": {
-      "gap_norm_avg": 0.7809938733871011,
-      "gap_norm_left_avg": 0.9264982980880494,
-      "gap_norm_right_avg": 0.674988485689478,
-      "gap_actual_avg": 107.08467061589994,
-      "font_size_avg": 174.97568190011768,
-      "count": 1
-    },
-    "田|﨑": {
-      "gap_norm_avg": 0.912839744178174,
-      "gap_norm_left_avg": 0.9584186061647535,
-      "gap_norm_right_avg": 0.8713992046991539,
-      "gap_actual_avg": 95.16840943,
-      "font_size_avg": 108.4360757204706,
-      "count": 1
-    },
-    "宇|畑": {
-      "gap_norm_avg": 0.18635667245478346,
-      "gap_norm_left_avg": 0.19583720268802746,
-      "gap_norm_right_avg": 0.17775166770318812,
-      "gap_actual_avg": 14.44599617419999,
-      "font_size_avg": 95.81882113394119,
-      "count": 1
-    },
-    "大|山": {
-      "gap_norm_avg": 0.3357503760043215,
-      "gap_norm_left_avg": 0.32097436706233684,
-      "gap_norm_right_avg": 0.35195245686644233,
-      "gap_actual_avg": 34.38106147689996,
-      "font_size_avg": 119.87685974817649,
-      "count": 1
-    },
-    "和|田": {
-      "gap_norm_avg": 0.5280981748584637,
-      "gap_norm_left_avg": 0.4731895224632455,
-      "gap_norm_right_avg": 0.5974227870721099,
-      "gap_actual_avg": 83.85107404230007,
-      "font_size_avg": 175.39764267388242,
-      "count": 1
-    },
-    "三|室": {
-      "gap_norm_avg": 0.24321306937514778,
-      "gap_norm_left_avg": 0.2275073776697723,
-      "gap_norm_right_avg": 0.26124800365308487,
-      "gap_actual_avg": 24.16613639510001,
-      "font_size_avg": 118.59842840758826,
-      "count": 1
-    },
-    "小|野": {
-      "gap_norm_avg": 0.21983344678746586,
-      "gap_norm_left_avg": 0.2287191209100843,
-      "gap_norm_right_avg": 0.21161236535206573,
-      "gap_actual_avg": 33.71746700280005,
-      "font_size_avg": 180.2274464747059,
-      "count": 1
-    },
-    "野|田": {
-      "gap_norm_avg": 0.23550907279696873,
-      "gap_norm_left_avg": 0.21712193576833555,
-      "gap_norm_right_avg": 0.2572986014576034,
-      "gap_actual_avg": 34.5953398927,
-      "font_size_avg": 173.52783879905886,
-      "count": 1
-    },
-    "岡|本": {
-      "gap_norm_avg": 0.4225613672596775,
-      "gap_norm_left_avg": 0.43410058852844197,
-      "gap_norm_right_avg": 0.41161973006918523,
-      "gap_actual_avg": 39.3069391073999,
-      "font_size_avg": 112.53882071594118,
-      "count": 1
+    "高|橋": {
+      "gap_norm_avg": 0.5840424572270492,
+      "gap_norm_left_avg": 0.6010769159355707,
+      "gap_norm_right_avg": 0.5679468998084755,
+      "gap_actual_avg": 51.795998705100004,
+      "font_size_avg": 108.70587963529412,
+      "count": 2
     }
   },
-  "Gothic": {
-    "植|田": {
-      "gap_norm_avg": 0.5342136854741895,
-      "gap_norm_left_avg": 0.47849462365591383,
-      "gap_norm_right_avg": 0.604619565217391,
-      "gap_actual_avg": 45.093332205999985,
-      "font_size_avg": 97.04078188770592,
+  "MaruGothic": {
+    "R|O": {
+      "gap_norm_avg": 0.5083331082620535,
+      "gap_norm_left_avg": 0.5579489873027412,
+      "gap_norm_right_avg": 0.4668208428084905,
+      "gap_actual_avg": 17.084397564099987,
+      "font_size_avg": 44.385096929588265,
       "count": 1
+    },
+    "O|S": {
+      "gap_norm_avg": 0.44178256587667813,
+      "gap_norm_left_avg": 0.41919287514482456,
+      "gap_norm_right_avg": 0.4669455800079194,
+      "gap_actual_avg": 15.341340999099998,
+      "font_size_avg": 45.06431259888235,
+      "count": 1
+    },
+    "廣|瀬": {
+      "gap_norm_avg": 0.30871791687035177,
+      "gap_norm_left_avg": 0.311210276589509,
+      "gap_norm_right_avg": 0.3062651606243612,
+      "gap_actual_avg": 35.97839675650002,
+      "font_size_avg": 136.91764363588237,
+      "count": 2
+    },
+    "Ｒ|Ｏ": {
+      "gap_norm_avg": 0.337689807739279,
+      "gap_norm_left_avg": 0.3706575215037419,
+      "gap_norm_right_avg": 0.3101076352906635,
+      "gap_actual_avg": 10.272757450233323,
+      "font_size_avg": 38.75163301813726,
+      "count": 3
+    },
+    "Ｏ|Ｓ": {
+      "gap_norm_avg": 0.2884900957678703,
+      "gap_norm_left_avg": 0.27373655557531973,
+      "gap_norm_right_avg": 0.30492457217985675,
+      "gap_actual_avg": 9.986135709939981,
+      "font_size_avg": 47.05835176471765,
+      "count": 5
+    },
+    "Ｍ|Ａ": {
+      "gap_norm_avg": 0.4659028400303164,
+      "gap_norm_left_avg": 0.4572244611855973,
+      "gap_norm_right_avg": 0.4750686027921275,
+      "gap_actual_avg": 13.957608643157892,
+      "font_size_avg": 38.83384835835914,
+      "count": 19
+    },
+    "Ａ|Ｔ": {
+      "gap_norm_avg": 0.3487629085015023,
+      "gap_norm_left_avg": 0.3540543922797511,
+      "gap_norm_right_avg": 0.3438891205364544,
+      "gap_actual_avg": 9.276915262687499,
+      "font_size_avg": 37.60774415784558,
+      "count": 16
+    },
+    "Ｔ|Ｓ": {
+      "gap_norm_avg": 0.42738306890972516,
+      "gap_norm_left_avg": 0.42623489689298527,
+      "gap_norm_right_avg": 0.42861682615989305,
+      "gap_actual_avg": 10.206709604733334,
+      "font_size_avg": 33.534639684509806,
+      "count": 6
+    },
+    "Ｓ|Ｕ": {
+      "gap_norm_avg": 0.5628013213108056,
+      "gap_norm_left_avg": 0.5400363550172359,
+      "gap_norm_right_avg": 0.589368470224716,
+      "gap_actual_avg": 13.055302047249995,
+      "font_size_avg": 33.65588151154412,
+      "count": 8
+    },
+    "Ｕ|Ｍ": {
+      "gap_norm_avg": 0.69728427302468,
+      "gap_norm_left_avg": 0.7530916402040942,
+      "gap_norm_right_avg": 0.6493795742841728,
+      "gap_actual_avg": 22.414843082066692,
+      "font_size_avg": 42.762613310019624,
+      "count": 6
+    },
+    "Ｍ|Ｏ": {
+      "gap_norm_avg": 0.4468893650700719,
+      "gap_norm_left_avg": 0.4561563548292056,
+      "gap_norm_right_avg": 0.4396891904014562,
+      "gap_actual_avg": 12.52360409029999,
+      "font_size_avg": 37.90450885630882,
+      "count": 8
+    },
+    "Ｏ|Ｔ": {
+      "gap_norm_avg": 0.3014037897642699,
+      "gap_norm_left_avg": 0.2843816133097004,
+      "gap_norm_right_avg": 0.32060197984894334,
+      "gap_actual_avg": 8.281933168850031,
+      "font_size_avg": 38.41156766716177,
+      "count": 8
+    },
+    "Ｔ|Ｏ": {
+      "gap_norm_avg": 0.31775856666425134,
+      "gap_norm_left_avg": 0.33810519861521526,
+      "gap_norm_right_avg": 0.2997289074637282,
+      "gap_actual_avg": 10.40939489931109,
+      "font_size_avg": 42.93141504871896,
+      "count": 18
+    },
+    "松|本": {
+      "gap_norm_avg": 0.3582698522738744,
+      "gap_norm_left_avg": 0.35520769270679753,
+      "gap_norm_right_avg": 0.3613852672159699,
+      "gap_actual_avg": 30.116401875799994,
+      "font_size_avg": 96.78509561958826,
+      "count": 2
+    },
+    "Ｔ|Ａ": {
+      "gap_norm_avg": 0.2916698608516889,
+      "gap_norm_left_avg": 0.2896468394003754,
+      "gap_norm_right_avg": 0.29382029861112574,
+      "gap_actual_avg": 7.655644555153338,
+      "font_size_avg": 35.26865271305491,
+      "count": 30
+    },
+    "Ａ|Ｋ": {
+      "gap_norm_avg": 0.519059804126862,
+      "gap_norm_left_avg": 0.48135760200848504,
+      "gap_norm_right_avg": 0.5631841444989687,
+      "gap_actual_avg": 13.340976931326662,
+      "font_size_avg": 37.00737162383529,
+      "count": 30
+    },
+    "Ｋ|Ａ": {
+      "gap_norm_avg": 0.41365891739870053,
+      "gap_norm_left_avg": 0.4489372756146876,
+      "gap_norm_right_avg": 0.3835279917613146,
+      "gap_actual_avg": 10.33229361994546,
+      "font_size_avg": 36.844776262481275,
+      "count": 22
+    },
+    "Ａ|Ｈ": {
+      "gap_norm_avg": 0.4337131338749828,
+      "gap_norm_left_avg": 0.40631959118122435,
+      "gap_norm_right_avg": 0.4650673774889245,
+      "gap_actual_avg": 9.55660049025002,
+      "font_size_avg": 31.097646281382353,
+      "count": 4
+    },
+    "Ｈ|Ａ": {
+      "gap_norm_avg": 0.5024080501122016,
+      "gap_norm_left_avg": 0.5387166784086389,
+      "gap_norm_right_avg": 0.4706846688784799,
+      "gap_actual_avg": 11.580513397683342,
+      "font_size_avg": 31.930848874931375,
+      "count": 12
+    },
+    "Ａ|Ｓ": {
+      "gap_norm_avg": 0.38405080692353616,
+      "gap_norm_left_avg": 0.38635978623302875,
+      "gap_norm_right_avg": 0.3824226885273711,
+      "gap_actual_avg": 11.692550772857137,
+      "font_size_avg": 37.738486451495795,
+      "count": 14
+    },
+    "Ｓ|Ｈ": {
+      "gap_norm_avg": 0.41822932106354227,
+      "gap_norm_left_avg": 0.394708320726797,
+      "gap_norm_right_avg": 0.446332819248149,
+      "gap_actual_avg": 10.38306836222223,
+      "font_size_avg": 37.885576394908504,
+      "count": 18
+    },
+    "Ｈ|Ｉ": {
+      "gap_norm_avg": 0.8144072157863965,
+      "gap_norm_left_avg": 0.4767325014641134,
+      "gap_norm_right_avg": 2.849726896980689,
+      "gap_actual_avg": 12.001827592714278,
+      "font_size_avg": 39.95955082173949,
+      "count": 14
+    },
+    "Ｏ|Ｚ": {
+      "gap_norm_avg": 0.38308882030539937,
+      "gap_norm_left_avg": 0.3542918760373023,
+      "gap_norm_right_avg": 0.4169811680236976,
+      "gap_actual_avg": 11.226800687200011,
+      "font_size_avg": 38.10352845917647,
+      "count": 2
+    },
+    "Ｚ|Ａ": {
+      "gap_norm_avg": 0.31980250907579194,
+      "gap_norm_left_avg": 0.3285194881621917,
+      "gap_norm_right_avg": 0.31163204954277485,
+      "gap_actual_avg": 8.478713721266672,
+      "font_size_avg": 39.52967221437255,
+      "count": 6
+    },
+    "Ａ|Ｗ": {
+      "gap_norm_avg": 0.18470661704044333,
+      "gap_norm_left_avg": 0.19832870816049608,
+      "gap_norm_right_avg": 0.17293039452086664,
+      "gap_actual_avg": 4.994508296483332,
+      "font_size_avg": 40.11738461798039,
+      "count": 12
+    },
+    "Ｗ|Ａ": {
+      "gap_norm_avg": 0.23627775234352671,
+      "gap_norm_left_avg": 0.22228021902491787,
+      "gap_norm_right_avg": 0.2520192968801669,
+      "gap_actual_avg": 6.702602694500019,
+      "font_size_avg": 40.05392056727941,
+      "count": 16
+    },
+    "Ｏ|Ｈ": {
+      "gap_norm_avg": 0.7396314665981358,
+      "gap_norm_left_avg": 0.6522899353777205,
+      "gap_norm_right_avg": 0.8539791702406198,
+      "gap_actual_avg": 17.294800569199964,
+      "font_size_avg": 32.22705801785296,
+      "count": 4
+    },
+    "Ｈ|Ｔ": {
+      "gap_norm_avg": 0.932433061558299,
+      "gap_norm_left_avg": 1.0101982536147374,
+      "gap_norm_right_avg": 0.8657848332558111,
+      "gap_actual_avg": 20.115067123100005,
+      "font_size_avg": 29.86901886111766,
+      "count": 2
+    },
+    "Ｋ|Ｅ": {
+      "gap_norm_avg": 0.5831286349041916,
+      "gap_norm_left_avg": 0.5819242019470374,
+      "gap_norm_right_avg": 0.5857221756230995,
+      "gap_actual_avg": 13.373068022374987,
+      "font_size_avg": 35.97490106141177,
+      "count": 8
+    },
+    "Ｅ|Ｄ": {
+      "gap_norm_avg": 0.6408417243151757,
+      "gap_norm_left_avg": 0.6715545686282294,
+      "gap_norm_right_avg": 0.6128152620107172,
+      "gap_actual_avg": 16.596533995,
+      "font_size_avg": 38.98784216255885,
+      "count": 4
+    },
+    "Ｄ|Ａ": {
+      "gap_norm_avg": 0.4437424525096891,
+      "gap_norm_left_avg": 0.45279015787856125,
+      "gap_norm_right_avg": 0.4350492482883998,
+      "gap_actual_avg": 12.15260569696153,
+      "font_size_avg": 39.29182405541177,
+      "count": 13
+    },
+    "Ｎ|Ｉ": {
+      "gap_norm_avg": 0.9180348846201987,
+      "gap_norm_left_avg": 0.5375195810951315,
+      "gap_norm_right_avg": 3.1429827176840854,
+      "gap_actual_avg": 12.84180033474999,
+      "font_size_avg": 35.91215596494117,
+      "count": 4
+    },
+    "Ｉ|Ｓ": {
+      "gap_norm_avg": 0.776553682693048,
+      "gap_norm_left_avg": 3.019571464415087,
+      "gap_norm_right_avg": 0.445571417624336,
+      "gap_actual_avg": 11.988398152400023,
+      "font_size_avg": 35.417254016529405,
+      "count": 6
+    },
+    "Ｉ|Ｍ": {
+      "gap_norm_avg": 0.8758264654380288,
+      "gap_norm_left_avg": 3.413517337980705,
+      "gap_norm_right_avg": 0.502359977852656,
+      "gap_actual_avg": 12.830273513599991,
+      "font_size_avg": 33.100391329352945,
+      "count": 2
+    },
+    "Ｍ|Ｕ": {
+      "gap_norm_avg": 0.47095662740405403,
+      "gap_norm_left_avg": 0.4377526339030366,
+      "gap_norm_right_avg": 0.5098342380453847,
+      "gap_actual_avg": 11.034174950166678,
+      "font_size_avg": 32.49280964519605,
+      "count": 6
+    },
+    "Ｕ|Ｒ": {
+      "gap_norm_avg": 0.6545989737779413,
+      "gap_norm_left_avg": 0.6648184543215722,
+      "gap_norm_right_avg": 0.6456619461684702,
+      "gap_actual_avg": 17.421982602228578,
+      "font_size_avg": 37.44011110881512,
+      "count": 14
+    },
+    "Ｓ|Ａ": {
+      "gap_norm_avg": 0.46111551559862607,
+      "gap_norm_left_avg": 0.4550922555684111,
+      "gap_norm_right_avg": 0.4673003531767752,
+      "gap_actual_avg": 14.652909343440019,
+      "font_size_avg": 40.11843036958824,
+      "count": 10
+    },
+    "西|村": {
+      "gap_norm_avg": 0.2851289355667976,
+      "gap_norm_left_avg": 0.30020359187712214,
+      "gap_norm_right_avg": 0.2714958329582007,
+      "gap_actual_avg": 26.551205816200024,
+      "font_size_avg": 108.73568355611764,
+      "count": 2
+    },
+    "Ｕ|Ｅ": {
+      "gap_norm_avg": 0.6081814804250257,
+      "gap_norm_left_avg": 0.6003367902835781,
+      "gap_norm_right_avg": 0.6162339007642607,
+      "gap_actual_avg": 11.656932203099984,
+      "font_size_avg": 26.96117579655884,
+      "count": 4
+    },
+    "Ｓ|Ｅ": {
+      "gap_norm_avg": 0.47834893006798657,
+      "gap_norm_left_avg": 0.4505565302138067,
+      "gap_norm_right_avg": 0.5101033209547177,
+      "gap_actual_avg": 17.202667255049988,
+      "font_size_avg": 59.266665185,
+      "count": 4
+    },
+    "Ｅ|Ｋ": {
+      "gap_norm_avg": 0.589744397993095,
+      "gap_norm_left_avg": 0.5941022613407416,
+      "gap_norm_right_avg": 0.5861142535971835,
+      "gap_actual_avg": 23.824334376949977,
+      "font_size_avg": 68.09058653302942,
+      "count": 4
+    },
+    "Ｋ|Ｉ": {
+      "gap_norm_avg": 0.6914607071255605,
+      "gap_norm_left_avg": 0.396891585538,
+      "gap_norm_right_avg": 2.7377936168995762,
+      "gap_actual_avg": 15.533867510699991,
+      "font_size_avg": 61.2599984685,
+      "count": 4
+    },
+    "Ｚ|Ｕ": {
+      "gap_norm_avg": 0.717826528480147,
+      "gap_norm_left_avg": 0.7098696587694138,
+      "gap_norm_right_avg": 0.7259637960311262,
+      "gap_actual_avg": 22.670396855700062,
+      "font_size_avg": 48.69960662564706,
+      "count": 2
+    },
+    "Ｕ|Ｎ": {
+      "gap_norm_avg": 0.7832905121162734,
+      "gap_norm_left_avg": 0.7817855348290003,
+      "gap_norm_right_avg": 0.7848012948964898,
+      "gap_actual_avg": 24.413598071300044,
+      "font_size_avg": 49.60705758335293,
+      "count": 2
+    },
+    "Ｎ|Ｅ": {
+      "gap_norm_avg": 0.7472836372842653,
+      "gap_norm_left_avg": 0.7115408853568963,
+      "gap_norm_right_avg": 0.7895669407046246,
+      "gap_actual_avg": 24.130400749099977,
+      "font_size_avg": 51.932547721294114,
+      "count": 4
+    },
+    "水|根": {
+      "gap_norm_avg": 0.2947586599927803,
+      "gap_norm_left_avg": 0.2961820092066164,
+      "gap_norm_right_avg": 0.2933489256076239,
+      "gap_actual_avg": 31.56747266139996,
+      "font_size_avg": 123.14666358799998,
+      "count": 2
+    },
+    "伊|藤": {
+      "gap_norm_avg": 0.6307860836271681,
+      "gap_norm_left_avg": 0.6315567043443642,
+      "gap_norm_right_avg": 0.6300173412292105,
+      "gap_actual_avg": 72.37387028169996,
+      "font_size_avg": 132.32940845647062,
+      "count": 2
+    },
+    "Ｆ|Ｕ": {
+      "gap_norm_avg": 0.7311537368987381,
+      "gap_norm_left_avg": 0.7491736961686194,
+      "gap_norm_right_avg": 0.7139802886240167,
+      "gap_actual_avg": 23.842400621600007,
+      "font_size_avg": 45.13058710702942,
+      "count": 4
+    },
+    "Ｕ|Ｋ": {
+      "gap_norm_avg": 0.6834773160212616,
+      "gap_norm_left_avg": 0.665460257179474,
+      "gap_norm_right_avg": 0.7024971328197067,
+      "gap_actual_avg": 16.055337403500005,
+      "font_size_avg": 35.23058735452943,
+      "count": 2
+    },
+    "Ｋ|Ｕ": {
+      "gap_norm_avg": 0.5077208189442677,
+      "gap_norm_left_avg": 0.5218407102215512,
+      "gap_norm_right_avg": 0.4943449053571899,
+      "gap_actual_avg": 11.974639779239993,
+      "font_size_avg": 35.89380302422354,
+      "count": 10
+    },
+    "Ｕ|Ｄ": {
+      "gap_norm_avg": 0.7159066395311136,
+      "gap_norm_left_avg": 0.7400957529776118,
+      "gap_norm_right_avg": 0.69324866638909,
+      "gap_actual_avg": 16.692463989849983,
+      "font_size_avg": 33.12352858367647,
+      "count": 4
+    },
+    "Ａ|Ｂ": {
+      "gap_norm_avg": 0.6110794522087097,
+      "gap_norm_left_avg": 0.5917027592345919,
+      "gap_norm_right_avg": 0.6317681812851369,
+      "gap_actual_avg": 19.929337369799953,
+      "font_size_avg": 44.94901848411767,
+      "count": 2
+    },
+    "Ｂ|Ｅ": {
+      "gap_norm_avg": 0.5388142202235434,
+      "gap_norm_left_avg": 0.5216197176550165,
+      "gap_norm_right_avg": 0.5571809517359718,
+      "gap_actual_avg": 16.45466745530001,
+      "font_size_avg": 43.872940079647066,
+      "count": 2
+    },
+    "Ｋ|Ｏ": {
+      "gap_norm_avg": 0.2802320102771852,
+      "gap_norm_left_avg": 0.32809866030943063,
+      "gap_norm_right_avg": 0.24455380510674915,
+      "gap_actual_avg": 9.080845436933325,
+      "font_size_avg": 44.410717843980414,
+      "count": 6
+    },
+    "Ｏ|Ｎ": {
+      "gap_norm_avg": 0.2711848278468539,
+      "gap_norm_left_avg": 0.24063144491989552,
+      "gap_norm_right_avg": 0.3106254710562565,
+      "gap_actual_avg": 8.080403718399992,
+      "font_size_avg": 40.93803819223531,
+      "count": 2
+    },
+    "小|西": {
+      "gap_norm_avg": 0.35744521686929787,
+      "gap_norm_left_avg": 0.35465697594865625,
+      "gap_norm_right_avg": 0.36027764635605886,
+      "gap_actual_avg": 32.553726570500004,
+      "font_size_avg": 102.84940919347056,
+      "count": 2
+    },
+    "Ｙ|Ａ": {
+      "gap_norm_avg": 0.24884957163437532,
+      "gap_norm_left_avg": 0.2509951098254761,
+      "gap_norm_right_avg": 0.24692399478694357,
+      "gap_actual_avg": 9.00888404293077,
+      "font_size_avg": 44.10521760023532,
+      "count": 13
+    },
+    "Ａ|Ｍ": {
+      "gap_norm_avg": 0.5188543262821855,
+      "gap_norm_left_avg": 0.5279264744899649,
+      "gap_norm_right_avg": 0.5102032133188845,
+      "gap_actual_avg": 16.233040245893342,
+      "font_size_avg": 40.40292709450196,
+      "count": 15
+    },
+    "Ｚ|Ｏ": {
+      "gap_norm_avg": 0.5434392883661829,
+      "gap_norm_left_avg": 0.651049369646467,
+      "gap_norm_right_avg": 0.46635655260042114,
+      "gap_actual_avg": 43.63853605769998,
+      "font_size_avg": 123.19999692,
+      "count": 2
+    },
+    "Ｙ|A": {
+      "gap_norm_avg": 0.20444206795200692,
+      "gap_norm_left_avg": 0.2037049081090285,
+      "gap_norm_right_avg": 0.2051845823859363,
+      "gap_actual_avg": 6.026134244299996,
+      "font_size_avg": 39.419606857647075,
+      "count": 1
+    },
+    "A|M": {
+      "gap_norm_avg": 0.42318447122016994,
+      "gap_norm_left_avg": 0.4294956392773646,
+      "gap_norm_right_avg": 0.41705609444377123,
+      "gap_actual_avg": 12.614000279799995,
+      "font_size_avg": 39.6909793998824,
+      "count": 1
+    },
+    "M|Ａ": {
+      "gap_norm_avg": 0.37604609013743645,
+      "gap_norm_left_avg": 0.3706003512637745,
+      "gap_norm_right_avg": 0.38165425923037455,
+      "gap_actual_avg": 11.208930877200004,
+      "font_size_avg": 39.6909793998824,
+      "count": 1
+    },
+    "Ａ|D": {
+      "gap_norm_avg": 0.38963224623799314,
+      "gap_norm_left_avg": 0.38199950849559977,
+      "gap_norm_right_avg": 0.3975762225303622,
+      "gap_actual_avg": 11.219070617699998,
+      "font_size_avg": 39.14195980576471,
+      "count": 1
+    },
+    "D|A": {
+      "gap_norm_avg": 0.27051461010731154,
+      "gap_norm_left_avg": 0.27602996893651716,
+      "gap_norm_right_avg": 0.2652153385650539,
+      "gap_actual_avg": 7.789197488699983,
+      "font_size_avg": 39.14195980576471,
+      "count": 1
+    },
+    "山|田": {
+      "gap_norm_avg": 0.4515820733642477,
+      "gap_norm_left_avg": 0.4515820733642478,
+      "gap_norm_right_avg": 0.45158207336424755,
+      "gap_actual_avg": 31.340397217399996,
+      "font_size_avg": 84.08313515282353,
+      "count": 2
+    },
+    "Ａ|Ｄ": {
+      "gap_norm_avg": 0.7443657197610003,
+      "gap_norm_left_avg": 0.7297816328258037,
+      "gap_norm_right_avg": 0.7595445950707639,
+      "gap_actual_avg": 19.421021681966664,
+      "font_size_avg": 36.174116742705884,
+      "count": 3
+    },
+    "Ｃ|ｈ": {
+      "gap_norm_avg": 0.3947457752086481,
+      "gap_norm_left_avg": 0.3406741481726264,
+      "gap_norm_right_avg": 0.4692201596155938,
+      "gap_actual_avg": 13.703730825700006,
+      "font_size_avg": 59.74039066335295,
+      "count": 2
+    },
+    "ｈ|i": {
+      "gap_norm_avg": 0.679844654270074,
+      "gap_norm_left_avg": 0.4479637461230813,
+      "gap_norm_right_avg": 1.4093935499971268,
+      "gap_actual_avg": 13.08293019970003,
+      "font_size_avg": 59.73411615370589,
+      "count": 1
+    },
+    "i|d": {
+      "gap_norm_avg": 0.5765375230082946,
+      "gap_norm_left_avg": 1.2296761963731955,
+      "gap_norm_right_avg": 0.37653965865368405,
+      "gap_actual_avg": 11.414673953500028,
+      "font_size_avg": 59.730978898882356,
+      "count": 1
+    },
+    "d|a": {
+      "gap_norm_avg": 0.42099835117418516,
+      "gap_norm_left_avg": 0.41798011000417307,
+      "gap_norm_right_avg": 0.4240604989314986,
+      "gap_actual_avg": 12.670927391299983,
+      "font_size_avg": 50.85725363052941,
+      "count": 1
+    },
+    "千|田": {
+      "gap_norm_avg": 0.5702562074387405,
+      "gap_norm_left_avg": 0.5452048987547153,
+      "gap_norm_right_avg": 0.5977205267364076,
+      "gap_actual_avg": 45.10080197719998,
+      "font_size_avg": 92.42352710117648,
+      "count": 2
+    },
+    "ｈ|ｉ": {
+      "gap_norm_avg": 0.7093242105876016,
+      "gap_norm_left_avg": 0.4613034951653664,
+      "gap_norm_right_avg": 1.5425363211380385,
+      "gap_actual_avg": 15.595729395539996,
+      "font_size_avg": 73.28831189328235,
+      "count": 5
+    },
+    "ｉ|ｄ": {
+      "gap_norm_avg": 0.5765375230082946,
+      "gap_norm_left_avg": 1.2296761963731955,
+      "gap_norm_right_avg": 0.37653965865368405,
+      "gap_actual_avg": 11.414673953500028,
+      "font_size_avg": 59.730978898882356,
+      "count": 1
+    },
+    "ｄ|ａ": {
+      "gap_norm_avg": 0.42099835117418516,
+      "gap_norm_left_avg": 0.41798011000417307,
+      "gap_norm_right_avg": 0.4240604989314986,
+      "gap_actual_avg": 12.670927391299983,
+      "font_size_avg": 50.85725363052941,
+      "count": 1
+    },
+    "Ｈ|O": {
+      "gap_norm_avg": 0.7349982732015244,
+      "gap_norm_left_avg": 0.8227617592717404,
+      "gap_norm_right_avg": 0.6641534382650379,
+      "gap_actual_avg": 28.903071372799957,
+      "font_size_avg": 57.298037783235316,
+      "count": 1
+    },
+    "O|R": {
+      "gap_norm_avg": 0.7799516391264659,
+      "gap_norm_left_avg": 0.6998990029833961,
+      "gap_norm_right_avg": 0.8806817363188656,
+      "gap_actual_avg": 30.458670649699968,
+      "font_size_avg": 57.33803778223531,
+      "count": 1
+    },
+    "Ｈ|Ｏ": {
+      "gap_norm_avg": 0.5057547741860544,
+      "gap_norm_left_avg": 0.5753170959162922,
+      "gap_norm_right_avg": 0.45135080117865184,
+      "gap_actual_avg": 14.970802142666656,
+      "font_size_avg": 37.80784219205882,
+      "count": 3
+    },
+    "Ｏ|Ｒ": {
+      "gap_norm_avg": 0.7799516391264659,
+      "gap_norm_left_avg": 0.6998990029833961,
+      "gap_norm_right_avg": 0.8806817363188656,
+      "gap_actual_avg": 30.458670649699968,
+      "font_size_avg": 57.33803778223531,
+      "count": 1
+    },
+    "Ｉ|Ｎ": {
+      "gap_norm_avg": 0.4931265035603892,
+      "gap_norm_left_avg": 1.4855211226635432,
+      "gap_norm_right_avg": 0.2956314554351577,
+      "gap_actual_avg": 9.780670827099982,
+      "font_size_avg": 52.738822210941144,
+      "count": 2
+    },
+    "Ｎ|Ｚ": {
+      "gap_norm_avg": 0.2225779450033791,
+      "gap_norm_left_avg": 0.22550672020362098,
+      "gap_norm_right_avg": 0.21972426955204782,
+      "gap_actual_avg": 7.46066414469999,
+      "font_size_avg": 51.763135960823526,
+      "count": 2
+    },
+    "新|沢": {
+      "gap_norm_avg": 0.2889008550200317,
+      "gap_norm_left_avg": 0.2908599897582321,
+      "gap_norm_right_avg": 0.2869679358435985,
+      "gap_actual_avg": 34.856272487900014,
+      "font_size_avg": 140.55921217229414,
+      "count": 2
+    },
+    "Ｎ|Ｏ": {
+      "gap_norm_avg": 0.370974377903809,
+      "gap_norm_left_avg": 0.41382645946208235,
+      "gap_norm_right_avg": 0.3367784086080847,
+      "gap_actual_avg": 10.668133894299999,
+      "font_size_avg": 42.068626399264716,
+      "count": 4
+    },
+    "Ｒ|Ｕ": {
+      "gap_norm_avg": 0.7607407050179416,
+      "gap_norm_left_avg": 0.7380839062936565,
+      "gap_norm_right_avg": 0.784832536660809,
+      "gap_actual_avg": 23.839067318199966,
+      "font_size_avg": 42.13764600538238,
+      "count": 4
+    },
+    "Ａ|Ｙ": {
+      "gap_norm_avg": 0.1693923310196854,
+      "gap_norm_left_avg": 0.17000407972901024,
+      "gap_norm_right_avg": 0.16878496920091798,
+      "gap_actual_avg": 4.330797154800024,
+      "font_size_avg": 34.19058738052941,
+      "count": 2
+    },
+    "Ａ|Ｇ": {
+      "gap_norm_avg": 0.35240443967251617,
+      "gap_norm_left_avg": 0.35672146285572115,
+      "gap_norm_right_avg": 0.34872845963645815,
+      "gap_actual_avg": 11.591034506424968,
+      "font_size_avg": 44.421175360058825,
+      "count": 8
+    },
+    "Ｇ|Ｕ": {
+      "gap_norm_avg": 0.47051516660726284,
+      "gap_norm_left_avg": 0.44215163918168654,
+      "gap_norm_right_avg": 0.5036592679600879,
+      "gap_actual_avg": 13.795301953400013,
+      "font_size_avg": 42.347253843279404,
+      "count": 8
+    },
+    "Ｕ|Ｃ": {
+      "gap_norm_avg": 0.3642787580248039,
+      "gap_norm_left_avg": 0.38335433462011026,
+      "gap_norm_right_avg": 0.3470656092863147,
+      "gap_actual_avg": 10.178498526624985,
+      "font_size_avg": 40.78627349014705,
+      "count": 8
+    },
+    "Ｃ|Ｈ": {
+      "gap_norm_avg": 0.4197530531744212,
+      "gap_norm_left_avg": 0.39591361777079453,
+      "gap_norm_right_avg": 0.44690720156906466,
+      "gap_actual_avg": 11.539435580674976,
+      "font_size_avg": 40.734508785558816,
+      "count": 8
+    },
+    "田|口": {
+      "gap_norm_avg": 0.5956253850893418,
+      "gap_norm_left_avg": 0.5956253850893418,
+      "gap_norm_right_avg": 0.5956253850893418,
+      "gap_actual_avg": 51.557332044400084,
+      "font_size_avg": 100.19450729905884,
+      "count": 2
+    },
+    "Ｃ|Ａ": {
+      "gap_norm_avg": 0.39816390716548167,
+      "gap_norm_left_avg": 0.3972911406346933,
+      "gap_norm_right_avg": 0.39904051671398577,
+      "gap_actual_avg": 8.095733800700003,
+      "font_size_avg": 27.57960715364705,
+      "count": 2
+    },
+    "Ａ|Ｏ": {
+      "gap_norm_avg": 0.30915686268431664,
+      "gap_norm_left_avg": 0.33139478238778525,
+      "gap_norm_right_avg": 0.2897157718364005,
+      "gap_actual_avg": 6.723337176999962,
+      "font_size_avg": 28.477646346882334,
+      "count": 2
+    },
+    "Ｏ|Ｕ": {
+      "gap_norm_avg": 0.5225377277590973,
+      "gap_norm_left_avg": 0.46684979915927816,
+      "gap_norm_right_avg": 0.5933104476142522,
+      "gap_actual_avg": 16.060046048033346,
+      "font_size_avg": 39.984051287980385,
+      "count": 6
+    },
+    "Ｕ|Ｊ": {
+      "gap_norm_avg": 0.7435788323604449,
+      "gap_norm_left_avg": 0.7467740450726686,
+      "gap_norm_right_avg": 0.7404108457889471,
+      "gap_actual_avg": 29.427875133800057,
+      "font_size_avg": 58.26117501405884,
+      "count": 2
+    },
+    "Ｅ|Ｈ": {
+      "gap_norm_avg": 0.31400891423976335,
+      "gap_norm_left_avg": 0.3134547202111839,
+      "gap_norm_right_avg": 0.314565071390777,
+      "gap_actual_avg": 5.091340408200011,
+      "font_size_avg": 24.073724888352938,
+      "count": 2
+    },
+    "Ａ|Ｒ": {
+      "gap_norm_avg": 0.4467001398274124,
+      "gap_norm_left_avg": 0.4370924464761179,
+      "gap_norm_right_avg": 0.45673969965661265,
+      "gap_actual_avg": 10.183334652599974,
+      "font_size_avg": 30.856665895250003,
+      "count": 8
+    },
+    "Ｒ|Ａ": {
+      "gap_norm_avg": 0.41892598280113047,
+      "gap_norm_left_avg": 0.438882833519275,
+      "gap_norm_right_avg": 0.4013993466071644,
+      "gap_actual_avg": 10.28158064678333,
+      "font_size_avg": 34.13241744734314,
+      "count": 12
+    },
+    "上|原": {
+      "gap_norm_avg": 0.3997566188623255,
+      "gap_norm_left_avg": 0.403434379755859,
+      "gap_norm_right_avg": 0.3961453061231921,
+      "gap_actual_avg": 28.240405876899956,
+      "font_size_avg": 79.693331341,
+      "count": 2
+    },
+    "Ｔ|Ｕ": {
+      "gap_norm_avg": 0.3581377403961379,
+      "gap_norm_left_avg": 0.3371417058758321,
+      "gap_norm_right_avg": 0.38192257454597983,
+      "gap_actual_avg": 8.549463924999998,
+      "font_size_avg": 32.65254820329412,
+      "count": 2
+    },
+    "Ｕ|Ｂ": {
+      "gap_norm_avg": 0.6057560270046722,
+      "gap_norm_left_avg": 0.6180594879141126,
+      "gap_norm_right_avg": 0.5939328454347224,
+      "gap_actual_avg": 13.835467310900015,
+      "font_size_avg": 32.74039133835295,
+      "count": 2
+    },
+    "Ｂ|Ａ": {
+      "gap_norm_avg": 0.40088571320415106,
+      "gap_norm_left_avg": 0.41445814176349244,
+      "gap_norm_right_avg": 0.38817402137611134,
+      "gap_actual_avg": 9.654664018300025,
+      "font_size_avg": 33.192940346647056,
+      "count": 2
+    },
+    "Ｏ|Ｋ": {
+      "gap_norm_avg": 0.3540578619619463,
+      "gap_norm_left_avg": 0.30898610335643184,
+      "gap_norm_right_avg": 0.4145244898816775,
+      "gap_actual_avg": 9.155464004300029,
+      "font_size_avg": 35.856469691823534,
+      "count": 2
+    },
+    "山|口": {
+      "gap_norm_avg": 0.5408016901593039,
+      "gap_norm_left_avg": 0.5390555313715574,
+      "gap_norm_right_avg": 0.54255919835083,
+      "gap_actual_avg": 64.3316042463,
+      "font_size_avg": 144.19529051276473,
+      "count": 2
+    },
+    "Ａ|Ｉ": {
+      "gap_norm_avg": 0.8807064464663229,
+      "gap_norm_left_avg": 0.5070832406059044,
+      "gap_norm_right_avg": 3.3462562762577073,
+      "gap_actual_avg": 13.764267138899982,
+      "font_size_avg": 36.25254811329413,
+      "count": 2
+    },
+    "Ｙ|ａ": {
+      "gap_norm_avg": 0.05697311089441842,
+      "gap_norm_left_avg": 0.05065366019639658,
+      "gap_norm_right_avg": 0.06509412555744985,
+      "gap_actual_avg": 3.9830660471999977,
+      "font_size_avg": 92.8188212089412,
+      "count": 2
+    },
+    "ａ|ｓ": {
+      "gap_norm_avg": 0.3028658441290991,
+      "gap_norm_left_avg": 0.2997211658686721,
+      "gap_norm_right_avg": 0.30607721008578526,
+      "gap_actual_avg": 18.33973786690001,
+      "font_size_avg": 82.33176264758822,
+      "count": 2
+    },
+    "ｓ|ｈ": {
+      "gap_norm_avg": 0.42768501223850597,
+      "gap_norm_left_avg": 0.4460006141769789,
+      "gap_norm_right_avg": 0.41402084305390485,
+      "gap_actual_avg": 15.297269429099998,
+      "font_size_avg": 67.479998313,
+      "count": 4
+    },
+    "ｉ|ｍ": {
+      "gap_norm_avg": 0.46959403507428926,
+      "gap_norm_left_avg": 1.5244887884256595,
+      "gap_norm_right_avg": 0.2785778409030172,
+      "gap_actual_avg": 16.602469625399976,
+      "font_size_avg": 66.37921402679412,
+      "count": 4
+    },
+    "ｍ|ａ": {
+      "gap_norm_avg": 0.3228230287063825,
+      "gap_norm_left_avg": 0.27309031977932063,
+      "gap_norm_right_avg": 0.3956719904896605,
+      "gap_actual_avg": 17.346469372749965,
+      "font_size_avg": 56.82784171655883,
+      "count": 4
+    },
+    "Ｉ|Ｋ": {
+      "gap_norm_avg": 0.6118562948902835,
+      "gap_norm_left_avg": 2.0270218053458726,
+      "gap_norm_right_avg": 0.360307542180332,
+      "gap_actual_avg": 9.591866943100001,
+      "font_size_avg": 41.09097936488235,
+      "count": 2
+    },
+    "村|松": {
+      "gap_norm_avg": 0.3793935589716357,
+      "gap_norm_left_avg": 0.3837646395288647,
+      "gap_norm_right_avg": 0.3751209302921857,
+      "gap_actual_avg": 40.6596066985,
+      "font_size_avg": 123.52940867647061,
+      "count": 2
+    },
+    "Ｕ|Ｇ": {
+      "gap_norm_avg": 0.41765414759713376,
+      "gap_norm_left_avg": 0.46261177618224775,
+      "gap_norm_right_avg": 0.3806607042013278,
+      "gap_actual_avg": 10.434670962700011,
+      "font_size_avg": 34.19058738052943,
+      "count": 2
+    },
+    "Ｏ|Ｍ": {
+      "gap_norm_avg": 0.3320707102944707,
+      "gap_norm_left_avg": 0.3273483114030679,
+      "gap_norm_right_avg": 0.33832524642591544,
+      "gap_actual_avg": 9.906804057050067,
+      "font_size_avg": 40.6733323165,
+      "count": 4
+    },
+    "Ｎ|Ａ": {
+      "gap_norm_avg": 0.3101344158500898,
+      "gap_norm_left_avg": 0.3287752849691333,
+      "gap_norm_right_avg": 0.29350286406664156,
+      "gap_actual_avg": 7.171335767300005,
+      "font_size_avg": 38.099868328549015,
+      "count": 6
+    },
+    "Ｅ|Ｎ": {
+      "gap_norm_avg": 0.375536960465496,
+      "gap_norm_left_avg": 0.4112148107741668,
+      "gap_norm_right_avg": 0.3455558204118722,
+      "gap_actual_avg": 10.076407471300001,
+      "font_size_avg": 45.68548905394119,
+      "count": 2
+    },
+    "榎|本": {
+      "gap_norm_avg": 0.4010394558493557,
+      "gap_norm_left_avg": 0.4024196222264571,
+      "gap_norm_right_avg": 0.3996687241440012,
+      "gap_actual_avg": 48.41000622460001,
+      "font_size_avg": 139.6156827841176,
+      "count": 2
+    },
+    "Ａ|Ｚ": {
+      "gap_norm_avg": 0.39533687902090325,
+      "gap_norm_left_avg": 0.38034261469213915,
+      "gap_norm_right_avg": 0.411561902774404,
+      "gap_actual_avg": 8.149474220400037,
+      "font_size_avg": 30.16313650082355,
+      "count": 2
+    },
+    "中|沢": {
+      "gap_norm_avg": 0.4932861555059245,
+      "gap_norm_left_avg": 0.521863563156427,
+      "gap_norm_right_avg": 0.46767607140630435,
+      "gap_actual_avg": 32.78346821790001,
+      "font_size_avg": 81.22744894970587,
+      "count": 2
+    },
+    "Ｅ|Ｍ": {
+      "gap_norm_avg": 0.376111752328935,
+      "gap_norm_left_avg": 0.4623318126467745,
+      "gap_norm_right_avg": 0.31699541425721917,
+      "gap_actual_avg": 7.475597002399979,
+      "font_size_avg": 30.189803166823463,
+      "count": 2
+    },
+    "竹|村": {
+      "gap_norm_avg": 0.40989001789235585,
+      "gap_norm_left_avg": 0.4105519472458441,
+      "gap_norm_right_avg": 0.40923021954900096,
+      "gap_actual_avg": 28.81253493739996,
+      "font_size_avg": 81.30744894770588,
+      "count": 2
+    },
+    "ｏ|ｓ": {
+      "gap_norm_avg": 0.3936210991456202,
+      "gap_norm_left_avg": 0.33462586041678444,
+      "gap_norm_right_avg": 0.4778707030923574,
+      "gap_actual_avg": 9.527467259600002,
+      "font_size_avg": 33.22901877711762,
+      "count": 2
+    },
+    "Ｙ|Ｏ": {
+      "gap_norm_avg": 0.08890888115654207,
+      "gap_norm_left_avg": 0.09493650358462906,
+      "gap_norm_right_avg": 0.08360096450060234,
+      "gap_actual_avg": 3.879864931499995,
+      "font_size_avg": 56.556861331176464,
+      "count": 2
+    },
+    "Ｉ|Ｄ": {
+      "gap_norm_avg": 0.8976960476034053,
+      "gap_norm_left_avg": 3.295056518257985,
+      "gap_norm_right_avg": 0.5196315060599762,
+      "gap_actual_avg": 20.258006967799986,
+      "font_size_avg": 53.4086261157647,
+      "count": 2
+    },
+    "Ｔ|Ｎ": {
+      "gap_norm_avg": 0.6335683697221608,
+      "gap_norm_left_avg": 0.6063944667830058,
+      "gap_norm_right_avg": 0.663291978410871,
+      "gap_actual_avg": 18.144130518499992,
+      "font_size_avg": 37.81803827023529,
+      "count": 2
+    },
+    "Ｎ|ａ": {
+      "gap_norm_avg": 0.5352880514846864,
+      "gap_norm_left_avg": 0.5043751466240906,
+      "gap_norm_right_avg": 0.5702376359476975,
+      "gap_actual_avg": 22.62626851189998,
+      "font_size_avg": 60.22274359247057,
+      "count": 2
+    },
+    "ａ|ｇ": {
+      "gap_norm_avg": 0.4813984195455573,
+      "gap_norm_left_avg": 0.5076044560274217,
+      "gap_norm_right_avg": 0.45776541734355713,
+      "gap_actual_avg": 20.141067505700022,
+      "font_size_avg": 57.01960641764704,
+      "count": 2
+    },
+    "ｇ|ｏ": {
+      "gap_norm_avg": 0.3646698885648989,
+      "gap_norm_left_avg": 0.3510440825525799,
+      "gap_norm_right_avg": 0.3793961838061302,
+      "gap_actual_avg": 15.445471187399988,
+      "font_size_avg": 56.71293975864707,
+      "count": 2
+    },
+    "Ａ|Ｎ": {
+      "gap_norm_avg": 0.5266930083507689,
+      "gap_norm_left_avg": 0.49669372485954594,
+      "gap_norm_right_avg": 0.5605490209144366,
+      "gap_actual_avg": 20.911467552099992,
+      "font_size_avg": 56.531763292588266,
+      "count": 2
+    },
+    "Ｉ|Ｔ": {
+      "gap_norm_avg": 0.4958613919013338,
+      "gap_norm_left_avg": 2.338596168682609,
+      "gap_norm_right_avg": 0.27733264035368876,
+      "gap_actual_avg": 6.301736984999991,
+      "font_size_avg": 35.78039126235294,
+      "count": 2
+    },
+    "山|下": {
+      "gap_norm_avg": 0.4212391462828845,
+      "gap_norm_left_avg": 0.4507260466470435,
+      "gap_norm_right_avg": 0.395373461458612,
+      "gap_actual_avg": 31.619332833900046,
+      "font_size_avg": 88.83921346529412,
+      "count": 2
+    },
+    "Ｏ|Ｇ": {
+      "gap_norm_avg": 0.26800553164725405,
+      "gap_norm_left_avg": 0.2625337963632681,
+      "gap_norm_right_avg": 0.27371020591939077,
+      "gap_actual_avg": 8.837664466899994,
+      "font_size_avg": 48.58470466773529,
+      "count": 4
+    },
+    "Ｇ|Ａ": {
+      "gap_norm_avg": 0.019642646855787056,
+      "gap_norm_left_avg": 0.019883200331322036,
+      "gap_norm_right_avg": 0.01940784439222999,
+      "gap_actual_avg": 0.6797403249999547,
+      "font_size_avg": 50.285488938941185,
+      "count": 2
+    },
+    "中|戸": {
+      "gap_norm_avg": 0.1998906765623043,
+      "gap_norm_left_avg": 0.20013443805775252,
+      "gap_norm_right_avg": 0.1996475081420189,
+      "gap_actual_avg": 17.06799814269999,
+      "font_size_avg": 109.03842864658824,
+      "count": 2
+    },
+    "戸|川": {
+      "gap_norm_avg": 0.18255005457703696,
+      "gap_norm_left_avg": 0.1875168122770532,
+      "gap_norm_right_avg": 0.17783961674945045,
+      "gap_actual_avg": 16.030936892000028,
+      "font_size_avg": 108.51607571847059,
+      "count": 2
+    },
+    "八|木": {
+      "gap_norm_avg": 0.38094230530746354,
+      "gap_norm_left_avg": 0.38217582819518936,
+      "gap_norm_right_avg": 0.37971671951730845,
+      "gap_actual_avg": 48.4690660233,
+      "font_size_avg": 145.51058459752943,
+      "count": 2
+    },
+    "小|倉": {
+      "gap_norm_avg": 0.28211309928916417,
+      "gap_norm_left_avg": 0.28300156495265955,
+      "gap_norm_right_avg": 0.28123019473137933,
+      "gap_actual_avg": 28.45599531229999,
+      "font_size_avg": 116.13019317517646,
+      "count": 2
     }
   }
 }

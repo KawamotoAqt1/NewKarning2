@@ -74,6 +74,7 @@ output/
 buildmodel/
 Study/
 debug/
+temp/
 
 # CSV aggregated files (uncomment if generated)
 # pairs_aggregated.csv

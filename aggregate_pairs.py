@@ -135,6 +135,39 @@ def create_pair_key(left_char: str, right_char: str, left_font: str, right_font:
         return f"{left_char}|{right_char}|{left_font}-{right_font}"
 
 
+def calculate_total_width(sequence: List[Dict[str, str]], bbox: Dict[str, Dict[str, float]]) -> Optional[float]:
+    """
+    文字列全体の幅を計算（最初の文字のmin_xから最後の文字のmax_xまで）
+    
+    Args:
+        sequence: sequence情報のリスト
+        bbox: bbox情報の辞書
+    
+    Returns:
+        文字列全体の幅（計算できない場合はNone）
+    """
+    if not sequence or not bbox:
+        return None
+    
+    # sequenceの順序で最初と最後の文字を取得
+    first_id = sequence[0].get("id")
+    last_id = sequence[-1].get("id")
+    
+    if not first_id or not last_id:
+        return None
+    
+    if first_id not in bbox or last_id not in bbox:
+        return None
+    
+    first_min_x = bbox[first_id].get("min_x")
+    last_max_x = bbox[last_id].get("max_x")
+    
+    if first_min_x is None or last_max_x is None:
+        return None
+    
+    return last_max_x - first_min_x
+
+
 def aggregate_pairs(json_data_list: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """
     JSONデータから文字ペアのレコードを生成
@@ -167,6 +200,10 @@ def aggregate_pairs(json_data_list: List[Dict[str, Any]]) -> List[Dict[str, Any]
             seq_font = seq_item.get("font", default_font)
             if seq_id:
                 sequence_font_map[seq_id] = seq_font
+        
+        # 文字列全体の幅を計算（サンプルごとに1回だけ計算）
+        text_total_width = calculate_total_width(sequence, bbox)
+        text_length = len(sequence) if sequence else None
         
         for pair in pairs:
             left_id = pair.get("left_id")
@@ -249,6 +286,10 @@ def aggregate_pairs(json_data_list: List[Dict[str, Any]]) -> List[Dict[str, Any]
             # pair_keyを生成
             record["pair_key"] = create_pair_key(left_char, right_char, left_font, right_font)
             
+            # 文字列全体の幅と文字列長を追加（サンプルごとに同じ値）
+            record["text_total_width"] = text_total_width
+            record["text_length"] = text_length
+            
             records.append(record)
     
     return records
@@ -289,10 +330,12 @@ def write_csv(records: List[Dict[str, Any]], output_path: str):
         "left_index",
         "right_index",
         "avg_width",
-        "font_size_est",  # 推定フォントサイズ（案1用）
+        "font_size_est",  # 推定フォントサイズ（重みとして使用）
         "gap_norm",  # 平均文字幅で正規化（推奨）
         "gap_norm_left",  # 後方互換性のため保持
         "gap_norm_right",  # 後方互換性のため保持
+        "text_total_width",  # 文字列全体の幅（重みとして使用）
+        "text_length",  # 文字列長（参考）
         "pair_key",
     ]
     

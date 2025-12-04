@@ -192,12 +192,12 @@
                 <label for="blendRatioSlider">Phase0とのブレンド比率（Phase1モード時）</label>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <span style="min-width: 80px; font-size: 12px; color: #666;">Phase0のみ</span>
-                    <input type="range" id="blendRatioSlider" min="0" max="100" value="0" step="1" style="flex: 1;">
+                    <input type="range" id="blendRatioSlider" min="0" max="100" step="1" style="flex: 1;">
                     <span style="min-width: 80px; font-size: 12px; color: #666; text-align: right;">Phase1のみ</span>
-                    <span id="blendRatioValue" style="min-width: 60px; text-align: right; font-weight: 600;">0%</span>
+                    <span id="blendRatioValue" style="min-width: 60px; text-align: right; font-weight: 600;"></span>
                 </div>
                 <div style="margin-top: 5px; font-size: 11px; color: #888;">
-                    <span id="blendRatioDescription">Phase0のルールベースカーニングを100%使用</span>
+                    <span id="blendRatioDescription"></span>
                 </div>
             </div>
             <div class="control-group">
@@ -326,6 +326,11 @@
 
     <script>
         // ============================================
+        // 設定定数
+        // ============================================
+        const DEFAULT_BLEND_RATIO_PERCENT = 55;  // ブレンド比率のデフォルト値（0-100の範囲、0 = Phase0のみ、100 = Phase1のみ）
+        
+        // ============================================
         // Phase0/Phase1 カーニングエンジン実装
         // ============================================
         
@@ -338,7 +343,7 @@
         let showUnlearnedPairs = false;  // 未学習ペアの可視化を表示するかどうか
         let currentTextInfo = null;  // 現在の文字列全体の情報（文字列全体の幅計算用）
         let isComputingPhase0Width = false;  // Phase0の幅計算中フラグ（無限ループ防止用）
-        let blendRatio = 0.0;  // Phase0とPhase1のブレンド比率（0.0 = Phase0のみ、1.0 = Phase1のみ、0.5 = 50%ずつ）
+        let blendRatio = DEFAULT_BLEND_RATIO_PERCENT / 100.0;  // Phase0とPhase1のブレンド比率（0.0 = Phase0のみ、1.0 = Phase1のみ、0.5 = 50%ずつ）
 
         // 一般的なフォントリスト（日本語・英語）
         const commonFonts = [
@@ -1269,12 +1274,6 @@
                 }
             }
             
-            // トラッキング調整を係数に変換（-50～+50 → 0.5～1.5）
-            // トラッキング調整=0の場合は係数=1.0（元の値）
-            // トラッキング調整=+50の場合は係数=1.5（50%広げる）
-            // トラッキング調整=-50の場合は係数=0.5（50%詰める）
-            const trackingCoefficient = 1.0 + (globalTracking / 100);
-            
             // レコードが見つからない場合の処理（選択されたアルゴリズムに応じて）
             if (!record) {
                 // デバッグ: 未学習ペアの処理
@@ -1286,7 +1285,8 @@
                         const leftFeatures = getCharFeatures(leftChar, fontName, baseWidthPx);
                         const rightFeatures = getCharFeatures(rightChar, fontName, baseWidthPx);
                         const avgWidth = (leftFeatures.width + rightFeatures.width) / 2;
-                        const gapPx = phase1ModelAverage * avgWidth * trackingCoefficient;
+                        // Phase0と同じ方法（px単位で直接加算）
+                        const gapPx = phase1ModelAverage * avgWidth + globalTracking;
                         console.log(`[getKerningPhase1] 平均値アルゴリズム: gapPx = ${gapPx.toFixed(3)}px`);
                         return gapPx;
                     }
@@ -1334,7 +1334,8 @@
                     // Phase0のgapに係数をかける
                     // 係数が極端な値にならないように制限（0.1 ～ 10.0）
                     scaleFactor = Math.max(0.1, Math.min(10.0, scaleFactor));
-                    const gapPx = phase0Gap * scaleFactor * trackingCoefficient;
+                    // Phase0と同じ方法（px単位で直接加算）
+                    const gapPx = phase0Gap * scaleFactor + globalTracking;
                     console.log(`[getKerningPhase1] Phase0スケールアルゴリズム: phase0Gap = ${phase0Gap.toFixed(3)}px, scaleFactor = ${scaleFactor.toFixed(3)}, gapPx = ${gapPx.toFixed(3)}px`);
                     return gapPx;
                 }
@@ -1483,8 +1484,8 @@
                     console.log('  現在のIの幅（measureText）:', currentRightWidth.toFixed(2), 'px');
                 }
                 
-                // トラッキング調整を係数として適用
-                return gapPx * trackingCoefficient;
+                // Phase0と同じ方法（px単位で直接加算）
+                return gapPx + globalTracking;
             }
             
             // フォールバック: gap_normを使用（旧方式）
@@ -1496,8 +1497,8 @@
             const rightFeatures = getCharFeatures(rightChar, fontName, fontSizeToUse);
             const avgWidth = (leftFeatures.width + rightFeatures.width) / 2;
             const gapPx = gapNorm * avgWidth;
-            // トラッキング調整を係数として適用
-            return gapPx * trackingCoefficient;
+            // Phase0と同じ方法（px単位で直接加算）
+            return gapPx + globalTracking;
         }
         
         // ============================================
@@ -2486,6 +2487,11 @@
                 }
             }
             
+            // スライダーの初期値を設定（定数から）
+            blendRatioSlider.value = DEFAULT_BLEND_RATIO_PERCENT;
+            blendRatioValue.textContent = `${DEFAULT_BLEND_RATIO_PERCENT}%`;
+            updateBlendRatioDescription(DEFAULT_BLEND_RATIO_PERCENT);
+            
             blendRatioSlider.addEventListener('input', function() {
                 const value = parseFloat(this.value);
                 blendRatio = value / 100.0;  // 0.0～1.0の範囲に変換
@@ -2493,9 +2499,6 @@
                 updateBlendRatioDescription(value);
                 updateDisplay();
             });
-            
-            // 初期表示を更新
-            updateBlendRatioDescription(0);
         }
         
         // 初期表示

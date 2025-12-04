@@ -167,6 +167,7 @@ def build_phase1_model(csv_path: str, output_json_path: str) -> Dict[str, Any]:
             "sum_gap_actual_weighted": 0.0,  # 重み付け平均用
             "sum_font_size_est": 0.0,
             "sum_text_total_width": 0.0,  # 文字列全体の幅の合計
+            "sum_text_total_width_weighted": 0.0,  # 文字列全体の幅 * combined_weight の合計（重み付け平均用）
             "sum_weight": 0.0,  # 重みの合計（フォントサイズ * 文字列全体の幅の合計）
             "count": 0
         })
@@ -232,6 +233,7 @@ def build_phase1_model(csv_path: str, output_json_path: str) -> Dict[str, Any]:
                 stats[font_key][pair_key]["sum_font_size_est"] += font_size_est
             if text_total_width is not None:
                 stats[font_key][pair_key]["sum_text_total_width"] += text_total_width
+                stats[font_key][pair_key]["sum_text_total_width_weighted"] += text_total_width * combined_weight
             stats[font_key][pair_key]["sum_weight"] += combined_weight
             stats[font_key][pair_key]["count"] += 1
             
@@ -271,8 +273,9 @@ def build_phase1_model(csv_path: str, output_json_path: str) -> Dict[str, Any]:
                 gap_actual_avg = data["sum_gap_actual_weighted"] / sum_weight
                 # font_size_avgは単純平均（重みとして使用したフォントサイズの平均）
                 font_size_avg = data["sum_font_size_est"] / count if data["sum_font_size_est"] > 0 else None
-                # text_total_width_avgは単純平均（文字列全体の幅の平均）
-                text_total_width_avg = data["sum_text_total_width"] / count if data["sum_text_total_width"] > 0 else None
+                # text_total_width_avgは重み付け平均（フォントサイズ×文字列全体の幅で重み付け）
+                # これにより、大きなフォントサイズかつ大きな文字列全体の幅のサンプルに高い重み
+                text_total_width_avg = data["sum_text_total_width_weighted"] / sum_weight if data["sum_text_total_width_weighted"] > 0 else None
             else:
                 # フォールバック: 単純平均（重みがない場合）
                 gap_norm_avg = data["sum_gap_norm"] / count if data["sum_gap_norm"] > 0 else None
@@ -280,6 +283,7 @@ def build_phase1_model(csv_path: str, output_json_path: str) -> Dict[str, Any]:
                 gap_norm_right_avg = data["sum_gap_norm_right"] / count if data["sum_gap_norm_right"] > 0 else None
                 gap_actual_avg = data["sum_gap_actual"] / count
                 font_size_avg = data["sum_font_size_est"] / count if data["sum_font_size_est"] > 0 else None
+                # フォールバック: 重みがない場合は単純平均を使用
                 text_total_width_avg = data["sum_text_total_width"] / count if data["sum_text_total_width"] > 0 else None
             
             result[font_key][pair_key] = {
@@ -288,7 +292,7 @@ def build_phase1_model(csv_path: str, output_json_path: str) -> Dict[str, Any]:
                 "gap_norm_right_avg": gap_norm_right_avg,  # 後方互換性のため保持（重み付け平均）
                 "gap_actual_avg": gap_actual_avg,  # フォントサイズ×文字列全体の幅で重み付け平均
                 "font_size_avg": font_size_avg,  # 学習時の平均フォントサイズ（単純平均）
-                "text_total_width_avg": text_total_width_avg,  # 文字列全体の幅の平均（単純平均、オプション）
+                "text_total_width_avg": text_total_width_avg,  # 文字列全体の幅の平均（重み付け平均：フォントサイズ×文字列全体の幅で重み付け）
                 "count": count
             }
     

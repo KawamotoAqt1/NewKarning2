@@ -200,6 +200,18 @@
                     <span id="blendRatioDescription"></span>
                 </div>
             </div>
+            <div class="control-group" id="phase2Group" style="grid-column: 1 / -1; display: none;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="checkbox" id="phase2EnabledCheckbox">
+                    <span>Phase2: 全体最適化を有効化（Phase1モード時）</span>
+                </label>
+            </div>
+            <div class="control-group" id="centerOfMassGroup" style="grid-column: 1 / -1; display: none;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="checkbox" id="centerOfMassCheckbox" checked>
+                    <span>重心補正を有効化（Phase2時）</span>
+                </label>
+            </div>
             <div class="control-group">
                 <label for="textInput">文字列</label>
                 <input type="text" id="textInput" value="ＷＡＶＥ" placeholder="文字列を入力">
@@ -344,6 +356,9 @@
         
         // グローバル状態
         let phaseMode = "phase0";  // "phase0" or "phase1" or "compare"
+        let phase2Enabled = false;  // Phase2の全体最適化を有効にするかどうか
+        let centerOfMassAdjustmentEnabled = true;  // 重心補正を有効にするかどうか（Phase2）
+        const CENTER_OF_MASS_ADJUSTMENT_STRENGTH = 0.3;  // 重心補正の強度（0.0-1.0、大きいほど強く調整）
         let phase1Model = null;   // Phase1モデルデータ
         let phase1ModelAverage = null;  // 学習済みペアのgap_norm_avgの平均値（未学習ペア用）
         let phase0Average = null;  // Phase0のルールベースで計算した平均値（係数計算用）
@@ -1557,6 +1572,136 @@
         // Phase0カーニング位置計算（既存関数を保持）
         // ============================================
         
+        // ============================================
+        // Phase2: 重心補正（Center of Mass Adjustment）
+        // ============================================
+        
+        /**
+         * 文字列の視覚的重心を中央に寄せるためにギャップを調整
+         * @param {Array<number>} gaps - ギャップ配列（変更される）
+         * @param {Array<number>} positions - 文字位置配列
+         * @param {Array} features - 文字特徴量配列
+         * @param {number} fontSize - フォントサイズ
+         * @param {number} strength - 調整の強度（0.0-1.0、デフォルト: CENTER_OF_MASS_ADJUSTMENT_STRENGTH）
+         * @returns {Object} 調整結果の情報
+         */
+        function adjustCenterOfMass(gaps, positions, features, fontSize, strength = CENTER_OF_MASS_ADJUSTMENT_STRENGTH) {
+            if (!gaps || gaps.length === 0 || !positions || !features || features.length === 0) {
+                return { adjusted: false, deltaCenter: 0, centerOfMass: 0, textCenter: 0 };
+            }
+            
+            // 各文字の重みを計算（黒密度 × 文字幅）
+            const weights = features.map(f => {
+                const fillRatio = f.fillRatio || 0.4;  // デフォルト0.4
+                const width = f.width || fontSize * 0.6;  // デフォルト幅
+                return fillRatio * width;
+            });
+            
+            // 各文字の重心位置を計算（文字の中心）
+            const getInkLeft = (feature) => {
+                if (feature && Number.isFinite(feature.inkLeft)) return feature.inkLeft;
+                if (feature && Number.isFinite(feature.actualBoundingBoxLeft)) return feature.actualBoundingBoxLeft;
+                return 0;
+            };
+            const getInkRight = (feature) => {
+                if (feature && Number.isFinite(feature.inkRight)) return feature.inkRight;
+                if (feature && Number.isFinite(feature.actualBoundingBoxRight)) return feature.actualBoundingBoxRight;
+                if (feature && Number.isFinite(feature.width)) return feature.width;
+                return fontSize * 0.6;
+            };
+            
+            const charCenters = positions.map((pos, i) => {
+                const inkLeft = getInkLeft(features[i]);
+                const inkRight = getInkRight(features[i]);
+                return pos + (inkLeft + inkRight) / 2;  // 文字の中心位置
+            });
+            
+            // 全体の重心を計算
+            let totalWeightedPosition = 0;
+            let totalWeight = 0;
+            for (let i = 0; i < charCenters.length; i++) {
+                totalWeightedPosition += charCenters[i] * weights[i];
+                totalWeight += weights[i];
+            }
+            
+            if (totalWeight === 0) {
+                return { adjusted: false, deltaCenter: 0, centerOfMass: 0, textCenter: 0 };
+            }
+            
+            const centerOfMass = totalWeightedPosition / totalWeight;
+            
+            // 文字列全体の中心を計算（最初の文字の左端から最後の文字の右端まで）
+            const firstInkLeft = getInkLeft(features[0]);
+            const lastInkRight = getInkRight(features[features.length - 1]);
+            const textLeft = positions[0] + firstInkLeft;
+            const textRight = positions[positions.length - 1] + lastInkRight;
+            const textCenter = (textLeft + textRight) / 2;
+            
+            // 重心と文字列中心の差分
+            const deltaCenter = textCenter - centerOfMass;
+            
+            // 差分が小さい場合は調整しない
+            if (Math.abs(deltaCenter) < 0.1) {
+                return { adjusted: false, deltaCenter, centerOfMass, textCenter };
+            }
+            
+            // ギャップを調整して重心を中央に寄せる
+            // 左寄り（deltaCenter > 0、重心が左にある）なら右側のギャップを広げ、左側を詰める
+            // 右寄り（deltaCenter < 0、重心が右にある）なら左側のギャップを広げ、右側を詰める
+            
+            // 調整量を計算（重心の差分に基づく）
+            // 文字列全体の幅に対する比率で調整量を決定
+            const textWidth = textRight - textLeft;
+            if (textWidth <= 0) {
+                return { adjusted: false, deltaCenter, centerOfMass, textCenter };
+            }
+            
+            // 調整量は文字列幅に対する比率で計算（より適切なスケーリング）
+            const adjustmentRatio = (deltaCenter / textWidth) * strength;
+            
+            // 各ギャップに調整を適用（左から右へ線形に変化）
+            // 左寄り（deltaCenter > 0）の場合：
+            //   - 左側のギャップを詰める（負の調整）
+            //   - 右側のギャップを広げる（正の調整）
+            // 右寄り（deltaCenter < 0）の場合：
+            //   - 左側のギャップを広げる（正の調整）
+            //   - 右側のギャップを詰める（負の調整）
+            const gapAdjustments = [];
+            for (let i = 0; i < gaps.length; i++) {
+                // 位置比率：0（左端）から1（右端）まで
+                const positionRatio = i / (gaps.length - 1 || 1);
+                // 調整量：左端で-deltaCenter、右端で+deltaCenter（線形変化）
+                // ただし、文字列幅で正規化してから適用
+                const adjustment = adjustmentRatio * textWidth * (2 * positionRatio - 1);
+                gapAdjustments.push(adjustment);
+            }
+            
+            // ギャップを調整（最初の文字の位置は変更しない）
+            for (let i = 0; i < gaps.length; i++) {
+                gaps[i] += gapAdjustments[i];
+                
+                // ギャップが最小・最大の範囲内に収まるように制限
+                const minGap = -0.2 * fontSize;
+                const maxGap = 0.8 * fontSize;
+                if (gaps[i] < minGap) gaps[i] = minGap;
+                if (gaps[i] > maxGap) gaps[i] = maxGap;
+            }
+            
+            // 調整後の位置を再計算（最初の文字の位置は保持）
+            // positions[0]は変更しない（文字列全体の位置を保持）
+            const firstPos = positions[0];  // 最初の文字の位置を保持
+            let x = firstPos;
+            
+            for (let i = 0; i < gaps.length; i++) {
+                const currentInkRight = getInkRight(features[i]);
+                const nextInkLeft = getInkLeft(features[i + 1]);
+                x = x + currentInkRight + gaps[i] - nextInkLeft;
+                positions[i + 1] = x;
+            }
+            
+            return { adjusted: true, deltaCenter, centerOfMass, textCenter };
+        }
+        
         // カーニング前の幅を計算（bboxベース + 文字間調整）
         function calculateWidthWithoutKerning(text, fontId, fontSize, beforeKerningGapPx = DEFAULT_BEFORE_KERNING_GAP) {
             const chars = Array.from(text);
@@ -1963,6 +2108,28 @@
                 (deltaW / gaps.length) : 0;
             const widthAnchorApplied = shouldApplyWidthAnchor && Math.abs(deltaW) > 0.001;
             
+            // ============================================
+            // Phase2: 重心補正の適用
+            // ============================================
+            let centerOfMassAdjustmentResult = null;
+            if (phase2Enabled && centerOfMassAdjustmentEnabled && gaps.length > 0) {
+                centerOfMassAdjustmentResult = adjustCenterOfMass(gaps, positions, features, fontSize, CENTER_OF_MASS_ADJUSTMENT_STRENGTH);
+                
+                // 調整後の文字列全体の幅を再計算
+                if (centerOfMassAdjustmentResult.adjusted && positions.length > 0 && features.length > 0) {
+                    const getInkRight = (feature) => {
+                        if (feature && Number.isFinite(feature.inkRight)) return feature.inkRight;
+                        if (feature && Number.isFinite(feature.actualBoundingBoxRight)) return feature.actualBoundingBoxRight;
+                        if (feature && Number.isFinite(feature.width)) return feature.width;
+                        return fontSize * 0.6;
+                    };
+                    const lastPos = positions[positions.length - 1];
+                    const lastFeature = features[features.length - 1];
+                    const startX = positions[0] - (features[0].inkLeft || features[0].actualBoundingBoxLeft || 0);
+                    phase1TotalWidth = lastPos + getInkRight(lastFeature) - startX;
+                }
+            }
+            
             return {
                 positions,
                 gaps,
@@ -1985,7 +2152,9 @@
                     phase0Gaps: phase0Gaps,
                     phase1Gaps: phase1Gaps,
                     blendedGaps: gaps,
-                    isLearned: isLearned
+                    isLearned: isLearned,
+                    phase2Enabled: phase2Enabled,
+                    centerOfMassAdjustment: centerOfMassAdjustmentResult
                 }
             };
         }
@@ -2581,6 +2750,14 @@
             if (blendRatioGroup) {
                 blendRatioGroup.style.display = (phaseMode === "phase1") ? "flex" : "none";
             }
+            const phase2Group = document.getElementById('phase2Group');
+            if (phase2Group) {
+                phase2Group.style.display = (phaseMode === "phase1") ? "flex" : "none";
+            }
+            const centerOfMassGroup = document.getElementById('centerOfMassGroup');
+            if (centerOfMassGroup) {
+                centerOfMassGroup.style.display = (phaseMode === "phase1" && phase2Enabled) ? "flex" : "none";
+            }
             updateDisplay();
         });
         
@@ -2598,6 +2775,28 @@
         if (showUnlearnedPairsCheckbox) {
             showUnlearnedPairsCheckbox.addEventListener('change', function() {
                 showUnlearnedPairs = this.checked;
+                updateDisplay();
+            });
+        }
+        
+        // Phase2の有効化チェックボックス
+        const phase2EnabledCheckbox = document.getElementById('phase2EnabledCheckbox');
+        if (phase2EnabledCheckbox) {
+            phase2EnabledCheckbox.addEventListener('change', function() {
+                phase2Enabled = this.checked;
+                const centerOfMassGroup = document.getElementById('centerOfMassGroup');
+                if (centerOfMassGroup) {
+                    centerOfMassGroup.style.display = (phaseMode === "phase1" && phase2Enabled) ? "flex" : "none";
+                }
+                updateDisplay();
+            });
+        }
+        
+        // 重心補正の有効化チェックボックス
+        const centerOfMassCheckbox = document.getElementById('centerOfMassCheckbox');
+        if (centerOfMassCheckbox) {
+            centerOfMassCheckbox.addEventListener('change', function() {
+                centerOfMassAdjustmentEnabled = this.checked;
                 updateDisplay();
             });
         }

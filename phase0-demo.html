@@ -378,6 +378,9 @@
         const ADJUST_TRIPLET_VERTICAL = +0.3;  // 縦線×縦線×縦線の補正値（px、広げる）
         const ADJUST_TRIPLET_ROUND = -0.2;  // 丸×丸×丸の補正値（px、締める）
         const ADJUST_TRIPLET_BRUSH = +0.4;  // 筆文字連続の補正値（px、緩くする）
+        const ADJUST_TRIPLET_LATIN_SEQUENCE = -0.1;  // 同じLATIN_PAIRが連続する場合の補正値（px、締める）
+        const ADJUST_TRIPLET_VERTICAL_SEQUENCE = +0.2;  // 同じVERTICAL_VERTICALが連続する場合の補正値（px、広げる）
+        const ADJUST_TRIPLET_CURVE_SEQUENCE = -0.15;  // 同じCURVE_CURVEが連続する場合の補正値（px、締める）
         let phase1Model = null;   // Phase1モデルデータ
         let phase1ModelAverage = null;  // 学習済みペアのgap_norm_avgの平均値（未学習ペア用）
         let phase0Average = null;  // Phase0のルールベースで計算した平均値（係数計算用）
@@ -1807,7 +1810,7 @@
          * @returns {Object} 調整結果の情報
          */
         function applyTripletAdjustment(gaps, features, chars, fontFamily, fontSize) {
-            if (!gaps || gaps.length === 0 || !features || !chars || features.length < 3) {
+            if (!gaps || gaps.length === 0 || !features || !chars || features.length < 2) {
                 return { adjusted: false, adjustedTriplets: [] };
             }
             
@@ -1818,7 +1821,53 @@
             const isCurve = (charType) => charType === "CURVE";
             const isBrush = (family) => family === "Brush";
             
-            // 3文字以上の連続パターンを検出
+            // 2文字ペアの連続パターンを検出（T|A、W|Aのような同じペアカテゴリが連続）
+            for (let i = 0; i < gaps.length - 1 && i + 2 < features.length; i++) {
+                const pair1 = getPairCategory(features[i]?.charType, features[i + 1]?.charType);
+                const pair2 = getPairCategory(features[i + 1]?.charType, features[i + 2]?.charType);
+                
+                // 同じペアカテゴリが連続する場合
+                if (pair1 && pair2 && pair1 === pair2) {
+                    let pattern = null;
+                    let adjustment = 0;
+                    
+                    // ペアカテゴリに応じた補正値を適用
+                    if (pair1 === "LATIN_PAIR") {
+                        pattern = "LATIN_PAIR_SEQUENCE";
+                        adjustment = ADJUST_TRIPLET_LATIN_SEQUENCE;  // 少し締める
+                    } else if (pair1 === "VERTICAL_VERTICAL") {
+                        pattern = "VERTICAL_VERTICAL_SEQUENCE";
+                        adjustment = ADJUST_TRIPLET_VERTICAL_SEQUENCE;  // 少し広げる
+                    } else if (pair1 === "CURVE_CURVE") {
+                        pattern = "CURVE_CURVE_SEQUENCE";
+                        adjustment = ADJUST_TRIPLET_CURVE_SEQUENCE;  // 少し締める
+                    }
+                    
+                    if (pattern && adjustment !== 0) {
+                        // 連続する2つのギャップに調整を適用
+                        if (i < gaps.length) {
+                            gaps[i] += adjustment;
+                            adjustedTriplets.push({ index: i, pattern, adjustment });
+                        }
+                        if (i + 1 < gaps.length) {
+                            gaps[i + 1] += adjustment;
+                            adjustedTriplets.push({ index: i + 1, pattern, adjustment });
+                        }
+                        
+                        // ギャップが最小・最大の範囲内に収まるように制限
+                        const minGap = -0.2 * fontSize;
+                        const maxGap = 0.8 * fontSize;
+                        if (gaps[i] < minGap) gaps[i] = minGap;
+                        if (gaps[i] > maxGap) gaps[i] = maxGap;
+                        if (i + 1 < gaps.length) {
+                            if (gaps[i + 1] < minGap) gaps[i + 1] = minGap;
+                            if (gaps[i + 1] > maxGap) gaps[i + 1] = maxGap;
+                        }
+                    }
+                }
+            }
+            
+            // 3文字以上の連続パターンを検出（既存のロジック）
             for (let i = 0; i <= chars.length - 3; i++) {
                 const charType1 = features[i]?.charType;
                 const charType2 = features[i + 1]?.charType;

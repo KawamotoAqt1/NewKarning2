@@ -218,6 +218,12 @@
                     <span>標準偏差補正を有効化（Phase2時）</span>
                 </label>
             </div>
+            <div class="control-group" id="tripletAdjustmentGroup" style="grid-column: 1 / -1; display: none;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="checkbox" id="tripletAdjustmentCheckbox" checked>
+                    <span>Triplet補正を有効化（Phase2時）</span>
+                </label>
+            </div>
             <div class="control-group">
                 <label for="textInput">文字列</label>
                 <input type="text" id="textInput" value="ＷＡＶＥ" placeholder="文字列を入力">
@@ -368,6 +374,10 @@
         let stdDevSmoothingEnabled = true;  // 標準偏差補正を有効にするかどうか（Phase2）
         const STD_DEV_THRESHOLD = 2.0;  // 標準偏差の閾値（px、この値を超える場合にスムージングを適用）
         const SMOOTHING_STRENGTH = 0.5;  // スムージングの強度（0.0-1.0、大きいほど強く均す）
+        let tripletAdjustmentEnabled = true;  // Triplet補正を有効にするかどうか（Phase2）
+        const ADJUST_TRIPLET_VERTICAL = +0.3;  // 縦線×縦線×縦線の補正値（px、広げる）
+        const ADJUST_TRIPLET_ROUND = -0.2;  // 丸×丸×丸の補正値（px、締める）
+        const ADJUST_TRIPLET_BRUSH = +0.4;  // 筆文字連続の補正値（px、緩くする）
         let phase1Model = null;   // Phase1モデルデータ
         let phase1ModelAverage = null;  // 学習済みペアのgap_norm_avgの平均値（未学習ペア用）
         let phase0Average = null;  // Phase0のルールベースで計算した平均値（係数計算用）
@@ -1783,6 +1793,89 @@
             return { adjusted: true, stdDevBefore: stdDev, stdDevAfter: smoothedStdDev };
         }
         
+        // ============================================
+        // Phase2: Triplet補正（3文字以上の連続パターン調整）
+        // ============================================
+        
+        /**
+         * 3文字以上の連続パターンに特別な調整を適用
+         * @param {Array<number>} gaps - ギャップ配列（変更される）
+         * @param {Array} features - 文字特徴量配列
+         * @param {Array<string>} chars - 文字配列
+         * @param {string} fontFamily - フォントファミリー（Brush判定用）
+         * @param {number} fontSize - フォントサイズ
+         * @returns {Object} 調整結果の情報
+         */
+        function applyTripletAdjustment(gaps, features, chars, fontFamily, fontSize) {
+            if (!gaps || gaps.length === 0 || !features || !chars || features.length < 3) {
+                return { adjusted: false, adjustedTriplets: [] };
+            }
+            
+            const adjustedTriplets = [];
+            
+            // 連続パターンを検出する関数
+            const isVertical = (charType) => charType === "VERTICAL_HEAVY" || charType === "VERTICAL_LIGHT";
+            const isCurve = (charType) => charType === "CURVE";
+            const isBrush = (family) => family === "Brush";
+            
+            // 3文字以上の連続パターンを検出
+            for (let i = 0; i <= chars.length - 3; i++) {
+                const charType1 = features[i]?.charType;
+                const charType2 = features[i + 1]?.charType;
+                const charType3 = features[i + 2]?.charType;
+                
+                if (!charType1 || !charType2 || !charType3) continue;
+                
+                let pattern = null;
+                let adjustment = 0;
+                
+                // パターン1: 縦線 × 縦線 × 縦線
+                if (isVertical(charType1) && isVertical(charType2) && isVertical(charType3)) {
+                    pattern = "VERTICAL_VERTICAL_VERTICAL";
+                    adjustment = ADJUST_TRIPLET_VERTICAL;  // 少し広げる
+                }
+                // パターン2: 丸 × 丸 × 丸
+                else if (isCurve(charType1) && isCurve(charType2) && isCurve(charType3)) {
+                    pattern = "CURVE_CURVE_CURVE";
+                    adjustment = ADJUST_TRIPLET_ROUND;  // 少し締める（負の値）
+                }
+                // パターン3: 筆文字連続（フォントファミリーがBrushの場合）
+                else if (isBrush(fontFamily)) {
+                    // 筆文字フォントの場合、連続する文字に対して緩くする
+                    pattern = "BRUSH_SEQUENCE";
+                    adjustment = ADJUST_TRIPLET_BRUSH;  // 緩くする（正の値）
+                }
+                
+                if (pattern && adjustment !== 0) {
+                    // 連続する2つのギャップに調整を適用
+                    // 3文字連続の場合、2つのギャップ（文字1-2間、文字2-3間）を調整
+                    if (i < gaps.length) {
+                        gaps[i] += adjustment;
+                        adjustedTriplets.push({ index: i, pattern, adjustment });
+                    }
+                    if (i + 1 < gaps.length) {
+                        gaps[i + 1] += adjustment;
+                        adjustedTriplets.push({ index: i + 1, pattern, adjustment });
+                    }
+                    
+                    // ギャップが最小・最大の範囲内に収まるように制限
+                    const minGap = -0.2 * fontSize;
+                    const maxGap = 0.8 * fontSize;
+                    if (gaps[i] < minGap) gaps[i] = minGap;
+                    if (gaps[i] > maxGap) gaps[i] = maxGap;
+                    if (i + 1 < gaps.length) {
+                        if (gaps[i + 1] < minGap) gaps[i + 1] = minGap;
+                        if (gaps[i + 1] > maxGap) gaps[i + 1] = maxGap;
+                    }
+                }
+            }
+            
+            return {
+                adjusted: adjustedTriplets.length > 0,
+                adjustedTriplets: adjustedTriplets
+            };
+        }
+        
         // カーニング前の幅を計算（bboxベース + 文字間調整）
         function calculateWidthWithoutKerning(text, fontId, fontSize, beforeKerningGapPx = DEFAULT_BEFORE_KERNING_GAP) {
             const chars = Array.from(text);
@@ -2252,6 +2345,47 @@
                 }
             }
             
+            // ============================================
+            // Phase2: Triplet補正の適用
+            // ============================================
+            let tripletAdjustmentResult = null;
+            if (phase2Enabled && tripletAdjustmentEnabled && gaps.length > 0 && chars.length >= 3) {
+                tripletAdjustmentResult = applyTripletAdjustment(gaps, features, chars, fontFamily, fontSize);
+                
+                // 調整後の位置を再計算（Triplet補正でギャップが変更された場合）
+                if (tripletAdjustmentResult.adjusted && positions.length > 0 && features.length > 0) {
+                    const getInkLeft = (feature) => {
+                        if (feature && Number.isFinite(feature.inkLeft)) return feature.inkLeft;
+                        if (feature && Number.isFinite(feature.actualBoundingBoxLeft)) return feature.actualBoundingBoxLeft;
+                        return 0;
+                    };
+                    const getInkRight = (feature) => {
+                        if (feature && Number.isFinite(feature.inkRight)) return feature.inkRight;
+                        if (feature && Number.isFinite(feature.actualBoundingBoxRight)) return feature.actualBoundingBoxRight;
+                        if (feature && Number.isFinite(feature.width)) return feature.width;
+                        return fontSize * 0.6;
+                    };
+                    
+                    // 最初の文字の位置を保持
+                    const firstPos = positions[0];
+                    let x = firstPos;
+                    
+                    // 各ギャップに基づいて位置を再計算
+                    for (let i = 0; i < gaps.length; i++) {
+                        const currentInkRight = getInkRight(features[i]);
+                        const nextInkLeft = getInkLeft(features[i + 1]);
+                        x = x + currentInkRight + gaps[i] - nextInkLeft;
+                        positions[i + 1] = x;
+                    }
+                    
+                    // 調整後の文字列全体の幅を再計算
+                    const lastPos = positions[positions.length - 1];
+                    const lastFeature = features[features.length - 1];
+                    const startX = positions[0] - (features[0].inkLeft || features[0].actualBoundingBoxLeft || 0);
+                    phase1TotalWidth = lastPos + getInkRight(lastFeature) - startX;
+                }
+            }
+            
             return {
                 positions,
                 gaps,
@@ -2277,7 +2411,8 @@
                     isLearned: isLearned,
                     phase2Enabled: phase2Enabled,
                     centerOfMassAdjustment: centerOfMassAdjustmentResult,
-                    stdDevSmoothing: stdDevSmoothingResult
+                    stdDevSmoothing: stdDevSmoothingResult,
+                    tripletAdjustment: tripletAdjustmentResult
                 }
             };
         }
@@ -2885,6 +3020,10 @@
             if (stdDevSmoothingGroup) {
                 stdDevSmoothingGroup.style.display = (phaseMode === "phase1" && phase2Enabled) ? "flex" : "none";
             }
+            const tripletAdjustmentGroup = document.getElementById('tripletAdjustmentGroup');
+            if (tripletAdjustmentGroup) {
+                tripletAdjustmentGroup.style.display = (phaseMode === "phase1" && phase2Enabled) ? "flex" : "none";
+            }
             updateDisplay();
         });
         
@@ -2919,6 +3058,10 @@
                 if (stdDevSmoothingGroup) {
                     stdDevSmoothingGroup.style.display = (phaseMode === "phase1" && phase2Enabled) ? "flex" : "none";
                 }
+                const tripletAdjustmentGroup = document.getElementById('tripletAdjustmentGroup');
+                if (tripletAdjustmentGroup) {
+                    tripletAdjustmentGroup.style.display = (phaseMode === "phase1" && phase2Enabled) ? "flex" : "none";
+                }
                 updateDisplay();
             });
         }
@@ -2937,6 +3080,15 @@
         if (stdDevSmoothingCheckbox) {
             stdDevSmoothingCheckbox.addEventListener('change', function() {
                 stdDevSmoothingEnabled = this.checked;
+                updateDisplay();
+            });
+        }
+        
+        // Triplet補正の有効化チェックボックス
+        const tripletAdjustmentCheckbox = document.getElementById('tripletAdjustmentCheckbox');
+        if (tripletAdjustmentCheckbox) {
+            tripletAdjustmentCheckbox.addEventListener('change', function() {
+                tripletAdjustmentEnabled = this.checked;
                 updateDisplay();
             });
         }

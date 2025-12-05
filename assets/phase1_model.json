@@ -69,7 +69,7 @@
       "gap_norm_right_avg": 0.21861249753596898,
       "gap_actual_avg": 10.282252459235478,
       "font_size_avg": 57.8307436522706,
-      "text_total_width_avg": 378.98463918069996,
+      "text_total_width_avg": 532.7929153604707,
       "count": 10
     },
     "Ａ|Ｔ": {
@@ -78,7 +78,7 @@
       "gap_norm_right_avg": 0.31356295399385065,
       "gap_actual_avg": 8.981145117579327,
       "font_size_avg": 44.66901849111764,
-      "text_total_width_avg": 238.23266675046668,
+      "text_total_width_avg": 256.23003112290723,
       "count": 6
     },
     "Ｔ|Ａ": {
@@ -87,7 +87,7 @@
       "gap_norm_right_avg": 0.24777243145425423,
       "gap_actual_avg": 9.460011098455443,
       "font_size_avg": 46.00046943822353,
-      "text_total_width_avg": 294.85901511512003,
+      "text_total_width_avg": 319.696140843397,
       "count": 10
     },
     "Ａ|Ｏ": {
@@ -114,7 +114,7 @@
       "gap_norm_right_avg": 0.2961093807955447,
       "gap_actual_avg": 14.725629067295795,
       "font_size_avg": 59.379606358647095,
-      "text_total_width_avg": 405.76196344470003,
+      "text_total_width_avg": 567.5448798396984,
       "count": 8
     },
     "Ａ|Ｋ": {
@@ -123,7 +123,7 @@
       "gap_norm_right_avg": 0.3460378586769523,
       "gap_actual_avg": 12.625886943955654,
       "font_size_avg": 63.1488219506912,
-      "text_total_width_avg": 413.0099315737751,
+      "text_total_width_avg": 554.8271251352763,
       "count": 8
     },
     "Ａ|Ｓ": {
@@ -132,7 +132,7 @@
       "gap_norm_right_avg": 0.3374577238284367,
       "gap_actual_avg": 10.733934249872883,
       "font_size_avg": 58.82211617650588,
-      "text_total_width_avg": 379.03434056266013,
+      "text_total_width_avg": 536.0833280764875,
       "count": 10
     },
     "Ｓ|Ｈ": {
@@ -141,7 +141,7 @@
       "gap_norm_right_avg": 0.38691928027115596,
       "gap_actual_avg": 17.940431970881303,
       "font_size_avg": 57.38621705273949,
-      "text_total_width_avg": 403.0768362384857,
+      "text_total_width_avg": 584.4768235477519,
       "count": 14
     },
     "Ｈ|Ｉ": {
@@ -150,7 +150,7 @@
       "gap_norm_right_avg": 2.216142478385712,
       "gap_actual_avg": 22.46755333230271,
       "font_size_avg": 64.17913565042352,
-      "text_total_width_avg": 455.86829206688,
+      "text_total_width_avg": 615.2763658673709,
       "count": 10
     },
     "Ｉ|Ｍ": {
@@ -159,7 +159,7 @@
       "gap_norm_right_avg": 0.13664217582834662,
       "gap_actual_avg": 11.735372684195463,
       "font_size_avg": 71.42431193988236,
-      "text_total_width_avg": 441.78126704755005,
+      "text_total_width_avg": 656.9898397757357,
       "count": 4
     },
     "Ｍ|Ａ": {
@@ -168,7 +168,7 @@
       "gap_norm_right_avg": 0.21489303507356153,
       "gap_actual_avg": 13.66804128405805,
       "font_size_avg": 74.33882167094119,
-      "text_total_width_avg": 483.0375295520249,
+      "text_total_width_avg": 628.6145254188835,
       "count": 8
     },
     "Ｇ|Ａ": {
@@ -177,7 +177,7 @@
       "gap_norm_right_avg": 0.4036598811401599,
       "gap_actual_avg": 14.254334069004017,
       "font_size_avg": 50.963528137676455,
-      "text_total_width_avg": 336.1311217164,
+      "text_total_width_avg": 336.12719376068407,
       "count": 4
     },
     "Ａ|Ｒ": {
@@ -213,7 +213,7 @@
       "gap_norm_right_avg": 0.4135633705238959,
       "gap_actual_avg": 27.091914248637778,
       "font_size_avg": 54.47411628520588,
-      "text_total_width_avg": 416.16260064115,
+      "text_total_width_avg": 674.3955432258823,
       "count": 4
     },
     "Ｍ|Ｏ": {
@@ -240,7 +240,7 @@
       "gap_norm_right_avg": 0.2903088492081073,
       "gap_actual_avg": 11.321548206775311,
       "font_size_avg": 36.436665755749985,
-      "text_total_width_avg": 170.4450650617,
+      "text_total_width_avg": 217.57165252386605,
       "count": 8
     },
     "Ｏ|Ｍ": {
@@ -258,7 +258,7 @@
       "gap_norm_right_avg": 2.990487628700896,
       "gap_actual_avg": 9.428050198780157,
       "font_size_avg": 31.855685478117636,
-      "text_total_width_avg": 189.62026601924998,
+      "text_total_width_avg": 189.2769438483077,
       "count": 4
     },
     "Ｉ|Ｚ": {
@@ -267,7 +267,7 @@
       "gap_norm_right_avg": 0.4195066005097222,
       "gap_actual_avg": 8.507996310176413,
       "font_size_avg": 30.66235217461764,
-      "text_total_width_avg": 189.62026601924998,
+      "text_total_width_avg": 189.27742857823912,
       "count": 4
     },
     "Ｚ|Ａ": {
@@ -276,7 +276,7 @@
       "gap_norm_right_avg": 0.31829680441821945,
       "gap_actual_avg": 10.103937762492174,
       "font_size_avg": 41.44862641476472,
-      "text_total_width_avg": 251.31793271395003,
+      "text_total_width_avg": 281.0612949555089,
       "count": 4
     },
     "Ａ|Ｗ": {
@@ -285,7 +285,7 @@
       "gap_norm_right_avg": 0.10638697917268562,
       "gap_actual_avg": 4.082530417080505,
       "font_size_avg": 39.8614369119608,
-      "text_total_width_avg": 260.8652428120001,
+      "text_total_width_avg": 280.1702421134189,
       "count": 6
     },
     "Ｗ|Ａ": {
@@ -294,7 +294,7 @@
       "gap_norm_right_avg": 0.14379616500495773,
       "gap_actual_avg": 4.056177113859991,
       "font_size_avg": 39.8614369119608,
-      "text_total_width_avg": 260.8652428120001,
+      "text_total_width_avg": 280.1702421134189,
       "count": 6
     },
     "Ｉ|Ｓ": {
@@ -303,7 +303,7 @@
       "gap_norm_right_avg": 0.5326826779031665,
       "gap_actual_avg": 29.335102390246252,
       "font_size_avg": 85.53019394017647,
-      "text_total_width_avg": 484.22546514395,
+      "text_total_width_avg": 590.2803099303418,
       "count": 4
     },
     "Ｓ|Ｏ": {
@@ -330,7 +330,7 @@
       "gap_norm_right_avg": 0.19719161094034673,
       "gap_actual_avg": 11.958655569787071,
       "font_size_avg": 70.38039039735293,
-      "text_total_width_avg": 405.7122642986,
+      "text_total_width_avg": 549.6403284239351,
       "count": 6
     },
     "Ｓ|Ｕ": {
@@ -339,7 +339,7 @@
       "gap_norm_right_avg": 0.5033275005442457,
       "gap_actual_avg": 14.19261550018716,
       "font_size_avg": 44.780783194205895,
-      "text_total_width_avg": 240.63439729310002,
+      "text_total_width_avg": 240.8752664527553,
       "count": 4
     },
     "Ｕ|Ｄ": {
@@ -348,7 +348,7 @@
       "gap_norm_right_avg": 0.5241169785458742,
       "gap_actual_avg": 15.565727934474294,
       "font_size_avg": 43.704704789735295,
-      "text_total_width_avg": 240.63439729310002,
+      "text_total_width_avg": 240.87831735399322,
       "count": 4
     },
     "Ｄ|Ａ": {
@@ -357,7 +357,7 @@
       "gap_norm_right_avg": 0.26380604413769665,
       "gap_actual_avg": 8.713500234866192,
       "font_size_avg": 43.538430284088236,
-      "text_total_width_avg": 240.63439729310002,
+      "text_total_width_avg": 240.96325203930598,
       "count": 4
     },
     "Ａ|Ｎ": {
@@ -366,7 +366,7 @@
       "gap_norm_right_avg": 0.5423359713702685,
       "gap_actual_avg": 18.800244372422785,
       "font_size_avg": 47.16052169680393,
-      "text_total_width_avg": 331.8883993153333,
+      "text_total_width_avg": 342.3517262231753,
       "count": 6
     },
     "Ｈ|Ａ": {
@@ -519,7 +519,7 @@
       "gap_norm_right_avg": 0.6851303150206642,
       "gap_actual_avg": 15.690397328799973,
       "font_size_avg": 45.835292971764694,
-      "text_total_width_avg": 226.79772919220002,
+      "text_total_width_avg": 226.79772919220005,
       "count": 2
     },
     "ｕ|ｄ": {
@@ -528,7 +528,7 @@
       "gap_norm_right_avg": 0.6092517461774442,
       "gap_actual_avg": 15.673203862500031,
       "font_size_avg": 54.786665297000006,
-      "text_total_width_avg": 226.79772919220002,
+      "text_total_width_avg": 226.79772919220005,
       "count": 2
     },
     "ｄ|ａ": {
@@ -638,7 +638,7 @@
       "gap_norm_right_avg": 0.10553350409745046,
       "gap_actual_avg": 15.417741006499995,
       "font_size_avg": 102.97097781788236,
-      "text_total_width_avg": 289.01106749999997,
+      "text_total_width_avg": 289.0110674999999,
       "count": 2
     },
     "中|村": {
@@ -728,7 +728,7 @@
       "gap_norm_right_avg": 0.48495096203229227,
       "gap_actual_avg": 46.82079369367678,
       "font_size_avg": 103.78248106556863,
-      "text_total_width_avg": 243.27106092840003,
+      "text_total_width_avg": 254.65702417937345,
       "count": 6
     },
     "増|田": {
@@ -854,7 +854,7 @@
       "gap_norm_right_avg": 0.27331712090710186,
       "gap_actual_avg": 32.90343733449037,
       "font_size_avg": 130.71254575179412,
-      "text_total_width_avg": 263.16945993420006,
+      "text_total_width_avg": 269.0911458219598,
       "count": 4
     },
     "深|井": {
@@ -917,7 +917,7 @@
       "gap_norm_right_avg": 0.19672919813349898,
       "gap_actual_avg": 3.5287971151000193,
       "font_size_avg": 25.392156227941115,
-      "text_total_width_avg": 309.4946626849,
+      "text_total_width_avg": 309.49466268489994,
       "count": 2
     },
     "5|0": {
@@ -1052,7 +1052,7 @@
       "gap_norm_right_avg": 0.3173779306948448,
       "gap_actual_avg": 31.096265701499988,
       "font_size_avg": 114.15999714600001,
-      "text_total_width_avg": 245.5349270072001,
+      "text_total_width_avg": 245.53492700720008,
       "count": 2
     },
     "山|﨑": {
@@ -1115,7 +1115,7 @@
       "gap_norm_right_avg": 0.2150022251592668,
       "gap_actual_avg": 20.186128411100015,
       "font_size_avg": 105.27921305429412,
-      "text_total_width_avg": 205.31545711619998,
+      "text_total_width_avg": 205.31545711619995,
       "count": 2
     },
     "北|尾": {
@@ -1187,7 +1187,7 @@
       "gap_norm_right_avg": 0.551793966233624,
       "gap_actual_avg": 46.77520548559999,
       "font_size_avg": 104.75215424394118,
-      "text_total_width_avg": 221.14053445980005,
+      "text_total_width_avg": 221.14053445980002,
       "count": 2
     },
     "黒|川": {
@@ -1223,7 +1223,7 @@
       "gap_norm_right_avg": 0.5749518233848094,
       "gap_actual_avg": 50.11279967339999,
       "font_size_avg": 116.63999708400002,
-      "text_total_width_avg": 228.22346188730003,
+      "text_total_width_avg": 228.22346188730006,
       "count": 2
     },
     "宇|畑": {
@@ -1277,7 +1277,7 @@
       "gap_norm_right_avg": 0.5283739357042724,
       "gap_actual_avg": 41.6358650926,
       "font_size_avg": 94.64313488882354,
-      "text_total_width_avg": 218.9358606601,
+      "text_total_width_avg": 218.93586066009996,
       "count": 2
     },
     "津|田": {
@@ -1385,7 +1385,7 @@
       "gap_norm_right_avg": 0.2572986014576034,
       "gap_actual_avg": 34.5953398927,
       "font_size_avg": 173.52783879905886,
-      "text_total_width_avg": 509.5234625319,
+      "text_total_width_avg": 509.52346253189995,
       "count": 2
     },
     "金|子": {
@@ -1430,7 +1430,7 @@
       "gap_norm_right_avg": 0.6326401010458065,
       "gap_actual_avg": 53.40747599510005,
       "font_size_avg": 103.00705624835295,
-      "text_total_width_avg": 236.27013809020002,
+      "text_total_width_avg": 236.27013809020005,
       "count": 2
     }
   },
@@ -1441,7 +1441,7 @@
       "gap_norm_right_avg": 0.27849613487239605,
       "gap_actual_avg": 15.813209968946746,
       "font_size_avg": 50.16365887662749,
-      "text_total_width_avg": 336.21182267426667,
+      "text_total_width_avg": 421.2334138864832,
       "count": 6
     },
     "Ｍ|Ａ": {
@@ -1450,7 +1450,7 @@
       "gap_norm_right_avg": 0.31849493148047453,
       "gap_actual_avg": 12.457873951452054,
       "font_size_avg": 48.60862623576471,
-      "text_total_width_avg": 325.05913209606666,
+      "text_total_width_avg": 396.50642850111274,
       "count": 12
     },
     "Ａ|Ｍ": {
@@ -1459,7 +1459,7 @@
       "gap_norm_right_avg": 0.29001564673941876,
       "gap_actual_avg": 10.974444942175545,
       "font_size_avg": 39.506846674470594,
-      "text_total_width_avg": 275.70874794295383,
+      "text_total_width_avg": 294.86180019898023,
       "count": 13
     },
     "Ｍ|Ｕ": {
@@ -1468,7 +1468,7 @@
       "gap_norm_right_avg": 0.33908847575328965,
       "gap_actual_avg": 12.001261874577972,
       "font_size_avg": 42.02370265311111,
-      "text_total_width_avg": 299.9253183983778,
+      "text_total_width_avg": 313.452973394824,
       "count": 9
     },
     "Ｕ|Ｒ": {
@@ -1477,7 +1477,7 @@
       "gap_norm_right_avg": 0.30406321201555636,
       "gap_actual_avg": 11.130244232090185,
       "font_size_avg": 44.91258354741712,
-      "text_total_width_avg": 303.701563327091,
+      "text_total_width_avg": 315.09306416251115,
       "count": 11
     },
     "Ｒ|Ａ": {
@@ -1486,7 +1486,7 @@
       "gap_norm_right_avg": 0.27554327841451337,
       "gap_actual_avg": 9.722576537653097,
       "font_size_avg": 44.35551709839496,
-      "text_total_width_avg": 325.43449420722857,
+      "text_total_width_avg": 328.03847724478214,
       "count": 7
     },
     "Ｎ|Ａ": {
@@ -1495,7 +1495,7 @@
       "gap_norm_right_avg": 0.15397934696212828,
       "gap_actual_avg": 6.244000604094448,
       "font_size_avg": 49.25348896474118,
-      "text_total_width_avg": 356.65776011741,
+      "text_total_width_avg": 396.2931488052459,
       "count": 10
     },
     "Ａ|Ｋ": {
@@ -1504,7 +1504,7 @@
       "gap_norm_right_avg": 0.32525736605528627,
       "gap_actual_avg": 17.100953769134364,
       "font_size_avg": 52.75274377922059,
-      "text_total_width_avg": 383.98229449524496,
+      "text_total_width_avg": 449.485198029741,
       "count": 20
     },
     "Ｋ|Ａ": {
@@ -1513,7 +1513,7 @@
       "gap_norm_right_avg": 0.2826569298811624,
       "gap_actual_avg": 11.750411602764611,
       "font_size_avg": 49.20604919001682,
-      "text_total_width_avg": 352.01697196016664,
+      "text_total_width_avg": 408.36858662294765,
       "count": 21
     },
     "Ａ|Ｔ": {
@@ -1522,7 +1522,7 @@
       "gap_norm_right_avg": 0.2459713856492168,
       "gap_actual_avg": 8.218774637882992,
       "font_size_avg": 45.055336564248385,
-      "text_total_width_avg": 273.0357164213778,
+      "text_total_width_avg": 306.36956711821546,
       "count": 9
     },
     "Ｔ|Ａ": {
@@ -1531,7 +1531,7 @@
       "gap_norm_right_avg": 0.22482789535325576,
       "gap_actual_avg": 8.588142225405527,
       "font_size_avg": 41.26082685518955,
-      "text_total_width_avg": 281.00026779722225,
+      "text_total_width_avg": 366.12466959109554,
       "count": 18
     },
     "Ａ|Ｎ": {
@@ -1540,7 +1540,7 @@
       "gap_norm_right_avg": 0.24239874486206237,
       "gap_actual_avg": 12.233985846446425,
       "font_size_avg": 50.308234036411754,
-      "text_total_width_avg": 318.576450013975,
+      "text_total_width_avg": 341.49809287642887,
       "count": 8
     },
     "Ｎ|Ｉ": {
@@ -1549,7 +1549,7 @@
       "gap_norm_right_avg": 0.5703657897552281,
       "gap_actual_avg": 9.089072537253848,
       "font_size_avg": 41.55152837297648,
-      "text_total_width_avg": 301.22141400594,
+      "text_total_width_avg": 308.4203267937924,
       "count": 5
     },
     "O|C": {
@@ -1576,7 +1576,7 @@
       "gap_norm_right_avg": 0.7107890389861794,
       "gap_actual_avg": 15.676478541744387,
       "font_size_avg": 50.67090069401176,
-      "text_total_width_avg": 362.77672101466,
+      "text_total_width_avg": 428.7748955282316,
       "count": 5
     },
     "I|A": {
@@ -1594,7 +1594,7 @@
       "gap_norm_right_avg": 0.7801294306561589,
       "gap_actual_avg": 11.154597388903232,
       "font_size_avg": 39.719606850147045,
-      "text_total_width_avg": 197.10913604365,
+      "text_total_width_avg": 200.9848442511481,
       "count": 2
     },
     "Ｏ|Ｃ": {
@@ -1612,7 +1612,7 @@
       "gap_norm_right_avg": 0.2883318114171266,
       "gap_actual_avg": 11.559641550916407,
       "font_size_avg": 47.15816875568627,
-      "text_total_width_avg": 306.89902035489996,
+      "text_total_width_avg": 321.9151870815186,
       "count": 3
     },
     "Ｈ|Ｉ": {
@@ -1621,7 +1621,7 @@
       "gap_norm_right_avg": 0.8764523904815248,
       "gap_actual_avg": 18.92133509028804,
       "font_size_avg": 53.33351299547059,
-      "text_total_width_avg": 379.02517949966926,
+      "text_total_width_avg": 407.98317060416275,
       "count": 13
     },
     "Ｉ|Ａ": {
@@ -1639,7 +1639,7 @@
       "gap_norm_right_avg": 0.7801294306561589,
       "gap_actual_avg": 11.154597388903232,
       "font_size_avg": 39.719606850147045,
-      "text_total_width_avg": 197.10913604365,
+      "text_total_width_avg": 200.9848442511481,
       "count": 2
     },
     "S|A": {
@@ -1657,7 +1657,7 @@
       "gap_norm_right_avg": 0.25406355833466676,
       "gap_actual_avg": 11.734754662930166,
       "font_size_avg": 50.99150199318628,
-      "text_total_width_avg": 381.36208892755,
+      "text_total_width_avg": 421.73374997157794,
       "count": 6
     },
     "K|I": {
@@ -1666,7 +1666,7 @@
       "gap_norm_right_avg": 0.6569137962425385,
       "gap_actual_avg": 15.235477663139504,
       "font_size_avg": 56.22548879044119,
-      "text_total_width_avg": 388.97439855230004,
+      "text_total_width_avg": 417.3619041260339,
       "count": 2
     },
     "I|K": {
@@ -1675,7 +1675,7 @@
       "gap_norm_right_avg": 0.3175066848875359,
       "gap_actual_avg": 10.520769275867899,
       "font_size_avg": 37.93529316926471,
-      "text_total_width_avg": 283.56960085139997,
+      "text_total_width_avg": 292.29491902223236,
       "count": 2
     },
     "K|A": {
@@ -1684,7 +1684,7 @@
       "gap_norm_right_avg": 0.2844461470458512,
       "gap_actual_avg": 10.669598076759145,
       "font_size_avg": 45.9719876462185,
-      "text_total_width_avg": 309.9025719353857,
+      "text_total_width_avg": 375.1947029921332,
       "count": 7
     },
     "A|W": {
@@ -1693,7 +1693,7 @@
       "gap_norm_right_avg": 0.03875416709194499,
       "gap_actual_avg": 1.973396790228707,
       "font_size_avg": 39.57254803029414,
-      "text_total_width_avg": 292.41193236935,
+      "text_total_width_avg": 297.23779453551884,
       "count": 2
     },
     "W|A": {
@@ -1702,7 +1702,7 @@
       "gap_norm_right_avg": 0.022687453873294957,
       "gap_actual_avg": 1.0235548659533416,
       "font_size_avg": 39.57254803029414,
-      "text_total_width_avg": 292.41193236935,
+      "text_total_width_avg": 297.23779453551884,
       "count": 2
     },
     "Ｓ|Ａ": {
@@ -1711,7 +1711,7 @@
       "gap_norm_right_avg": 0.22550050382492715,
       "gap_actual_avg": 14.514114790714148,
       "font_size_avg": 69.53908322884315,
-      "text_total_width_avg": 361.9908875328667,
+      "text_total_width_avg": 372.55928362130607,
       "count": 3
     },
     "Ｋ|Ｉ": {
@@ -1720,7 +1720,7 @@
       "gap_norm_right_avg": 0.7535334928690232,
       "gap_actual_avg": 14.127293789005634,
       "font_size_avg": 42.06182901381373,
-      "text_total_width_avg": 246.9293791906334,
+      "text_total_width_avg": 333.9267375349576,
       "count": 6
     },
     "Ｉ|Ｋ": {
@@ -1729,7 +1729,7 @@
       "gap_norm_right_avg": 0.34739944412307416,
       "gap_actual_avg": 18.036566009260397,
       "font_size_avg": 54.87509666733824,
-      "text_total_width_avg": 360.03546791735,
+      "text_total_width_avg": 399.1190174454587,
       "count": 4
     },
     "Ａ|Ｗ": {
@@ -1738,7 +1738,7 @@
       "gap_norm_right_avg": 0.055955192851516865,
       "gap_actual_avg": 3.514757675213846,
       "font_size_avg": 51.12156734941177,
-      "text_total_width_avg": 337.84282221455,
+      "text_total_width_avg": 374.8440832826468,
       "count": 6
     },
     "Ｗ|Ａ": {
@@ -1747,7 +1747,7 @@
       "gap_norm_right_avg": 0.1539674384406266,
       "gap_actual_avg": 7.593990066002007,
       "font_size_avg": 54.17960648864706,
-      "text_total_width_avg": 337.7660114957499,
+      "text_total_width_avg": 358.0287924390104,
       "count": 10
     },
     "Ｅ|Ｎ": {
@@ -1774,7 +1774,7 @@
       "gap_norm_right_avg": 0.2946222760989487,
       "gap_actual_avg": 10.500155278916091,
       "font_size_avg": 47.01882235394116,
-      "text_total_width_avg": 257.09539725305,
+      "text_total_width_avg": 294.7880510375118,
       "count": 4
     },
     "A|T": {
@@ -1801,7 +1801,7 @@
       "gap_norm_right_avg": 0.372678923544386,
       "gap_actual_avg": 13.87280330209003,
       "font_size_avg": 46.44914916556863,
-      "text_total_width_avg": 267.59026592184443,
+      "text_total_width_avg": 323.19071828903526,
       "count": 9
     },
     "N|A": {
@@ -1810,7 +1810,7 @@
       "gap_norm_right_avg": 0.09568715960732227,
       "gap_actual_avg": 3.1845469547422813,
       "font_size_avg": 47.37019489417647,
-      "text_total_width_avg": 353.54413435565,
+      "text_total_width_avg": 353.7346761779816,
       "count": 2
     },
     "A|M": {
@@ -1873,7 +1873,7 @@
       "gap_norm_right_avg": 0.1752702630400798,
       "gap_actual_avg": 8.312430726152126,
       "font_size_avg": 49.30039092435296,
-      "text_total_width_avg": 401.5677338747,
+      "text_total_width_avg": 478.35027687122187,
       "count": 2
     },
     "A|H": {
@@ -1909,7 +1909,7 @@
       "gap_norm_right_avg": 0.284671192156876,
       "gap_actual_avg": 14.636588096691945,
       "font_size_avg": 52.803528091676455,
-      "text_total_width_avg": 399.8620339414,
+      "text_total_width_avg": 451.64160278215553,
       "count": 4
     },
     "Ａ|Ｈ": {
@@ -1918,7 +1918,7 @@
       "gap_norm_right_avg": 0.30952959722918605,
       "gap_actual_avg": 14.952850764813931,
       "font_size_avg": 57.037645632882366,
-      "text_total_width_avg": 509.1343137956333,
+      "text_total_width_avg": 511.3661513868469,
       "count": 3
     },
     "Ｈ|Ａ": {
@@ -1927,7 +1927,7 @@
       "gap_norm_right_avg": 0.43970556263960053,
       "gap_actual_avg": 25.04781493920251,
       "font_size_avg": 68.27811594010589,
-      "text_total_width_avg": 532.23840403514,
+      "text_total_width_avg": 540.5077003425633,
       "count": 5
     },
     "Ａ|Ｓ": {
@@ -1936,7 +1936,7 @@
       "gap_norm_right_avg": 0.4908365781053392,
       "gap_actual_avg": 16.75255925181431,
       "font_size_avg": 58.174900506411774,
-      "text_total_width_avg": 509.1343137956333,
+      "text_total_width_avg": 511.25420073912886,
       "count": 3
     },
     "Ｓ|Ｈ": {
@@ -1945,7 +1945,7 @@
       "gap_norm_right_avg": 0.3135695588244489,
       "gap_actual_avg": 14.803023998321214,
       "font_size_avg": 52.06490065916176,
-      "text_total_width_avg": 420.60318358494993,
+      "text_total_width_avg": 451.36799298899234,
       "count": 8
     },
     "A|N": {
@@ -1954,7 +1954,7 @@
       "gap_norm_right_avg": 0.21473203526424428,
       "gap_actual_avg": 7.319006348840443,
       "font_size_avg": 39.27764607688236,
-      "text_total_width_avg": 310.4361993431,
+      "text_total_width_avg": 321.23926542149934,
       "count": 2
     },
     "N|E": {
@@ -1981,7 +1981,7 @@
       "gap_norm_right_avg": 0.29283893262965516,
       "gap_actual_avg": 13.431552572625668,
       "font_size_avg": 50.743528143176476,
-      "text_total_width_avg": 367.24033229405,
+      "text_total_width_avg": 420.80174892513804,
       "count": 2
     },
     "Ｎ|Ｅ": {
@@ -1990,7 +1990,7 @@
       "gap_norm_right_avg": 0.5320219908714663,
       "gap_actual_avg": 31.220337224949937,
       "font_size_avg": 67.57490027141178,
-      "text_total_width_avg": 468.1556482999667,
+      "text_total_width_avg": 541.5209155465672,
       "count": 3
     },
     "Ｅ|Ｚ": {
@@ -2008,7 +2008,7 @@
       "gap_norm_right_avg": 0.3308276095821517,
       "gap_actual_avg": 13.031635403355212,
       "font_size_avg": 44.54313614132354,
-      "text_total_width_avg": 284.432567481875,
+      "text_total_width_avg": 360.3719009438405,
       "count": 4
     },
     "H|O": {
@@ -2089,7 +2089,7 @@
       "gap_norm_right_avg": 0.22986514780544184,
       "gap_actual_avg": 7.280419099645883,
       "font_size_avg": 40.558430358588254,
-      "text_total_width_avg": 292.25106700604,
+      "text_total_width_avg": 324.8010316898406,
       "count": 5
     },
     "Ｏ|Ｓ": {
@@ -2098,7 +2098,7 @@
       "gap_norm_right_avg": 0.4015458456715567,
       "gap_actual_avg": 11.31256868458041,
       "font_size_avg": 44.247842031058845,
-      "text_total_width_avg": 341.1417320802,
+      "text_total_width_avg": 361.9589357492511,
       "count": 3
     },
     "浅|井": {
@@ -2134,7 +2134,7 @@
       "gap_norm_right_avg": 0.869291604210872,
       "gap_actual_avg": 29.628934297199976,
       "font_size_avg": 47.07843019558825,
-      "text_total_width_avg": 235.5569391817,
+      "text_total_width_avg": 235.55693918170002,
       "count": 1
     },
     "野|田": {
@@ -2152,7 +2152,7 @@
       "gap_norm_right_avg": 0.449925331529576,
       "gap_actual_avg": 23.41927552852549,
       "font_size_avg": 67.51854172940338,
-      "text_total_width_avg": 317.06809579198574,
+      "text_total_width_avg": 333.6298566682712,
       "count": 7
     },
     "Ｏ|Ｄ": {
@@ -2161,7 +2161,7 @@
       "gap_norm_right_avg": 0.5324033433903702,
       "gap_actual_avg": 21.468732633646837,
       "font_size_avg": 52.26556732081177,
-      "text_total_width_avg": 245.52578801962,
+      "text_total_width_avg": 252.3897005587778,
       "count": 5
     },
     "Ｄ|Ａ": {
@@ -2170,7 +2170,7 @@
       "gap_norm_right_avg": 0.5478735528639873,
       "gap_actual_avg": 23.517533269231844,
       "font_size_avg": 53.093244860032684,
-      "text_total_width_avg": 242.95891930701112,
+      "text_total_width_avg": 270.5261512581672,
       "count": 9
     },
     "I|N": {
@@ -2197,7 +2197,7 @@
       "gap_norm_right_avg": 0.5512568896308677,
       "gap_actual_avg": 32.14666110190106,
       "font_size_avg": 71.19137076923529,
-      "text_total_width_avg": 368.5358674094667,
+      "text_total_width_avg": 378.3122229149609,
       "count": 3
     },
     "Ｎ|Ｚ": {
@@ -2287,7 +2287,7 @@
       "gap_norm_right_avg": 0.2622205107825626,
       "gap_actual_avg": 29.977605434891974,
       "font_size_avg": 139.14391809002942,
-      "text_total_width_avg": 607.70546786,
+      "text_total_width_avg": 721.4600731661114,
       "count": 4
     },
     "Ｊ|Ｉ": {
@@ -2296,7 +2296,7 @@
       "gap_norm_right_avg": 0.7893519732924288,
       "gap_actual_avg": 48.775429150386216,
       "font_size_avg": 115.80365723562745,
-      "text_total_width_avg": 574.8632892655,
+      "text_total_width_avg": 686.7965284194144,
       "count": 6
     },
     "Ｉ|Ｉ": {
@@ -2323,7 +2323,7 @@
       "gap_norm_right_avg": 0.2449240756193069,
       "gap_actual_avg": 11.619197856899973,
       "font_size_avg": 72.90901778511765,
-      "text_total_width_avg": 509.1789320765,
+      "text_total_width_avg": 509.1789320765001,
       "count": 2
     },
     "Ｏ|Ｙ": {
@@ -2332,7 +2332,7 @@
       "gap_norm_right_avg": 0.46017555713348257,
       "gap_actual_avg": 12.205950693496009,
       "font_size_avg": 35.68588146079413,
-      "text_total_width_avg": 202.6427995925,
+      "text_total_width_avg": 204.4193579977721,
       "count": 4
     },
     "Ｙ|Ａ": {
@@ -2341,7 +2341,7 @@
       "gap_norm_right_avg": 0.33775995787490537,
       "gap_actual_avg": 8.572752081858711,
       "font_size_avg": 35.17725402252941,
-      "text_total_width_avg": 202.6427995925,
+      "text_total_width_avg": 204.4191399352821,
       "count": 4
     },
     "Ｕ|Ｅ": {
@@ -2350,7 +2350,7 @@
       "gap_norm_right_avg": 0.5906572870590785,
       "gap_actual_avg": 16.368446607084707,
       "font_size_avg": 38.564966356137255,
-      "text_total_width_avg": 205.90217829393336,
+      "text_total_width_avg": 236.12761957027647,
       "count": 6
     },
     "Ｅ|Ｄ": {
@@ -2458,7 +2458,7 @@
       "gap_norm_right_avg": 0.7269406675673878,
       "gap_actual_avg": 22.62878094220204,
       "font_size_avg": 41.64666562549999,
-      "text_total_width_avg": 192.05106723440002,
+      "text_total_width_avg": 197.88530358180296,
       "count": 4
     },
     "伊|藤": {
@@ -2476,7 +2476,7 @@
       "gap_norm_right_avg": 0.3172941665199362,
       "gap_actual_avg": 8.185036867087062,
       "font_size_avg": 34.97215598844117,
-      "text_total_width_avg": 254.33606793665,
+      "text_total_width_avg": 254.91165053927574,
       "count": 4
     },
     "Ｏ|Ｔ": {
@@ -2485,7 +2485,7 @@
       "gap_norm_right_avg": 0.3472344507602042,
       "gap_actual_avg": 8.473912754654785,
       "font_size_avg": 35.67816904268628,
-      "text_total_width_avg": 256.51457967590005,
+      "text_total_width_avg": 257.011651859663,
       "count": 6
     },
     "Ｉ|Ｔ": {
@@ -2557,7 +2557,7 @@
       "gap_norm_right_avg": 0.4012623778984932,
       "gap_actual_avg": 25.246963156597612,
       "font_size_avg": 71.18431194588237,
-      "text_total_width_avg": 509.63220236485006,
+      "text_total_width_avg": 527.2327956322113,
       "count": 4
     },
     "Ｕ|Ｎ": {
@@ -2647,7 +2647,7 @@
       "gap_norm_right_avg": 0.32731530906553385,
       "gap_actual_avg": 12.686309735127166,
       "font_size_avg": 44.96352828767647,
-      "text_total_width_avg": 350.08519902710003,
+      "text_total_width_avg": 403.60472472013674,
       "count": 4
     },
     "Ｕ|Ｍ": {
@@ -2674,7 +2674,7 @@
       "gap_norm_right_avg": 0.2985483522394805,
       "gap_actual_avg": 11.884503073958676,
       "font_size_avg": 46.11568512161766,
-      "text_total_width_avg": 331.50653420135,
+      "text_total_width_avg": 399.37019214880047,
       "count": 4
     },
     "Ｍ|Ｉ": {
@@ -2737,7 +2737,7 @@
       "gap_norm_right_avg": 0.5689030656429793,
       "gap_actual_avg": 74.41707035019999,
       "font_size_avg": 148.15450610005882,
-      "text_total_width_avg": 340.71839702599993,
+      "text_total_width_avg": 340.718397026,
       "count": 2
     },
     "高|橋": {
@@ -2766,7 +2766,7 @@
       "gap_norm_right_avg": 0.4669455800079194,
       "gap_actual_avg": 15.341340999099998,
       "font_size_avg": 45.06431259888235,
-      "text_total_width_avg": 353.90092997709996,
+      "text_total_width_avg": 353.9009299771,
       "count": 1
     },
     "廣|瀬": {
@@ -2784,7 +2784,7 @@
       "gap_norm_right_avg": 0.33821053057012007,
       "gap_actual_avg": 11.494267824715099,
       "font_size_avg": 38.75163301813726,
-      "text_total_width_avg": 293.9912429377667,
+      "text_total_width_avg": 304.7346620008976,
       "count": 3
     },
     "Ｏ|Ｓ": {
@@ -2793,7 +2793,7 @@
       "gap_norm_right_avg": 0.285060300200118,
       "gap_actual_avg": 9.987627658864625,
       "font_size_avg": 47.05835176471765,
-      "text_total_width_avg": 267.68680028558003,
+      "text_total_width_avg": 303.5519427109337,
       "count": 5
     },
     "Ｍ|Ａ": {
@@ -2802,7 +2802,7 @@
       "gap_norm_right_avg": 0.5323755882661703,
       "gap_actual_avg": 17.876425838763918,
       "font_size_avg": 38.83384835835914,
-      "text_total_width_avg": 309.05395100247887,
+      "text_total_width_avg": 359.279388467345,
       "count": 19
     },
     "Ａ|Ｔ": {
@@ -2811,7 +2811,7 @@
       "gap_norm_right_avg": 0.29296346405954804,
       "gap_actual_avg": 7.997777441528049,
       "font_size_avg": 37.60774415784558,
-      "text_total_width_avg": 274.33761803434993,
+      "text_total_width_avg": 287.9864621412213,
       "count": 16
     },
     "Ｔ|Ｓ": {
@@ -2820,7 +2820,7 @@
       "gap_norm_right_avg": 0.4023405442550802,
       "gap_actual_avg": 9.565364834008024,
       "font_size_avg": 33.534639684509806,
-      "text_total_width_avg": 261.94559941563335,
+      "text_total_width_avg": 279.69878865571496,
       "count": 6
     },
     "Ｓ|Ｕ": {
@@ -2829,7 +2829,7 @@
       "gap_norm_right_avg": 0.5728285350957584,
       "gap_actual_avg": 12.779487457539698,
       "font_size_avg": 33.65588151154412,
-      "text_total_width_avg": 262.64196536017505,
+      "text_total_width_avg": 275.9790540917429,
       "count": 8
     },
     "Ｕ|Ｍ": {
@@ -2838,7 +2838,7 @@
       "gap_norm_right_avg": 0.6997449477710064,
       "gap_actual_avg": 26.19019598006145,
       "font_size_avg": 42.762613310019624,
-      "text_total_width_avg": 314.63960182399995,
+      "text_total_width_avg": 333.85239505171415,
       "count": 6
     },
     "Ｍ|Ｏ": {
@@ -2847,7 +2847,7 @@
       "gap_norm_right_avg": 0.4241676241554707,
       "gap_actual_avg": 12.415421316545713,
       "font_size_avg": 37.90450885630882,
-      "text_total_width_avg": 257.02480274140004,
+      "text_total_width_avg": 273.9809529533007,
       "count": 8
     },
     "Ｏ|Ｔ": {
@@ -2856,7 +2856,7 @@
       "gap_norm_right_avg": 0.3057989959705522,
       "gap_actual_avg": 7.955900168039294,
       "font_size_avg": 38.41156766716177,
-      "text_total_width_avg": 262.40053511685,
+      "text_total_width_avg": 273.3764466215122,
       "count": 8
     },
     "Ｔ|Ｏ": {
@@ -2865,7 +2865,7 @@
       "gap_norm_right_avg": 0.27185142506062016,
       "gap_actual_avg": 10.361866670306561,
       "font_size_avg": 42.93141504871896,
-      "text_total_width_avg": 221.60838707582224,
+      "text_total_width_avg": 268.6942428568269,
       "count": 18
     },
     "松|本": {
@@ -2883,7 +2883,7 @@
       "gap_norm_right_avg": 0.28234685914458135,
       "gap_actual_avg": 7.595594744760759,
       "font_size_avg": 35.26865271305491,
-      "text_total_width_avg": 238.26661326623332,
+      "text_total_width_avg": 248.8504017301743,
       "count": 30
     },
     "Ａ|Ｋ": {
@@ -2892,7 +2892,7 @@
       "gap_norm_right_avg": 0.5935379970331044,
       "gap_actual_avg": 16.109841736872884,
       "font_size_avg": 37.00737162383529,
-      "text_total_width_avg": 263.96575011284665,
+      "text_total_width_avg": 315.54931637696814,
       "count": 30
     },
     "Ｋ|Ａ": {
@@ -2901,7 +2901,7 @@
       "gap_norm_right_avg": 0.3654942812983454,
       "gap_actual_avg": 10.626980155754513,
       "font_size_avg": 36.844776262481275,
-      "text_total_width_avg": 260.4432348711,
+      "text_total_width_avg": 283.0710123684818,
       "count": 22
     },
     "Ａ|Ｈ": {
@@ -2910,7 +2910,7 @@
       "gap_norm_right_avg": 0.4717162785013888,
       "gap_actual_avg": 10.021946351227305,
       "font_size_avg": 31.097646281382353,
-      "text_total_width_avg": 250.53146803665,
+      "text_total_width_avg": 259.6742473416915,
       "count": 4
     },
     "Ｈ|Ａ": {
@@ -2919,7 +2919,7 @@
       "gap_norm_right_avg": 0.49913480230409746,
       "gap_actual_avg": 12.615846678873122,
       "font_size_avg": 31.930848874931375,
-      "text_total_width_avg": 227.34544513575,
+      "text_total_width_avg": 241.58218982361564,
       "count": 12
     },
     "Ａ|Ｓ": {
@@ -2928,7 +2928,7 @@
       "gap_norm_right_avg": 0.48620681873255345,
       "gap_actual_avg": 17.682948908159016,
       "font_size_avg": 37.738486451495795,
-      "text_total_width_avg": 285.78373343109996,
+      "text_total_width_avg": 359.60556772503645,
       "count": 14
     },
     "Ｓ|Ｈ": {
@@ -2937,7 +2937,7 @@
       "gap_norm_right_avg": 0.4123986166707908,
       "gap_actual_avg": 10.375464905394,
       "font_size_avg": 37.885576394908504,
-      "text_total_width_avg": 254.0173036262333,
+      "text_total_width_avg": 268.3805217949273,
       "count": 18
     },
     "Ｈ|Ｉ": {
@@ -2946,7 +2946,7 @@
       "gap_norm_right_avg": 2.6659026368545318,
       "gap_actual_avg": 12.508020575466189,
       "font_size_avg": 39.95955082173949,
-      "text_total_width_avg": 261.58982824049997,
+      "text_total_width_avg": 285.45687927288037,
       "count": 14
     },
     "Ｏ|Ｚ": {
@@ -2955,7 +2955,7 @@
       "gap_norm_right_avg": 0.41698116802369767,
       "gap_actual_avg": 11.226800687200011,
       "font_size_avg": 38.10352845917647,
-      "text_total_width_avg": 194.15920263639998,
+      "text_total_width_avg": 194.15920263639995,
       "count": 2
     },
     "Ｚ|Ａ": {
@@ -2964,7 +2964,7 @@
       "gap_norm_right_avg": 0.2654702661953094,
       "gap_actual_avg": 7.680806572124158,
       "font_size_avg": 39.52967221437255,
-      "text_total_width_avg": 237.70635465953333,
+      "text_total_width_avg": 257.1714441576993,
       "count": 6
     },
     "Ａ|Ｗ": {
@@ -2973,7 +2973,7 @@
       "gap_norm_right_avg": 0.10401489986078466,
       "gap_actual_avg": 2.7394931656984243,
       "font_size_avg": 40.11738461798039,
-      "text_total_width_avg": 247.25222028373335,
+      "text_total_width_avg": 275.66134865233084,
       "count": 12
     },
     "Ｗ|Ａ": {
@@ -2982,7 +2982,7 @@
       "gap_norm_right_avg": 0.1670939932011318,
       "gap_actual_avg": 4.449423086941049,
       "font_size_avg": 40.05392056727941,
-      "text_total_width_avg": 238.23509919142504,
+      "text_total_width_avg": 266.9741541148625,
       "count": 16
     },
     "Ｏ|Ｈ": {
@@ -2991,7 +2991,7 @@
       "gap_norm_right_avg": 0.8366213147807016,
       "gap_actual_avg": 16.97475053357643,
       "font_size_avg": 32.22705801785296,
-      "text_total_width_avg": 157.29166770589998,
+      "text_total_width_avg": 158.210432706563,
       "count": 4
     },
     "Ｈ|Ｔ": {
@@ -3009,7 +3009,7 @@
       "gap_norm_right_avg": 0.5603261286234452,
       "gap_actual_avg": 13.688661522139503,
       "font_size_avg": 35.97490106141177,
-      "text_total_width_avg": 225.57696778007502,
+      "text_total_width_avg": 237.13553010830952,
       "count": 8
     },
     "Ｅ|Ｄ": {
@@ -3018,7 +3018,7 @@
       "gap_norm_right_avg": 0.5287148263880723,
       "gap_actual_avg": 16.440064531502987,
       "font_size_avg": 38.98784216255885,
-      "text_total_width_avg": 203.2660661114,
+      "text_total_width_avg": 242.29142288896824,
       "count": 4
     },
     "Ｄ|Ａ": {
@@ -3027,7 +3027,7 @@
       "gap_norm_right_avg": 0.3966834202389113,
       "gap_actual_avg": 12.130295910183692,
       "font_size_avg": 39.29182405541177,
-      "text_total_width_avg": 228.59368175982306,
+      "text_total_width_avg": 257.6652983358212,
       "count": 13
     },
     "Ｎ|Ｉ": {
@@ -3036,7 +3036,7 @@
       "gap_norm_right_avg": 3.1373133183581965,
       "gap_actual_avg": 12.857389364752747,
       "font_size_avg": 35.91215596494117,
-      "text_total_width_avg": 220.5941997401,
+      "text_total_width_avg": 220.21090975148206,
       "count": 4
     },
     "Ｉ|Ｓ": {
@@ -3045,7 +3045,7 @@
       "gap_norm_right_avg": 0.44526216285868847,
       "gap_actual_avg": 11.999856250394165,
       "font_size_avg": 35.417254016529405,
-      "text_total_width_avg": 226.69484533566666,
+      "text_total_width_avg": 226.47684487777545,
       "count": 6
     },
     "Ｉ|Ｍ": {
@@ -3063,7 +3063,7 @@
       "gap_norm_right_avg": 0.5271254802303699,
       "gap_actual_avg": 11.5445470260672,
       "font_size_avg": 32.49280964519605,
-      "text_total_width_avg": 256.0869782394,
+      "text_total_width_avg": 267.6690681890164,
       "count": 6
     },
     "Ｕ|Ｒ": {
@@ -3072,7 +3072,7 @@
       "gap_norm_right_avg": 0.701664882774655,
       "gap_actual_avg": 21.617296902598312,
       "font_size_avg": 37.44011110881512,
-      "text_total_width_avg": 256.3748013265143,
+      "text_total_width_avg": 288.53473693023096,
       "count": 14
     },
     "Ｓ|Ａ": {
@@ -3081,7 +3081,7 @@
       "gap_norm_right_avg": 0.5684650096919291,
       "gap_actual_avg": 21.20413228016715,
       "font_size_avg": 40.11843036958824,
-      "text_total_width_avg": 272.80968155068,
+      "text_total_width_avg": 380.3500593908134,
       "count": 10
     },
     "西|村": {
@@ -3099,7 +3099,7 @@
       "gap_norm_right_avg": 0.6429459168724181,
       "gap_actual_avg": 12.271399257600354,
       "font_size_avg": 26.96117579655884,
-      "text_total_width_avg": 130.96599963810002,
+      "text_total_width_avg": 131.0248362319482,
       "count": 4
     },
     "Ｓ|Ｅ": {
@@ -3108,7 +3108,7 @@
       "gap_norm_right_avg": 0.5064360596436095,
       "gap_actual_avg": 19.70720682737502,
       "font_size_avg": 59.266665185,
-      "text_total_width_avg": 188.8549327378,
+      "text_total_width_avg": 201.47042687363262,
       "count": 4
     },
     "Ｅ|Ｋ": {
@@ -3117,7 +3117,7 @@
       "gap_norm_right_avg": 0.588970341783059,
       "gap_actual_avg": 23.842379680205255,
       "font_size_avg": 68.09058653302942,
-      "text_total_width_avg": 275.95993427445,
+      "text_total_width_avg": 277.8401896633474,
       "count": 4
     },
     "Ｋ|Ｉ": {
@@ -3126,7 +3126,7 @@
       "gap_norm_right_avg": 3.087652747335138,
       "gap_actual_avg": 18.105331635887797,
       "font_size_avg": 61.2599984685,
-      "text_total_width_avg": 207.7979995148,
+      "text_total_width_avg": 209.9682286765624,
       "count": 4
     },
     "Ｚ|Ｕ": {
@@ -3153,7 +3153,7 @@
       "gap_norm_right_avg": 0.7700356522719739,
       "gap_actual_avg": 24.115921335477395,
       "font_size_avg": 51.932547721294114,
-      "text_total_width_avg": 313.289732684,
+      "text_total_width_avg": 316.7717655742538,
       "count": 4
     },
     "水|根": {
@@ -3180,7 +3180,7 @@
       "gap_norm_right_avg": 0.8331114000223454,
       "gap_actual_avg": 29.902258441289817,
       "font_size_avg": 45.13058710702942,
-      "text_total_width_avg": 297.8341995672,
+      "text_total_width_avg": 339.5038009632978,
       "count": 4
     },
     "Ｕ|Ｋ": {
@@ -3198,7 +3198,7 @@
       "gap_norm_right_avg": 0.497420305389519,
       "gap_actual_avg": 12.08468838398734,
       "font_size_avg": 35.89380302422354,
-      "text_total_width_avg": 231.17706421238,
+      "text_total_width_avg": 234.65249098368724,
       "count": 10
     },
     "Ｕ|Ｄ": {
@@ -3207,7 +3207,7 @@
       "gap_norm_right_avg": 0.6837145884891184,
       "gap_actual_avg": 16.63537795596567,
       "font_size_avg": 33.12352858367647,
-      "text_total_width_avg": 192.23866449405,
+      "text_total_width_avg": 195.32388020139012,
       "count": 4
     },
     "Ａ|Ｂ": {
@@ -3234,7 +3234,7 @@
       "gap_norm_right_avg": 0.25852067196288203,
       "gap_actual_avg": 10.559337158282705,
       "font_size_avg": 44.410717843980414,
-      "text_total_width_avg": 266.57959969893335,
+      "text_total_width_avg": 288.1740661198756,
       "count": 6
     },
     "Ｏ|Ｎ": {
@@ -3261,7 +3261,7 @@
       "gap_norm_right_avg": 0.3319265489084092,
       "gap_actual_avg": 13.042767080082736,
       "font_size_avg": 44.10521760023532,
-      "text_total_width_avg": 304.94391792691533,
+      "text_total_width_avg": 369.83858177837436,
       "count": 13
     },
     "Ａ|Ｍ": {
@@ -3270,7 +3270,7 @@
       "gap_norm_right_avg": 0.5750310801408438,
       "gap_actual_avg": 20.633910749882993,
       "font_size_avg": 40.40292709450196,
-      "text_total_width_avg": 327.4020980790732,
+      "text_total_width_avg": 378.34654430951747,
       "count": 15
     },
     "Ｚ|Ｏ": {
@@ -3342,7 +3342,7 @@
       "gap_norm_right_avg": 0.7595404763899499,
       "gap_actual_avg": 19.42092835552975,
       "font_size_avg": 36.174116742705884,
-      "text_total_width_avg": 244.25662267029998,
+      "text_total_width_avg": 244.2564036940534,
       "count": 3
     },
     "Ｃ|ｈ": {
@@ -3369,7 +3369,7 @@
       "gap_norm_right_avg": 0.37653965865368405,
       "gap_actual_avg": 11.414673953500028,
       "font_size_avg": 59.730978898882356,
-      "text_total_width_avg": 189.7802588975,
+      "text_total_width_avg": 189.78025889749998,
       "count": 1
     },
     "d|a": {
@@ -3396,7 +3396,7 @@
       "gap_norm_right_avg": 1.201234027472471,
       "gap_actual_avg": 17.207007843418733,
       "font_size_avg": 73.28831189328235,
-      "text_total_width_avg": 328.56559804238003,
+      "text_total_width_avg": 447.531261482998,
       "count": 5
     },
     "ｉ|ｄ": {
@@ -3405,7 +3405,7 @@
       "gap_norm_right_avg": 0.37653965865368405,
       "gap_actual_avg": 11.414673953500028,
       "font_size_avg": 59.730978898882356,
-      "text_total_width_avg": 189.7802588975,
+      "text_total_width_avg": 189.78025889749998,
       "count": 1
     },
     "ｄ|ａ": {
@@ -3423,7 +3423,7 @@
       "gap_norm_right_avg": 0.6641534382650379,
       "gap_actual_avg": 28.903071372799953,
       "font_size_avg": 57.298037783235316,
-      "text_total_width_avg": 210.94746989769993,
+      "text_total_width_avg": 210.9474698976999,
       "count": 1
     },
     "O|R": {
@@ -3441,7 +3441,7 @@
       "gap_norm_right_avg": 0.581814600916939,
       "gap_actual_avg": 23.51231651310251,
       "font_size_avg": 37.80784219205882,
-      "text_total_width_avg": 120.22337850289996,
+      "text_total_width_avg": 175.84397537719718,
       "count": 3
     },
     "Ｏ|Ｒ": {
@@ -3486,7 +3486,7 @@
       "gap_norm_right_avg": 0.31225374201153283,
       "gap_actual_avg": 10.005599354532919,
       "font_size_avg": 42.068626399264716,
-      "text_total_width_avg": 213.265400944,
+      "text_total_width_avg": 229.59871187788045,
       "count": 4
     },
     "Ｒ|Ｕ": {
@@ -3495,7 +3495,7 @@
       "gap_norm_right_avg": 0.8564842431776221,
       "gap_actual_avg": 29.64665088960601,
       "font_size_avg": 42.13764600538238,
-      "text_total_width_avg": 307.62539793505,
+      "text_total_width_avg": 347.8673132482035,
       "count": 4
     },
     "Ａ|Ｙ": {
@@ -3513,7 +3513,7 @@
       "gap_norm_right_avg": 0.3341007681921998,
       "gap_actual_avg": 11.233653401550896,
       "font_size_avg": 44.421175360058825,
-      "text_total_width_avg": 267.30253333599995,
+      "text_total_width_avg": 291.7078411009516,
       "count": 8
     },
     "Ｇ|Ｕ": {
@@ -3522,7 +3522,7 @@
       "gap_norm_right_avg": 0.4971272573821573,
       "gap_actual_avg": 14.144668119383248,
       "font_size_avg": 42.347253843279404,
-      "text_total_width_avg": 277.281201411525,
+      "text_total_width_avg": 299.3429761336551,
       "count": 8
     },
     "Ｕ|Ｃ": {
@@ -3531,7 +3531,7 @@
       "gap_norm_right_avg": 0.34614933982852153,
       "gap_actual_avg": 10.558931568819235,
       "font_size_avg": 40.78627349014705,
-      "text_total_width_avg": 272.36650077102496,
+      "text_total_width_avg": 299.3152627734289,
       "count": 8
     },
     "Ｃ|Ｈ": {
@@ -3540,7 +3540,7 @@
       "gap_norm_right_avg": 0.4365141073220682,
       "gap_actual_avg": 11.89006922376696,
       "font_size_avg": 40.734508785558816,
-      "text_total_width_avg": 272.36650077102496,
+      "text_total_width_avg": 299.36207576738343,
       "count": 8
     },
     "田|口": {
@@ -3576,7 +3576,7 @@
       "gap_norm_right_avg": 0.6564323685030228,
       "gap_actual_avg": 22.54705045180093,
       "font_size_avg": 39.984051287980385,
-      "text_total_width_avg": 175.36471302159998,
+      "text_total_width_avg": 248.92036356898163,
       "count": 6
     },
     "Ｕ|Ｊ": {
@@ -3603,7 +3603,7 @@
       "gap_norm_right_avg": 0.4713797621705384,
       "gap_actual_avg": 10.848674931982325,
       "font_size_avg": 30.856665895250003,
-      "text_total_width_avg": 214.561066203175,
+      "text_total_width_avg": 230.31726797021523,
       "count": 8
     },
     "Ｒ|Ａ": {
@@ -3612,7 +3612,7 @@
       "gap_norm_right_avg": 0.429289430024872,
       "gap_actual_avg": 11.37190136047853,
       "font_size_avg": 34.13241744734314,
-      "text_total_width_avg": 230.9432677056,
+      "text_total_width_avg": 247.71793200077627,
       "count": 12
     },
     "上|原": {
@@ -3702,7 +3702,7 @@
       "gap_norm_right_avg": 0.36878405895953337,
       "gap_actual_avg": 18.00044706166341,
       "font_size_avg": 67.479998313,
-      "text_total_width_avg": 363.26193282860004,
+      "text_total_width_avg": 473.32913636662494,
       "count": 4
     },
     "ｉ|ｍ": {
@@ -3711,7 +3711,7 @@
       "gap_norm_right_avg": 0.2553522313587383,
       "gap_actual_avg": 19.320583413065172,
       "font_size_avg": 66.37921402679412,
-      "text_total_width_avg": 363.26193282860004,
+      "text_total_width_avg": 475.17270278567287,
       "count": 4
     },
     "ｍ|ａ": {
@@ -3720,7 +3720,7 @@
       "gap_norm_right_avg": 0.3963323759512615,
       "gap_actual_avg": 22.384445335564195,
       "font_size_avg": 56.82784171655883,
-      "text_total_width_avg": 363.26193282860004,
+      "text_total_width_avg": 478.91105412431665,
       "count": 4
     },
     "Ｉ|Ｋ": {
@@ -3756,7 +3756,7 @@
       "gap_norm_right_avg": 0.3234403628772253,
       "gap_actual_avg": 9.73624741198769,
       "font_size_avg": 40.6733323165,
-      "text_total_width_avg": 257.29480108279995,
+      "text_total_width_avg": 258.1928680788429,
       "count": 4
     },
     "Ｎ|Ａ": {
@@ -3765,7 +3765,7 @@
       "gap_norm_right_avg": 0.23069175185845878,
       "gap_actual_avg": 5.925118031183152,
       "font_size_avg": 38.099868328549015,
-      "text_total_width_avg": 272.63870802869997,
+      "text_total_width_avg": 297.50574118406723,
       "count": 6
     },
     "Ｅ|Ｎ": {
@@ -3801,7 +3801,7 @@
       "gap_norm_right_avg": 0.46767607140630435,
       "gap_actual_avg": 32.78346821790001,
       "font_size_avg": 81.22744894970587,
-      "text_total_width_avg": 165.7021315616,
+      "text_total_width_avg": 165.70213156160003,
       "count": 2
     },
     "Ｅ|Ｍ": {
@@ -3810,7 +3810,7 @@
       "gap_norm_right_avg": 0.31699541425721917,
       "gap_actual_avg": 7.475597002399979,
       "font_size_avg": 30.189803166823463,
-      "text_total_width_avg": 210.28080263240003,
+      "text_total_width_avg": 210.2808026324,
       "count": 2
     },
     "竹|村": {
@@ -3900,7 +3900,7 @@
       "gap_norm_right_avg": 0.27733264035368876,
       "gap_actual_avg": 6.301736984999991,
       "font_size_avg": 35.78039126235294,
-      "text_total_width_avg": 242.7941325855,
+      "text_total_width_avg": 242.79413258550002,
       "count": 2
     },
     "山|下": {
@@ -3918,7 +3918,7 @@
       "gap_norm_right_avg": 0.22774713686017942,
       "gap_actual_avg": 7.400433898203869,
       "font_size_avg": 48.58470466773529,
-      "text_total_width_avg": 285.66093207700004,
+      "text_total_width_avg": 302.2592900360721,
       "count": 4
     },
     "Ｇ|Ａ": {
@@ -3963,7 +3963,7 @@
       "gap_norm_right_avg": 0.28123019473137933,
       "gap_actual_avg": 28.45599531229999,
       "font_size_avg": 116.13019317517646,
-      "text_total_width_avg": 230.19065693560003,
+      "text_total_width_avg": 230.1906569356,
       "count": 2
     }
   }

@@ -212,6 +212,12 @@
                     <span>重心補正を有効化（Phase2時）</span>
                 </label>
             </div>
+            <div class="control-group" id="stdDevSmoothingGroup" style="grid-column: 1 / -1; display: none;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="checkbox" id="stdDevSmoothingCheckbox" checked>
+                    <span>標準偏差補正を有効化（Phase2時）</span>
+                </label>
+            </div>
             <div class="control-group">
                 <label for="textInput">文字列</label>
                 <input type="text" id="textInput" value="ＷＡＶＥ" placeholder="文字列を入力">
@@ -359,6 +365,9 @@
         let phase2Enabled = false;  // Phase2の全体最適化を有効にするかどうか
         let centerOfMassAdjustmentEnabled = true;  // 重心補正を有効にするかどうか（Phase2）
         const CENTER_OF_MASS_ADJUSTMENT_STRENGTH = 0.3;  // 重心補正の強度（0.0-1.0、大きいほど強く調整）
+        let stdDevSmoothingEnabled = true;  // 標準偏差補正を有効にするかどうか（Phase2）
+        const STD_DEV_THRESHOLD = 2.0;  // 標準偏差の閾値（px、この値を超える場合にスムージングを適用）
+        const SMOOTHING_STRENGTH = 0.5;  // スムージングの強度（0.0-1.0、大きいほど強く均す）
         let phase1Model = null;   // Phase1モデルデータ
         let phase1ModelAverage = null;  // 学習済みペアのgap_norm_avgの平均値（未学習ペア用）
         let phase0Average = null;  // Phase0のルールベースで計算した平均値（係数計算用）
@@ -1702,6 +1711,78 @@
             return { adjusted: true, deltaCenter, centerOfMass, textCenter };
         }
         
+        // ============================================
+        // Phase2: 標準偏差補正（Gap Distribution Smoothing）
+        // ============================================
+        
+        /**
+         * ギャップのばらつきを均すためにスムージングを適用
+         * @param {Array<number>} gaps - ギャップ配列（変更される）
+         * @param {Array} features - 文字特徴量配列（意図的な調整を維持するために使用）
+         * @param {number} fontSize - フォントサイズ
+         * @param {number} threshold - 標準偏差の閾値（この値を超える場合にスムージングを適用）
+         * @param {number} smoothingStrength - スムージングの強度（0.0-1.0、大きいほど強く均す）
+         * @returns {Object} 調整結果の情報
+         */
+        function smoothGapDistribution(gaps, features, fontSize, threshold = STD_DEV_THRESHOLD, smoothingStrength = SMOOTHING_STRENGTH) {
+            if (!gaps || gaps.length === 0) {
+                return { adjusted: false, stdDevBefore: 0, stdDevAfter: 0 };
+            }
+            
+            // ギャップの平均値を計算
+            const gapAvg = gaps.reduce((sum, gap) => sum + gap, 0) / gaps.length;
+            
+            // 標準偏差を計算
+            const variance = gaps.reduce((sum, gap) => sum + Math.pow(gap - gapAvg, 2), 0) / gaps.length;
+            const stdDev = Math.sqrt(variance);
+            
+            // 標準偏差が閾値を超えない場合は調整しない
+            if (stdDev <= threshold) {
+                return { adjusted: false, stdDevBefore: stdDev, stdDevAfter: stdDev };
+            }
+            
+            // スムージングを適用（移動平均フィルタ）
+            // 3点移動平均を使用（前後のギャップの平均値に近づける）
+            const smoothedGaps = [...gaps];
+            const windowSize = 3;  // 前後1つずつを含む3点移動平均
+            
+            for (let i = 0; i < gaps.length; i++) {
+                // ウィンドウ内のギャップの平均値を計算
+                let sum = 0;
+                let count = 0;
+                
+                for (let j = Math.max(0, i - 1); j <= Math.min(gaps.length - 1, i + 1); j++) {
+                    sum += gaps[j];
+                    count++;
+                }
+                
+                const windowAvg = sum / count;
+                
+                // 現在のギャップをウィンドウ平均に近づける（スムージング強度に応じて）
+                // ただし、意図的な調整（例：縦線×縦線は広げる）は維持するため、
+                // 完全に平均化せず、smoothingStrengthの割合だけ平均に近づける
+                smoothedGaps[i] = gaps[i] * (1 - smoothingStrength) + windowAvg * smoothingStrength;
+            }
+            
+            // 調整後の標準偏差を計算
+            const smoothedGapAvg = smoothedGaps.reduce((sum, gap) => sum + gap, 0) / smoothedGaps.length;
+            const smoothedVariance = smoothedGaps.reduce((sum, gap) => sum + Math.pow(gap - smoothedGapAvg, 2), 0) / smoothedGaps.length;
+            const smoothedStdDev = Math.sqrt(smoothedVariance);
+            
+            // 元の配列を更新
+            for (let i = 0; i < gaps.length; i++) {
+                gaps[i] = smoothedGaps[i];
+                
+                // ギャップが最小・最大の範囲内に収まるように制限
+                const minGap = -0.2 * fontSize;
+                const maxGap = 0.8 * fontSize;
+                if (gaps[i] < minGap) gaps[i] = minGap;
+                if (gaps[i] > maxGap) gaps[i] = maxGap;
+            }
+            
+            return { adjusted: true, stdDevBefore: stdDev, stdDevAfter: smoothedStdDev };
+        }
+        
         // カーニング前の幅を計算（bboxベース + 文字間調整）
         function calculateWidthWithoutKerning(text, fontId, fontSize, beforeKerningGapPx = DEFAULT_BEFORE_KERNING_GAP) {
             const chars = Array.from(text);
@@ -2130,6 +2211,47 @@
                 }
             }
             
+            // ============================================
+            // Phase2: 標準偏差補正の適用
+            // ============================================
+            let stdDevSmoothingResult = null;
+            if (phase2Enabled && stdDevSmoothingEnabled && gaps.length > 0) {
+                stdDevSmoothingResult = smoothGapDistribution(gaps, features, fontSize, STD_DEV_THRESHOLD, SMOOTHING_STRENGTH);
+                
+                // 調整後の位置を再計算（標準偏差補正でギャップが変更された場合）
+                if (stdDevSmoothingResult.adjusted && positions.length > 0 && features.length > 0) {
+                    const getInkLeft = (feature) => {
+                        if (feature && Number.isFinite(feature.inkLeft)) return feature.inkLeft;
+                        if (feature && Number.isFinite(feature.actualBoundingBoxLeft)) return feature.actualBoundingBoxLeft;
+                        return 0;
+                    };
+                    const getInkRight = (feature) => {
+                        if (feature && Number.isFinite(feature.inkRight)) return feature.inkRight;
+                        if (feature && Number.isFinite(feature.actualBoundingBoxRight)) return feature.actualBoundingBoxRight;
+                        if (feature && Number.isFinite(feature.width)) return feature.width;
+                        return fontSize * 0.6;
+                    };
+                    
+                    // 最初の文字の位置を保持
+                    const firstPos = positions[0];
+                    let x = firstPos;
+                    
+                    // 各ギャップに基づいて位置を再計算
+                    for (let i = 0; i < gaps.length; i++) {
+                        const currentInkRight = getInkRight(features[i]);
+                        const nextInkLeft = getInkLeft(features[i + 1]);
+                        x = x + currentInkRight + gaps[i] - nextInkLeft;
+                        positions[i + 1] = x;
+                    }
+                    
+                    // 調整後の文字列全体の幅を再計算
+                    const lastPos = positions[positions.length - 1];
+                    const lastFeature = features[features.length - 1];
+                    const startX = positions[0] - (features[0].inkLeft || features[0].actualBoundingBoxLeft || 0);
+                    phase1TotalWidth = lastPos + getInkRight(lastFeature) - startX;
+                }
+            }
+            
             return {
                 positions,
                 gaps,
@@ -2154,7 +2276,8 @@
                     blendedGaps: gaps,
                     isLearned: isLearned,
                     phase2Enabled: phase2Enabled,
-                    centerOfMassAdjustment: centerOfMassAdjustmentResult
+                    centerOfMassAdjustment: centerOfMassAdjustmentResult,
+                    stdDevSmoothing: stdDevSmoothingResult
                 }
             };
         }
@@ -2758,6 +2881,10 @@
             if (centerOfMassGroup) {
                 centerOfMassGroup.style.display = (phaseMode === "phase1" && phase2Enabled) ? "flex" : "none";
             }
+            const stdDevSmoothingGroup = document.getElementById('stdDevSmoothingGroup');
+            if (stdDevSmoothingGroup) {
+                stdDevSmoothingGroup.style.display = (phaseMode === "phase1" && phase2Enabled) ? "flex" : "none";
+            }
             updateDisplay();
         });
         
@@ -2788,6 +2915,10 @@
                 if (centerOfMassGroup) {
                     centerOfMassGroup.style.display = (phaseMode === "phase1" && phase2Enabled) ? "flex" : "none";
                 }
+                const stdDevSmoothingGroup = document.getElementById('stdDevSmoothingGroup');
+                if (stdDevSmoothingGroup) {
+                    stdDevSmoothingGroup.style.display = (phaseMode === "phase1" && phase2Enabled) ? "flex" : "none";
+                }
                 updateDisplay();
             });
         }
@@ -2797,6 +2928,15 @@
         if (centerOfMassCheckbox) {
             centerOfMassCheckbox.addEventListener('change', function() {
                 centerOfMassAdjustmentEnabled = this.checked;
+                updateDisplay();
+            });
+        }
+        
+        // 標準偏差補正の有効化チェックボックス
+        const stdDevSmoothingCheckbox = document.getElementById('stdDevSmoothingCheckbox');
+        if (stdDevSmoothingCheckbox) {
+            stdDevSmoothingCheckbox.addEventListener('change', function() {
+                stdDevSmoothingEnabled = this.checked;
                 updateDisplay();
             });
         }

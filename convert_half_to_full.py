@@ -47,7 +47,7 @@ def convert_csv_half_to_full(input_path: str, output_path: str = None):
         output_path = input_path
     
     # CSVファイルを読み込んで変換
-    rows = []
+    rows = []  # ループ外で初期化（成功したエンコーディングのデータを保持）
     fieldnames = None
     detected_encoding = None
     
@@ -55,6 +55,7 @@ def convert_csv_half_to_full(input_path: str, output_path: str = None):
     encodings = ['utf-8', 'cp932', 'shift_jis', 'utf-8-sig']
     
     for encoding in encodings:
+        rows = []  # 各エンコーディング試行ごとにrowsを初期化（前の試行のデータをクリア）
         try:
             with open(input_file, 'r', encoding=encoding) as f:
                 reader = csv.DictReader(f)
@@ -70,13 +71,13 @@ def convert_csv_half_to_full(input_path: str, output_path: str = None):
             
             detected_encoding = encoding
             print(f"エンコーディング検出: {encoding}")
-            break
+            break  # 成功したらループを抜ける
             
         except UnicodeDecodeError:
             continue
         except Exception as e:
             print(f"エラー: {encoding} で読み込み中にエラーが発生しました: {e}", file=sys.stderr)
-            continue
+            continue  # エラーが発生した場合はrowsがクリアされ、次のエンコーディングを試す
     
     if detected_encoding is None:
         print(f"エラー: {input_path} のエンコーディングを検出できませんでした", file=sys.stderr)

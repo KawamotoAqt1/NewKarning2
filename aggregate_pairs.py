@@ -153,7 +153,7 @@ def calculate_total_width(sequence: List[Dict[str, str]], bbox: Dict[str, Dict[s
     first_id = sequence[0].get("id")
     last_id = sequence[-1].get("id")
     
-    if not first_id or not last_id:
+    if first_id is None or last_id is None:
         return None
     
     if first_id not in bbox or last_id not in bbox:

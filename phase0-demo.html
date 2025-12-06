@@ -661,13 +661,23 @@
                 return "KATAKANA";
             }
             
-            // 英大文字
+            // 英大文字（半角）
             if (code >= 0x41 && code <= 0x5A) {
                 return "LATIN_UPPER";
             }
             
-            // 英小文字
+            // 英小文字（半角）
             if (code >= 0x61 && code <= 0x7A) {
+                return "LATIN_LOWER";
+            }
+            
+            // 全角英大文字（追加）
+            if (code >= 0xFF21 && code <= 0xFF3A) {
+                return "LATIN_UPPER";
+            }
+            
+            // 全角英小文字（追加）
+            if (code >= 0xFF41 && code <= 0xFF5A) {
                 return "LATIN_LOWER";
             }
             
@@ -1516,7 +1526,20 @@
                 // 実際には、位置計算でactualBoundingBoxRightとactualBoundingBoxLeftを使用しているため、
                 // gap_actualをそのまま使用し、フォントサイズでスケールするだけ
                 const fontSizeScale = baseWidthPx / learnedFontSize;
-                const gapPx = gapActualAvg * fontSizeScale;
+                let gapPx = gapActualAvg * fontSizeScale;
+                
+                // Phase1の学習値に対して、Phase0のLATIN_PAIR補正を追加で適用
+                // （Phase1の学習値が広すぎる場合の補正として機能）
+                // leftFeaturesとrightFeaturesは既に1437-1438行目で宣言されているため、それを使用
+                const pairCat = getPairCategory(leftFeatures.charType, rightFeatures.charType);
+                
+                // LATIN_PAIRの場合、Phase0の補正を追加で適用
+                if (pairCat === "LATIN_PAIR") {
+                    const avgWidth = (leftFeatures.width + rightFeatures.width) / 2;
+                    const pairAdj = pairCategoryAdjust[pairCat] || 0;
+                    const pairAdjustment = pairAdj * avgWidth;
+                    gapPx += pairAdjustment;
+                }
                 
                 // デバッグ情報をコンソールに出力
                 if (leftChar === 'N' && rightChar === 'I') {
@@ -1539,10 +1562,20 @@
                 ? learnedFontSize 
                 : baseWidthPx;
             
-            const leftFeatures = getCharFeatures(leftChar, fontName, fontSizeToUse);
-            const rightFeatures = getCharFeatures(rightChar, fontName, fontSizeToUse);
-            const avgWidth = (leftFeatures.width + rightFeatures.width) / 2;
-            const gapPx = gapNorm * avgWidth;
+            const leftFeaturesFallback = getCharFeatures(leftChar, fontName, fontSizeToUse);
+            const rightFeaturesFallback = getCharFeatures(rightChar, fontName, fontSizeToUse);
+            const avgWidth = (leftFeaturesFallback.width + rightFeaturesFallback.width) / 2;
+            let gapPx = gapNorm * avgWidth;
+            
+            // Phase1の学習値に対して、Phase0のLATIN_PAIR補正を追加で適用
+            // （Phase1の学習値が広すぎる場合の補正として機能）
+            const pairCat = getPairCategory(leftFeaturesFallback.charType, rightFeaturesFallback.charType);
+            if (pairCat === "LATIN_PAIR") {
+                const pairAdj = pairCategoryAdjust[pairCat] || 0;
+                const pairAdjustment = pairAdj * avgWidth;
+                gapPx += pairAdjustment;
+            }
+            
             // Phase0と同じ方法（px単位で直接加算）
             return gapPx + globalTracking;
         }
@@ -2676,9 +2709,9 @@
                 });
                 
                 // デフォルト値を設定
-                if (defaultFonts.find(f => f.name === "游明朝") && 
-                    availableFonts.find(f => f.name === "游明朝")) {
-                    fontSelect.value = "游明朝";
+                if (defaultFonts.find(f => f.name === "08丸三-明朝体") && 
+                    availableFonts.find(f => f.name === "08丸三-明朝体")) {
+                    fontSelect.value = "08丸三-明朝体";
                 } else if (availableFonts.length > 0) {
                     fontSelect.value = availableFonts[0].name;
                 }
@@ -2694,6 +2727,7 @@
             
             // デフォルトのフォントを追加
             const defaultFonts = [
+                { name: "08丸三-明朝体", display: "08丸三-明朝体" },
                 { name: "游明朝", display: "游明朝" },
                 { name: "游ゴシック", display: "游ゴシック" },
                 { name: "ヒラギノ明朝 ProN", display: "ヒラギノ明朝 ProN" },
